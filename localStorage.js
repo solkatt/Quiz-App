@@ -22,11 +22,15 @@ function gatherUsername(){
 
     let userScore = {
         "username":username.value
-      // "highscore": userHighscore
+      // "score": userHighscore
     }
-    const highScore = getUserScoreFromLocalStorage();
+    let highScore = getUserScoreFromLocalStorage();
     highScore.push(userScore);
 
+    if(highScore.length > 5){
+        highScore.shift();
+    }
+    console.log(highScore)
     //showHighScore(userScore);
     saveUserScoreToLocalStorage(highScore);
 }
@@ -46,22 +50,31 @@ function getUserScoreFromLocalStorage(){
     return JSON.parse(localStorage.getItem('highScore')) || [];
 }
 
-//NEEDS TO DELETE LI EVERYTIME I CLICK ON BUTTON AND WRITE OUT NEW ARRAY
+/**
+ * Ranks and appends the list-elements to highsore ul with the right information from local storage.
+ * @param {Object} userScore - contains username and score
+ */
 function showHighScore(userScore){
     const ul = document.querySelector('.highScore');
     const highScore = getUserScoreFromLocalStorage();
     let rank = 1
-    let rankDot = ". "
+    
     for (userScore of highScore) {
-        const li = createLiElement(rank, rankDot, userScore);
+        const li = createLiElement(rank, userScore);
         rank ++
         ul.append(li);
     }
 }
 
-function createLiElement(rank, rankDot, userScore){
+/**
+ * 
+ * @param {Number} rank - the rank of userScore
+ * @param {String} rankDot - some text between rank and score
+ * @param {Object} userScore - conains username and score
+ */
+function createLiElement(rank, userScore){
     const li = document.createElement('li');
+    let rankDot = ". "
     li.append(rank, rankDot, userScore.username)
     return li;
 }
-
