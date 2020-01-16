@@ -1,9 +1,11 @@
 const submitUsername = document.querySelector('#submitUsername');
 
+let highScore = [];
+
 submitUsername.addEventListener('click', gatherUsername);
 
- function gatherUsername(){
-    const username = document.querySelector('#inputUsername');
+function gatherUsername(){
+   const username = document.querySelector('#inputUsername');
     console.log(username.value)
 
     let userScore = {
@@ -11,7 +13,7 @@ submitUsername.addEventListener('click', gatherUsername);
       // "highscore": userHighscore
     }
 
-    const highScore = []// = getUserScoreFromLocalStorage();
+    highScore = getUserScoreFromLocalStorage();
     
     highScore.push(userScore);
 
@@ -19,7 +21,7 @@ submitUsername.addEventListener('click', gatherUsername);
 }
 
 function saveUserScoreToLocalStorage(highScore){
-    localStorage.setItem('highSore', JSON.stringify(highScore));
+    localStorage.setItem('highScore', JSON.stringify(highScore));
 }
 
 function getUserScoreFromLocalStorage(){
