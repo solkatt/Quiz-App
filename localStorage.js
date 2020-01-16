@@ -50,16 +50,18 @@ function getUserScoreFromLocalStorage(){
 function showHighScore(userScore){
     const ul = document.querySelector('.highScore');
     const highScore = getUserScoreFromLocalStorage();
-
+    let rank = 1
+    let rankDot = ". "
     for (userScore of highScore) {
-        const li = createLiElement(userScore);
+        const li = createLiElement(rank, rankDot, userScore);
+        rank ++
         ul.append(li);
     }
 }
 
-function createLiElement(userScore){
+function createLiElement(rank, rankDot, userScore){
     const li = document.createElement('li');
-    li.append(userScore.username)
+    li.append(rank, rankDot, userScore.username)
     return li;
 }
 
