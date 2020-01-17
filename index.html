@@ -10,12 +10,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h2 id="display-text">I WANNA PLAY A GAME</h2>
+    <h2 id="display-text">0-20</h2>
     <img id="display-image" src="https://img.cinemablend.com/filter:scale/quill/4/e/b/f/d/3/4ebfd3962af3284166008d2a2925bc39d7dea9a2.jpg?mw=600" alt="">
     <form id="user-guess">
         <input type="text" placeholder="Din gissning" >
         <input type="button" value="Gissa" onclick="checkUserGuess()">
     </form>
+
     <div class="enterUsername">
         <input type="text" id="inputUsername" placeholder="username">
         <button id="submitUsername">start playing!</button>
@@ -25,5 +26,6 @@
             <!--HIGHSCORE INSERTED FROM JS-->
         </ul>
     </div>
+    <div id="guessingList"></div>
 </body>
 </html>
