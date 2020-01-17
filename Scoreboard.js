@@ -12,7 +12,7 @@ function showWinner(scoreList, player, guesses) /*scoreList = list of scoreList,
         document.querySelector("resultText").innerHTML = (bot2 + " " + "Won! After " + guesses+  " guesses!");
         document.querySelector("loserText").innerHTML = (player + " " + "You lost :(\n Your total scoreList was:\n" + scoreList);
         document.querySelector("scoreList").innerHTML = (player + scoreList);
-    }  else if (bot3 === Math.max(scoreList)) {
+    }  else {
         document.querySelector("resultText").innerHTML = (bot3 + " " + "Won! After " + guesses +  " guesses!");
         document.querySelector("loserText").innerHTML = (player + " " + "You lost :(\n Your total scoreList was:\n" + scoreList);
         document.querySelector("scoreList").innerHTML = (player + scoreList);
