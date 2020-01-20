@@ -8,7 +8,7 @@ function init(){
     minNumber = 0;
     maxNumber = 20;
     secretNumber = getRandom(minNumber, maxNumber);
-    dumBert();
+    slumpBert(minNumber, maxNumber);
 }
 
 //randomly assigns a number
@@ -17,6 +17,7 @@ function getRandom(minNumber, maxNumber){
 }
 
 //dumBert
+/*
 function dumBert(){
     for (let i = 0; i < maxNumber; i++) {
         let guess = i;
@@ -31,6 +32,40 @@ function dumBert(){
             displayOutput(guess, "error");
         }
     }
+}*/
+
+/*
+function snittBert(minNumber, maxNumber){
+    let guess = (maxNumber-minNumber)/2 + minNumber;
+    do {
+        if (secretNumber < guess) {
+            displayOutput(guess, "lower");
+            maxNumber = guess;
+            guess = Math.floor((maxNumber-minNumber)/2 + minNumber);
+        } else if (secretNumber > guess) {
+            displayOutput(guess, "higher");
+            minNumber = guess;
+            guess = Math.floor((maxNumber-minNumber)/2 + minNumber);
+        }
+    } while (guess != secretNumber);
+    displayOutput(guess, "win");
+}*/
+
+
+function slumpBert(minNumber, maxNumber){
+    let guess = Math.floor(Math.random()*(maxNumber-minNumber)+minNumber);
+    do {
+        if (secretNumber < guess) {
+            displayOutput(guess, "lower");
+            maxNumber = guess;
+            guess = Math.floor(Math.random()*((maxNumber-1)-minNumber)+minNumber);
+        } else if (secretNumber > guess) {
+            displayOutput(guess, "higher");
+            minNumber = guess;
+            guess = Math.floor(Math.random()*(maxNumber-(minNumber-1))+minNumber);
+        }
+    } while (guess != secretNumber);
+    displayOutput(guess, "win");
 }
 
 /* //activate to play on you're own
@@ -88,52 +123,3 @@ function display(textToDisplay){
     p.append(textToDisplay);
 }
 
-//Varning. OM man gissar på någon löjligt stor/låg siffra så kommer koden/botar 
-//just nu inte ta hänsyn till det och det kan bli lätt att slå dem
-
-/*
-function checkPlayersGuess(guess){
-    //let guess = document.getElementById('user-guess')["0"].value;
-
-    if(guess == secretNumber){
-        displayOutput(guess, "win");
-    } else if(guess > secretNumber){
-        displayOutput(guess, "lower");
-    } else if(guess < secretNumber){
-        displayOutput(guess, "higher");
-    } else {
-        displayOutput(guess, "error");
-    }
-}*/
-/*
-function snittBert(minNumber, maxNumber){
-    let guess = ((maxNumber-minNumber)/2)+minNumber;
-    do {
-        if (secretNumber < guess) {
-            displayOutput(guess, "higher");
-            minNumber = guess;
-            guess = ((maxNumber-minNumber)/2) + minNumber; 
-        } else if (number > guess) {
-            displayOutput(guess, "lower");
-            maxNumber = guess;
-            guess = ((maxNumber-minNumber)/2) + minNumber; 
-        }
-    } while (guess != secretNumber);
-    displayOutput(guess, "win");
-}*/
-/*
-function snittBert(minNumber, maxNumber){
-    let guess = 0;
-    do {
-        if (secretNumber < guess) {
-            displayOutput(guess, "higher");
-            minNumber = guess;
-            guess += guess; 
-        } else if (number > guess) {
-            displayOutput(guess, "lower");
-            maxNumber = guess;
-            guess += guess; 
-        }
-    } while (guess != secretNumber);
-    displayOutput(guess, "win");
-}*/
