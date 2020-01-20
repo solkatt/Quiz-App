@@ -7,3 +7,33 @@
 #display-image{
   height: 300px;
 }
+
+#gameRules {
+  position: fixed;
+  display: none;
+  width: 50%;
+  left: 25%;
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  z-index: 1 !important;
+  box-shadow: 5px 5px 10px black;
+}
+
+.showRulesButton {
+  background-color: lightblue;
+  border: none;
+  color: black;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.gameInfo {
+  
+}
