@@ -9,14 +9,15 @@
  */
 let state = {
     menuState: {
-        container: document.querySelector('.menu'),
+        container: document.querySelector('.menuCon'),
         hide: false,
-        startButton: document.querySelector('.startGameButton'),
-        settingsButton: document.querySelector('.settingsButton'),
-        highscoreButton: document.querySelector('.highscoreButton')
+        startButton: document.querySelector('#startgameButton'),
+        settingsButton: document.querySelector('#settingsButton'),
+        highscoreButton: document.querySelector('#hightScoreButton'),
+        rulesButton: document.querySelector('#rulesButton')
     },
     settingsState: {
-        container: document.querySelector('.settings'),
+        container: document.querySelector('.settingsCon'),
         hide: true,
         playerSettings: {
             nrOfBots: 3,
@@ -25,12 +26,12 @@ let state = {
         }
     },
     highscoreState: {
-        container: document.querySelector('.highscore'),
+        container: document.querySelector('.highscoreCon'),
         hide: true,
         scoreList: []
     },
     gameplayState: {
-        container: document.querySelector('.game--container'),
+        container: document.querySelector('.gameCon'),
         hide: true,
         numberInput: document.querySelector('#number--input'),
         numberSubmit: document.querySelector('[type="button"]'),
@@ -38,13 +39,18 @@ let state = {
             name: undefined,
             points: 0
         }
-    }
+    },
+    rulesState: {
+        container: document.querySelector('.rulesCon'),
+        hide: true
+    },
+    backToMenuButton: document.querySelectorAll('.backToMenuButton')
 }
 
 /**
  * Add click event listener to menu buttons.
- 
-window.addEventListener('load', function() {
+ */
+window.addEventListener('load', function () {
     // highscore button
     state.menuState.highscoreButton.addEventListener('click', () => {
         toggleDisplay(state.highscoreState);
@@ -57,8 +63,17 @@ window.addEventListener('load', function() {
     state.menuState.startButton.addEventListener('click', () => {
         toggleDisplay(state.gameplayState);
     })
+    // rules button
+    state.menuState.rulesButton.addEventListener('click', () => {
+        toggleDisplay(state.rulesState);
+    })
+    // back to menu button
+    for (const button of state.backToMenuButton) {
+        button.addEventListener('click', () => {
+            toggleDisplay(state.menuState);
+        })
+    }
 })
-*/
 
 /**
  * Toggle visibility of html-element.
@@ -70,7 +85,7 @@ function toggleDisplay(gameState) {
         show(gameState);
         // hide everything but chosen game state and menu state
         for (const key in state) {
-            if (state[key] != state.menuState && state[key] != gameState) {
+            if (state[key] != gameState && state[key] != state.backToMenuButton) {
                 hide(state[key]);
             }
         }

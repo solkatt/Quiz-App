@@ -8,10 +8,6 @@ body {
   width: 100%;
 }
 
-.hide {
-  display: none;
-}
-
 .container {
   position: absolute;
   margin: auto;
@@ -89,6 +85,10 @@ a {
 
 p {
   margin: 20px auto;
+}
+
+.hide {
+  display: none;
 }
 
 /* #display-image {
