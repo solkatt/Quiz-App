@@ -35,7 +35,7 @@ function checkUserGuess(){
     if(youWin == false){
         // takes a guess for each bot
         for (i = 0; i <= 2; i++){
-            if (i == 0) {
+            if (i == 0) { // SnittBert
                 //Same on all bots, somhow the maxNumber/ minNumber converts into strings, hence parseInt
                 guess = Math.floor((parseInt(maxNumber) - parseInt(minNumber))/2 + parseInt(minNumber));
                 player = "SnittBert";
@@ -45,7 +45,7 @@ function checkUserGuess(){
                     } else {
                     checkResult(player, guess);
                 }
-            } else if (i == 1) {
+            } else if (i == 1) { // DumBert
                 player = "DumBert";
                 if (secretNumber == 0){
                     guess = 0;
@@ -58,8 +58,8 @@ function checkUserGuess(){
                     } else {
                     checkResult(player, guess);
                 }
-            } else if (i == 2) {
-                // Fixes so that guesses can't be the same
+            } else if (i == 2) { // SlumpBert
+                // Fixes so that random guesses can't be the same
                 if (secretNumber == minNumber){
                     guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - parseInt(minNumber)) + (parseInt(minNumber)));
                 } else if (secretNumber == maxNumber) {
