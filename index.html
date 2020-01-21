@@ -20,7 +20,8 @@
             <div class="h1StartMenu">
                 <h1>Numbers</h1>
             </div>
-            <input type="text" id="inputUsername" placeholder="Enter your name here...">
+            <!-- Kommenterade ut input för namn här eftersom den finns på "spelsidan", rad 44. -->
+            <!-- <input type="text" id="inputUsername" placeholder="Enter your name here..."> -->
             <button id="startgameButton" type="button" value="Start Game">Start Game</button>
             <button id="rulesButton" type="button" value="Rules">Rules</button>
             <button id="hightScoreButton" type="button" value="Hightscore">Highscore</button>
@@ -40,7 +41,7 @@
             </form>
 
             <div class="enterUsername">
-                <!-- <input type="text" id="inputUsername" placeholder="username"> -->
+                <input type="text" id="inputUsername" placeholder="username">
                 <button id="submitUsername">start playing!</button>
             </div>
             <div class="highScoreContainer">
@@ -49,7 +50,7 @@
                 </ul>
             </div>
             <div id="guessingList"></div>
-
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
 
         <div class="rulesCon container hide">

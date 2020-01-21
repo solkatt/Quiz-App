@@ -48,7 +48,7 @@ let state = {
 }
 
 /**
- * Add click event listener to menu buttons.
+ * Add click event listener to buttons on page load.
  */
 window.addEventListener('load', function () {
     // highscore button
@@ -67,7 +67,7 @@ window.addEventListener('load', function () {
     state.menuState.rulesButton.addEventListener('click', () => {
         toggleDisplay(state.rulesState);
     })
-    // back to menu button
+    // adds event listeners to all back-to-menu-buttons
     for (const button of state.backToMenuButton) {
         button.addEventListener('click', () => {
             toggleDisplay(state.menuState);
@@ -77,13 +77,13 @@ window.addEventListener('load', function () {
 
 /**
  * Toggle visibility of html-element.
- * @param {HTMLDivElement} gameState The chosen game state recieved from event listener.
+ * @param {HTMLDivElement} gameState The selected game state recieved from event listener.
  */
 function toggleDisplay(gameState) {
-    // show chosen game state if it is hidden
+    // show selected game state if it is hidden
     if (gameState.hide === true) {
         show(gameState);
-        // hide everything but chosen game state and menu state
+        // hide everything but selected game state and menu state
         for (const key in state) {
             if (state[key] != gameState && state[key] != state.backToMenuButton) {
                 hide(state[key]);
@@ -97,9 +97,9 @@ function toggleDisplay(gameState) {
 }
 
 /**
- * Change 'hide' property value on chosen game state container.
+ * Change 'hide' property value on selected game state container.
  * Add 'hide' class to html-element.
- * @param {HTMLDivElement} gameState 
+ * @param {HTMLDivElement} gameState The selected game state recieved from toggleDisplay() to hide.
  */
 function hide(gameState) {
     gameState.hide = true;
@@ -109,7 +109,7 @@ function hide(gameState) {
 /**
  * Change 'hide' property value on game state container.
  * Remove 'hide' class to html-element.
- * @param {HTMLDivElement} gameState 
+ * @param {HTMLDivElement} gameState The selected game state recieved from toggleDisplay() to show.
  */
 function show(gameState) {
     gameState.hide = false;
