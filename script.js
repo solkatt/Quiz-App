@@ -46,8 +46,12 @@ function checkUserGuess(){
                     checkResult(player, guess);
                 }
             } else if (i == 1) {
-                guess = parseInt(minNumber)+1;
                 player = "DumBert";
+                if (secretNumber == 0){
+                    guess = 0;
+                } else {
+                    guess = parseInt(minNumber)+1;
+                }
                 if (secretNumber == guess) {
                     displayOutput(player, guess, "win");
                     break;
@@ -55,9 +59,14 @@ function checkUserGuess(){
                     checkResult(player, guess);
                 }
             } else if (i == 2) {
-                //Can't win if secretNumber is equal to start min an max, but keeps it from guessing the same number
-                //If this feature isn't wanted, remove -1 and +1
-                guess = Math.ceil(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
+                // Fixes so that guesses can't be the same
+                if (secretNumber == minNumber){
+                    guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - parseInt(minNumber)) + (parseInt(minNumber)));
+                } else if (secretNumber == maxNumber) {
+                    guess = Math.floor(Math.random()*(parseInt(maxNumber) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
+                } else {
+                    guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
+                }
                 player = "SlumpBert";
                     if (secretNumber == guess) {
                         displayOutput(player, guess, "win");
@@ -94,7 +103,7 @@ function displayOutput(player, guess, result){
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
-            swapPic.src = "https://lundgrens-media.imgix.net/products/pokal-xxl.jpg";
+            swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
             break;
