@@ -27,16 +27,8 @@ function checkUserGuess(){
     if(guess == secretNumber){
         displayOutput(player, guess, "win");
         youWin = true;
-    } else if(guess > secretNumber && guess > maxNumber){
-        displayOutput(player, guess, "too low");
-    } else if(guess > secretNumber){
-        displayOutput(player, guess, "lower");
-    } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){
-        displayOutput(player, guess, "too high");
-    } else if(guess < secretNumber) {
-        displayOutput(player, guess, "higher");
     } else {
-        displayOutput(player, guess, "error");
+        checkResult(player, guess);
     }
 
     //stops the bots from guessing if the player wins
@@ -47,41 +39,52 @@ function checkUserGuess(){
                 //Same on all bots, somhow the maxNumber/ minNumber converts into strings, hence parseInt
                 guess = Math.floor((parseInt(maxNumber) - parseInt(minNumber))/2 + parseInt(minNumber));
                 player = "SnittBert";
-                if (secretNumber < guess) {
-                    displayOutput(player, guess, "lower");
-                } else if (secretNumber > guess) {
-                        displayOutput(player, guess, "higher");
-                } else if (secretNumber == guess) {
+                if (secretNumber == guess) {
                     displayOutput(player, guess, "win");
                     break;
+                    } else {
+                    checkResult(player, guess);
                 }
             } else if (i == 1) {
                 guess = parseInt(minNumber)+1;
                 player = "DumBert";
-                if (guess == secretNumber){
-                    displayOutput(player, guess, "win")
-                    break; 
-                } else if(guess > secretNumber){
-                    displayOutput(player, guess, "lower");
-                } else if(guess < secretNumber){
-                    displayOutput(player, guess, "higher");
-                } 
+                if (secretNumber == guess) {
+                    displayOutput(player, guess, "win");
+                    break;
+                    } else {
+                    checkResult(player, guess);
+                }
             } else if (i == 2) {
                 //Can't win if secretNumber is equal to start min an max, but keeps it from guessing the same number
                 //If this feature isn't wanted, remove -1 and +1
-                guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
+                guess = Math.ceil(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
                 player = "SlumpBert";
-                    if (secretNumber < guess) {
-                        displayOutput(player, guess, "lower");
-                        } else if (secretNumber > guess) {
-                        displayOutput(player, guess, "higher");
-                        } else if (guess == secretNumber){
+                    if (secretNumber == guess) {
                         displayOutput(player, guess, "win");
                         break;
-                    }
+                        } else {
+                        checkResult(player, guess);
                 }
             }
         }
+    }
+}
+
+
+function checkResult(player, guess){
+    if(guess > secretNumber && guess > maxNumber){
+        //keeps deliberatly wrong guesses from confusing the bots
+        displayOutput(player, guess, "too low");
+    } else if(guess > secretNumber){
+        displayOutput(player, guess, "lower");
+    } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
+        //keeps deliberatly wrong guesses from confusing the bots
+        displayOutput(player, guess, "too high");
+    } else if(guess < secretNumber) {
+        displayOutput(player, guess, "higher");
+    } else {
+        displayOutput(player, guess, "error");
+    }
 }
 
 function displayOutput(player, guess, result){
@@ -96,13 +99,13 @@ function displayOutput(player, guess, result){
             display(player + " gissade rätt: " + guess);
             break;
         case "lower":
-            swapPic.src = "https://image.shutterstock.com/image-photo/photo-shocked-bearded-male-looks-260nw-776210818.jpg";
+            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             maxNumber = guess;
             swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             display( player + " gissade " + guess + ", gissa lägre");
             break;
         case "higher":
-            swapPic.src = "https://image.shutterstock.com/image-photo/portrait-happy-bearded-man-pointing-260nw-1029061363.jpg";
+            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             minNumber = guess;
             swapText.innerHTML = "Gissa högre: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa högre");
@@ -110,12 +113,12 @@ function displayOutput(player, guess, result){
         case "too low":
             swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
-            display( player + " gissade " + guess + ", gissa lägre");
+            display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
         case "too high":
             swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade under minimum: "  + minNumber;
-            display(player + " gissade " + guess + ", gissa högre");
+            display(player + " gissade " + guess + ", gissa mycket högre");
             break;
         case "error":
             swapPic.src = "https://i.imgflip.com/1qwh2e.jpg";
