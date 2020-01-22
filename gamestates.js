@@ -18,17 +18,11 @@ let state = {
     },
     settingsState: {
         container: document.querySelector('.settingsCon'),
-        hide: true,
-        playerSettings: {
-            nrOfBots: 3,
-            soundOn: false,
-            showBotsGuesses: true
-        }
+        hide: true
     },
     highscoreState: {
         container: document.querySelector('.highscoreCon'),
-        hide: true,
-        scoreList: []
+        hide: true
     },
     // the state between menu and actual gameplay
     newGameState: {
@@ -39,12 +33,7 @@ let state = {
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
-        hide: true,
-        numberInput: document.querySelector('#number--input'),
-        numberSubmit: document.querySelector('[type="button"]'),
-        playerInfo: {
-            points: 0
-        }
+        hide: true
     },
     rulesState: {
         container: document.querySelector('.rulesCon'),
