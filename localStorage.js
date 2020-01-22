@@ -55,14 +55,12 @@ function getUserScoreFromLocalStorage(){
  * @param {Object} userScore - contains username and score
  */
 function showHighScore(userScore){
-    const ul = document.querySelector('.highScore');
+    const ol = document.querySelector('.highScore');
     const highScore = getUserScoreFromLocalStorage();
-    let rank = 1
     
     for (userScore of highScore) {
-        const li = createLiElement(rank, userScore);
-        rank ++
-        ul.append(li);
+        const li = createLiElement(userScore);
+        ol.append(li);
     }
 }
 
@@ -72,9 +70,8 @@ function showHighScore(userScore){
  * @param {String} rankDot - some text between rank and score
  * @param {Object} userScore - conains username and score
  */
-function createLiElement(rank, userScore){
+function createLiElement(userScore){
     const li = document.createElement('li');
-    let rankDot = ". "
-    li.append(rank, rankDot, userScore.username)
+    li.append(userScore.username)
     return li;
 }
