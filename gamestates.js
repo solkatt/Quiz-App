@@ -28,7 +28,7 @@ let state = {
     highscoreState: {
         container: document.querySelector('.highscoreCon'),
         hide: true,
-        scoreList: []
+        scoreList: [],
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),

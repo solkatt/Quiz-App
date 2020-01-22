@@ -4,14 +4,11 @@
 const submitUsername = document.querySelector('#submitUsername');
 
 /**
- * the array to save the highscore in
- */
-
-/**
  * Adds clickevent to button and triggers the gatherUsername function
  */
 submitUsername.addEventListener('click', gatherUsername);
 showHighScore();
+
 /**
  * Handels the gathering of username and saving the userScore-object in local storage 
  * (for now, probably this will happen in another function when the score-functions are done).
@@ -19,7 +16,8 @@ showHighScore();
 function gatherUsername(){
    const username = document.querySelector('#inputUsername');
     console.log(username.value)
-    return username
+    addHighScoreToLocalStorage(username.value)
+    //GÖR EVENTUELLT EN RETURN AV DETTA ATT ANVÄNDA I CALCULATE USERSCORE
 }
 
 /**
