@@ -20,30 +20,39 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
-// let startButton = document.querySelector('#startgameButton');
+let startButton = document.querySelector('#startgameButton');
 
+/** Array of user selected bots. */
+let bots = [];
+/** Nodelist of inputs/checkboxes for bots. */
+let botCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 
-let bots = []
-let botsDiv = document.querySelector('.newGameCon form')
-let botsInput = document.querySelectorAll('input[type="checkbox"]')
-let botsArray = [];
-
+/**
+ * Handles bot selection from onclick-event.
+ * @param {string} selectedBot The bot that was clicked on, recieved from event listener.
+ * @param {number} i Index for the bot that was clicked on.
+ */
 function selectBots(selectedBot, i) {
-    console.log
-        if (selectedBot.checked == true) {
-            bots.push(selectedBot.value);
-        }
-        else if (selectedBot.value == selectedBot) {
-            bots.splice(i, 1);
-        }
-        else {
-            removeSelectedBot(selectedBot);
-        }
-    
-    console.log(bots)
+    // add selected bot value (bot name) to array of selected bots
+    if (selectedBot.checked == true) {
+        bots.push(selectedBot.value);
+    }
+    // remove any doubles, just in case
+    else if (selectedBot.value == selectedBot) {
+        bots.splice(i, 1);
+    }
+    // fires if above requirements are not met (checked = false or no doubles)
+    // removes selected bot
+    else {
+        removeBot(selectedBot);
+    }
 }
 
-function removeSelectedBot(botToRemove) {
+/**
+ * Remove bot from array of user selected bots.
+ * @param {string} botToRemove Bot as string to remove, param recieved from selectBots().
+ */
+function removeBot(botToRemove) {
     for (let i = 0; i < bots.length; i++) {
         if (bots[i] == botToRemove.value) {
             bots.splice(i, 1);
@@ -52,12 +61,13 @@ function removeSelectedBot(botToRemove) {
 }
 
 // start game button in menu
-state.menuState.startButton.addEventListener('click', () => {
+startButton.addEventListener('click', () => {
+    // reset selected bots to none
     bots = [];
-    botsInput.forEach(checkbox => {
+    // reset checkboxes to not checked
+    botCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
-    botsArray = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 })
 
 // start playing button in new-game-state
@@ -71,19 +81,19 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
 window.addEventListener("load", init);
 
 function init() {
-    for (let i = 0; i < botsInput.length; i++) {
-        const checkbox = botsInput[i];
-        console.log(checkbox.checked)
-        checkbox.addEventListener('change', () => {
-            selectBots(checkbox, i);
-        })
-    }
-
     minNumber = 1;
     maxNumber = 20;
     turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
+
+    // add event listener to bot checkboxes
+    for (let i = 0; i < botCheckboxes.length; i++) {
+        const checkbox = botCheckboxes[i];
+        checkbox.addEventListener('change', () => {
+            selectBots(checkbox, i);
+        })
+    }
 }
 
 window.addEventListener("load", init);
