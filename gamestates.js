@@ -9,11 +9,12 @@
  */
 let state = {
     menuState: {
-        container: document.querySelector('.menu'),
+        container: document.querySelector('.startMenu'),
         hide: false,
         startButton: document.querySelector('.startGameButton'),
+        rulesButton: document.querySelector('.rulessButton'),
+        highscoreButton: document.querySelector('.highscoreButton'),
         settingsButton: document.querySelector('.settingsButton'),
-        highscoreButton: document.querySelector('.highscoreButton')
     },
     settingsState: {
         container: document.querySelector('.settings'),
