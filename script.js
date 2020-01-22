@@ -1,6 +1,8 @@
 let secretNumber;
 let minNumber;
 let maxNumber;
+let turn;
+let guess;
 
 let scoreList; 
 let playerScore;
@@ -15,22 +17,27 @@ function init(){
     let totalGuesses = 0;
     minNumber = 0;
     maxNumber = 20;
+    turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
 }
+
+window.addEventListener("load", init);
 
 //randomly assigns a number
 function getRandom(minNumber, maxNumber){
     return Math.floor(Math.random()*(maxNumber - minNumber) + minNumber);
 }
 
+//checks when the player guesses
 document.querySelector(".checkUserGuess").addEventListener("click", checkUserGuess);
 
-
 function checkUserGuess(){
-    let guess = document.getElementById("user-guess")["0"].value;
+    //players guess
+    guess = parseInt(document.getElementById("user-guess")["0"].value);
     let player = "Du";
     let youWin = false;
+    turn = turn + 1;
 
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
@@ -45,64 +52,103 @@ function checkUserGuess(){
         checkResult(player, guess);
     }
 
+    //remove after fixing 
+    let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+
     //stops the bots from guessing if the player wins
     if(youWin == false){
         // takes a guess for each bot
-        for (i = 0; i <= 2; i++){
-            if (i == 0) { // SnittBert
-                //Same on all bots, somhow the maxNumber/ minNumber converts into strings, hence parseInt
-                guessScore ++;
-                guess = Math.floor((parseInt(maxNumber) - parseInt(minNumber))/2 + parseInt(minNumber));
-                player = "SnittBert";
-                calculateScore(secretNumber, guess, player);
-                if (secretNumber == guess) {
-                    displayOutput(player, guess, "win");
-                    break;
-                    } else {
-                    let previousGuess = guess;
-                    checkResult(player, guess);
-                }
-            } else if (i == 1) { // DumBert
-                guessScore ++;
-                player = "DumBert";
-                calculateScore(secretNumber, guess, player);
-                if (secretNumber == 0){
-                    guess = 0;
-                } else {
-                    guess = parseInt(minNumber)+1;
-                }
-                if (secretNumber == guess) {
-                    displayOutput(player, guess, "win");
-                    break;
-                    } else {
-                    let previousGuess = guess;
-                    checkResult(player, guess);
-                }
-            } else if (i == 2) { // SlumpBert
-                guessScore ++;
-                // Fixes so that random guesses can't be the same
-                if (secretNumber == minNumber){
-                    guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - parseInt(minNumber)) + (parseInt(minNumber)));
-                } else if (secretNumber == maxNumber) {
-                    guess = Math.floor(Math.random()*(parseInt(maxNumber) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
-                } else {
-                    guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
-                }
-                player = "SlumpBert";
-                calculateScore(secretNumber, guess, player);
-                    if (secretNumber == guess) {
-                        displayOutput(player, guess, "win");
-                        break;
-                        } else {
-                        let previousGuess = guess;
-                        checkResult(player, guess);
-                }
+        for (let bot of bots) {
+            if(guess == secretNumber){
+             break;
+            } else {
+                botGuesses(bot);
             }
         }
     }
 }
 
+//switch that lets the bots make a guess
+function botGuesses(player){
+    switch (player) {
+        case "AverageBert":
+            guess = Math.floor((maxNumber - minNumber)/2 + minNumber);
+            player = "AverageBert";
+            if (secretNumber == guess) {
+                displayOutput(player, guess, "win");
+                } else {
+                checkResult(player, guess);
+            }
+            break;
+        case "LowBert": 
+            player = "LowBert";
+            if (secretNumber == 0){
+                guess = 0;
+            } else {
+                guess = minNumber+1;
+            }
+            if (secretNumber == guess) {
+                displayOutput(player, guess, "win");
+                } else {
+                checkResult(player, guess);
+            }
+            break;
+        case "RandomBert":
+            // Fixes so that random guesses can't be the same
+            if (secretNumber == minNumber){
+                guess = Math.floor(Math.random()*((maxNumber-1) - minNumber) + (minNumber));
+            } else if (secretNumber == maxNumber) {
+                guess = Math.floor(Math.random()*(maxNumber - (minNumber+1))+(minNumber)+1);
+            } else {
+                guess = Math.floor(Math.random()*((maxNumber-1) - (minNumber+1))+(minNumber+1));
+            }
+            player = "RandomBert";
+                if (secretNumber == guess) {
+                    displayOutput(player, guess, "win");
 
+                    } else {
+                    checkResult(player, guess);
+            }
+            break;
+        case "HighBert": 
+            player = "HighBert";
+            if (secretNumber == maxNumber){
+                guess = maxNumber;
+            } else {
+                guess = maxNumber-1;
+            }
+            if (secretNumber == guess) {
+                displayOutput(player, guess, "win");
+                } else {
+                checkResult(player, guess);
+            }
+            break;
+        case "DumbBert":
+            player = "DumbBert";
+            //Unlike randombert, dumbert can guess already guessed guesses
+            //This is to hide if it guesses right
+            guess = Math.floor(Math.random()*(maxNumber - minNumber)+minNumber);
+            //If DumbBert guesses right it istead guesses the highest number
+            if (secretNumber == guess){
+                guess = maxNumber;
+                checkResult(player, guess);
+            } else {
+                checkResult(player, guess);
+            }
+            break;
+        case "SmartBert": 
+            player = "SmartBert";
+            if(turn <= 2){
+                guess = maxNumber;
+                displayOutput(player, guess, "wait");
+            } else {
+                displayOutput(player, guess, "win");
+            }
+            break;
+    }
+}
+
+//decide if the guess was to high or low, or other
 function checkResult(player, guess){
     if(guess > secretNumber && guess > maxNumber){
         //keeps deliberatly wrong guesses from confusing the bots
@@ -149,8 +195,13 @@ function displayOutput(player, guess, result){
             break;
         case "too high":
             swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
-            swapText.innerHTML = "Du gissade under minimum: "  + minNumber;
+            swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
+            break;
+        case "wait":
+            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
+            swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
+            display(player + " väntar... ");
             break;
         case "error":
             swapPic.src = "https://i.imgflip.com/1qwh2e.jpg";
@@ -160,7 +211,7 @@ function displayOutput(player, guess, result){
     }
 }
 
-//Just for checking the test easier
+//Just for checking the tests easier
 function display(textToDisplay){
     const displayResult = document.getElementById("guessingList")
     const p = document.createElement("p");
@@ -202,77 +253,5 @@ function calculateScore (secretNumber, guess, player) {
                 scoreList[3] += scoreToAdd;
             }
     }
-
    // addHighScoreToLocalStorage();
 }
-
-
-
-//Bot-graveyard
-/* //activate to play on you"re own
-function checkUserGuess(){
-    let guess = document.getElementById("user-guess")["0"].value;
-
-    if(guess == secretNumber){
-        displayOutput(player, guess, "win");
-    } else if(guess > secretNumber){
-        displayOutput(player, guess, "lower");
-    } else if(guess < secretNumber){
-        displayOutput(player, guess, "higher");
-    } else {
-        displayOutput(player, guess, "error");
-    }
-}
- */
-
-/* // function for snittBert singleplayer , just put snittBert(minNumber, maxNumber) in init()
-function snittBert(minNumber, maxNumber){
-    let guess = (maxNumber-minNumber)/2 + minNumber;
-    do {
-        if (secretNumber < guess) {
-            displayOutput(player, guess, "lower");
-            maxNumber = guess;
-            guess = Math.floor((maxNumber-minNumber)/2 + minNumber);
-        } else if (secretNumber > guess) {
-            displayOutput(player, guess, "higher");
-            minNumber = guess;
-            guess = Math.floor((maxNumber-minNumber)/2 + minNumber);
-        }
-    } while (guess != secretNumber);
-    displayOutput(player, guess, "win");
-}*/
-
-
-/* // function for dumBert singleplayer , just put dumBert(minNumber, maxNumber) in init()
-function dumBert(){
-    for (let i = 0; i < maxNumber; i++) {
-        let guess = i;
-        if (guess === secretNumber){
-            displayOutput(player, guess, "win")
-            break; 
-        } else if(guess > secretNumber){
-            displayOutput(player, guess, "lower");
-        } else if(guess < secretNumber){
-            displayOutput(player, guess, "higher");
-        } else {
-            displayOutput(player, guess, "error");
-        }
-    }
-}*/
-
-/* // function for slumpBert singleplayer , just put slumpBert(minNumber, maxNumber) in init()
-function slumpBert(minNumber, maxNumber){
-    let guess = Math.floor(Math.random()*(maxNumber-minNumber)+minNumber);
-    do {
-        if (secretNumber < guess) {
-            displayOutput(player, guess, "lower");
-            maxNumber = guess;
-            guess = Math.floor(Math.random()*((maxNumber-1)-minNumber)+minNumber);
-        } else if (secretNumber > guess) {
-            displayOutput(player, guess, "higher");
-            minNumber = guess;
-            guess = Math.floor(Math.random()*(maxNumber-(minNumber-1))+minNumber);
-        }
-    } while (guess != secretNumber);
-    displayOutput(player, guess, "win");
-}*/
