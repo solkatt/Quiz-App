@@ -67,43 +67,67 @@ function addHighScoreToLocalStorage(registeredUsername, playerScore){
         "username":registeredUsername,
         "score": playerScore
     }
-    let highScore = getUserScoreFromLocalStorage();
-    highScore.push(userScore);
+    updateHighScore(userScore);
 
+    let highScore = getUserScoreFromLocalStorage();
+
+    
     if(highScore.length > 5){
-        highScore.shift();
+        highScore.pop();
+        saveUserScoreToLocalStorage(highScore);
     }
+    
+    
+    //highScore.push(userScore);
+
+/*     if(highScore.length > 5){
+        highScore.shift();
+    } */
     console.log(highScore)
     //showHighScore(userScore);
-    saveUserScoreToLocalStorage(highScore);
+   // saveUserScoreToLocalStorage(highScore);
 }
 
 /******** THESE FUNCTIONS ARE FOR WHEN THE SCORE IS IMPLEMENED IN THE GAME, ARE NOT TESTED ****/
+
+/**
+ * Finds and replaces / knocks down lower scores
+ * @param {Object} userScore - object containing username and score
+ */
+function updateHighScore(userScore){
+    //let indexToRemove = calculateRankingPosition(userScore);
+    //const highScore = getUserScoreFromLocalStorage();
+    //console.log(indexToRemove + ' is the place')
+   // highScore.splice(calculateRankingPosition(), 0, userScore);
+   calculateRankingPosition(userScore);
+} 
 
 /**
  * Finds array-position for where the user's highscore should be
  * @param {Number} i - index
  * @param {Object} userScore - object containing username and score
  */
-/* function calculateRankingPosition(i, userScore){
-    const highScore = getUserScoreFromLocalStorage();
-    
+function calculateRankingPosition(userScore){
+/*     const highScore = getUserScoreFromLocalStorage();
+    console.log('kalkyleraR')
+    let index;
     for (let i = 0; i < highScore.length; i++) {
-        const storedScore = highScore[i];
-        if(storedScore.score > userScore.score && storedScore.score <= userScore.score){
+        //const storedScore = highScore;
+        if(highScore.score > userScore.score && highScore.score < userScore.score){
             index = i;
             break;
         }
-    }
-    return i
-} */
-
-/**
- * Finds and replaces / knocks down lower scores
- * @param {Object} userScore - object containing username and score
- */
-/* function updateHighScore(userScore){
-    calculateRankingPosition();
+    } */
     const highScore = getUserScoreFromLocalStorage();
-    highScore.splice(index,0, userScore);
-} */ 
+    let index 
+    for (let i = 0; i < highScore.length; i++) {
+        const storedHighScore = highScore[i];
+        if(userScore.score < storedHighScore.score){
+            index = i + 1;   
+        }
+    }
+    console.log(index + ' is the place to splice')
+    highScore.splice(index, 0, userScore);
+    saveUserScoreToLocalStorage(highScore);
+} 
+

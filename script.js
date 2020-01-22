@@ -60,14 +60,14 @@ function checkUserGuess(){
 
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
-
     addHighScoreToLocalStorage(gatherUsername(), playerScore);
-
     //Your Player
     if(guess == secretNumber){
         //showWinner(scoreList, playerScore, totalGuesses)
         displayOutput(player, guess, "win");
         youWin = true;
+        //Save score to local storage here?
+        
     } else {
         let previousGuess = guess;
         checkResult(player, guess);
