@@ -202,6 +202,8 @@ function calculateScore (secretNumber, guess, player) {
                 scoreList[3] += scoreToAdd;
             }
     }
+
+   // addHighScoreToLocalStorage();
 }
 
 
