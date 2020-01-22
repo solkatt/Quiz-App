@@ -20,8 +20,6 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
-let startButton = document.querySelector('#startgameButton');
-
 /** Array of user selected bots. */
 let bots = [];
 /** Nodelist of inputs/checkboxes for bots. */
@@ -60,16 +58,6 @@ function removeBot(botToRemove) {
     }
 }
 
-// start game button in menu
-startButton.addEventListener('click', () => {
-    // reset selected bots to none
-    bots = [];
-    // reset checkboxes to not checked
-    botCheckboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    })
-})
-
 // start playing button in new-game-state
 state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0, 0, 0];
@@ -86,7 +74,6 @@ function init() {
     turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
-
     // add event listener to bot checkboxes
     for (let i = 0; i < botCheckboxes.length; i++) {
         const checkbox = botCheckboxes[i];

@@ -20,11 +20,24 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
-let startButton = document.querySelector('#startgameButton');
+/** Array of user selected bots. */
+let bots = [];
+/** Nodelist of inputs/checkboxes for bots. */
+let botCheckboxes = document.querySelectorAll('input[type="checkbox"]');
 
 
-// start button
-startButton.addEventListener('click', () => {
+// start game button in menu
+state.menuState.startButton.addEventListener('click', () => {
+    // reset selected bots to none
+    bots = [];
+    // reset checkboxes to unchecked
+    botCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+})
+
+// start playing button in new-game-state
+state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
     totalGuess = 0;
@@ -39,6 +52,14 @@ function init(){
     turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
+
+        // add event listener to bot checkboxes
+        for (let i = 0; i < botCheckboxes.length; i++) {
+            const checkbox = botCheckboxes[i];
+            checkbox.addEventListener('change', () => {
+                selectBots(checkbox, i);
+            })
+        }
 }
 
 window.addEventListener("load", init);
@@ -75,9 +96,6 @@ function checkUserGuess(){
         let previousGuess = guess;
         checkResult(player, guess);
     }
-
-    //remove after fixing 
-    let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
     //stops the bots from guessing if the player wins
     if(stopTheGame == false){
@@ -268,5 +286,39 @@ function calculateScore (secretNumber, guess, player) {
             else if (player === "SlumpBert") {
                 scoreList[3] += scoreToAdd;
             }
+    }
+}
+
+// Bot selection
+/**
+ * Handles bot selection from onclick-event.
+ * @param {string} selectedBot The bot that was clicked on, recieved from event listener.
+ * @param {number} i Index for the bot that was clicked on.
+ */
+function selectBots(selectedBot, i) {
+    // add selected bot value (bot name) to array of selected bots
+    if (selectedBot.checked == true) {
+        bots.push(selectedBot.value);
+    }
+    // remove any doubles, just in case
+    else if (selectedBot.value == selectedBot) {
+        bots.splice(i, 1);
+    }
+    // fires if above requirements are not met (checked = false or no doubles)
+    // removes selected bot
+    else {
+        removeBot(selectedBot);
+    }
+}
+
+/**
+ * Remove bot from array of user selected bots.
+ * @param {string} botToRemove Bot as string to remove, param recieved from selectBots().
+ */
+function removeBot(botToRemove) {
+    for (let i = 0; i < bots.length; i++) {
+        if (bots[i] == botToRemove.value) {
+            bots.splice(i, 1);
+        }
     }
 }
