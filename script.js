@@ -237,7 +237,7 @@ function display(textToDisplay){
 
 function calculateScore (secretNumber, guess, player) {
     if (guess >= secretNumber) {
-        let difPercentage = (guess - secretNumber) / secretNumber; 
+        let difPercentage = (guess - secretNumber) / guess; 
         let scoreToAdd = Math.round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
         if (player === "Du") {
         playerScore += scoreToAdd;
