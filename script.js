@@ -2,11 +2,20 @@ let secretNumber;
 let minNumber;
 let maxNumber;
 
+let scoreList; 
+let playerScore;
+let totalGuesses;
+let previousGuess;
+
 window.addEventListener("load", init);
 
 function init(){
+    let scoreList = [0, 0, 0, 0];
+    let playerScore = 0;
+    let totalGuesses = 0;
     minNumber = 0;
     maxNumber = 20;
+    let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
 }
 
@@ -23,11 +32,16 @@ function checkUserGuess(){
     let player = "Du";
     let youWin = false;
 
+    calculateScore(secretNumber, guess, player);
+    console.log(playerScore)
+
     //Your Player
     if(guess == secretNumber){
+        //showWinner(scoreList, playerScore, totalGuesses)
         displayOutput(player, guess, "win");
         youWin = true;
     } else {
+        let previousGuess = guess;
         checkResult(player, guess);
     }
 
@@ -37,16 +51,21 @@ function checkUserGuess(){
         for (i = 0; i <= 2; i++){
             if (i == 0) { // SnittBert
                 //Same on all bots, somhow the maxNumber/ minNumber converts into strings, hence parseInt
+                guessScore ++;
                 guess = Math.floor((parseInt(maxNumber) - parseInt(minNumber))/2 + parseInt(minNumber));
                 player = "SnittBert";
+                calculateScore(secretNumber, guess, player);
                 if (secretNumber == guess) {
                     displayOutput(player, guess, "win");
                     break;
                     } else {
+                    let previousGuess = guess;
                     checkResult(player, guess);
                 }
             } else if (i == 1) { // DumBert
+                guessScore ++;
                 player = "DumBert";
+                calculateScore(secretNumber, guess, player);
                 if (secretNumber == 0){
                     guess = 0;
                 } else {
@@ -56,9 +75,11 @@ function checkUserGuess(){
                     displayOutput(player, guess, "win");
                     break;
                     } else {
+                    let previousGuess = guess;
                     checkResult(player, guess);
                 }
             } else if (i == 2) { // SlumpBert
+                guessScore ++;
                 // Fixes so that random guesses can't be the same
                 if (secretNumber == minNumber){
                     guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - parseInt(minNumber)) + (parseInt(minNumber)));
@@ -68,10 +89,12 @@ function checkUserGuess(){
                     guess = Math.floor(Math.random()*((parseInt(maxNumber)-1) - (parseInt(minNumber)+1))+(parseInt(minNumber)+1));
                 }
                 player = "SlumpBert";
+                calculateScore(secretNumber, guess, player);
                     if (secretNumber == guess) {
                         displayOutput(player, guess, "win");
                         break;
                         } else {
+                        let previousGuess = guess;
                         checkResult(player, guess);
                 }
             }
@@ -143,6 +166,42 @@ function display(textToDisplay){
     const p = document.createElement("p");
     displayResult.append(p);
     p.append(textToDisplay);
+}
+
+function calculateScore (secretNumber, guess, player) {
+    if (guess >= secretNumber) {
+        let difPercentage = (guess - secretNumber) / secretNumber; 
+        let scoreToAdd = round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
+        if (player === "Du") {
+        playerScore += scoreToAdd;
+        scoreList[0] += playerScore;
+        }
+        else if (player === "SnittBert") {
+            scoreList[1] += scoreToAdd;
+        }
+        else if (player === "DumBert") {
+            scoreList[2] += scoreToAdd;
+        }
+        else if (player === "SlumpBert") {
+            scoreList[3] += scoreToAdd;
+        }
+    } else if (guess < secretNumber) {
+        let difPercentage = (secretNumber - guess) / secretNumber;
+        let scoreToAdd = round((1 - difPercentage) * 100 * 3);
+        if (player === "Du") {
+            playerScore += scoreToAdd;
+            scoreList[0] += playerScore;
+            }
+            else if (player === "SnittBert") {
+                scoreList[1] += scoreToAdd;
+            }
+            else if (player === "DumBert") {
+                scoreList[2] += scoreToAdd;
+            }
+            else if (player === "SlumpBert") {
+                scoreList[3] += scoreToAdd;
+            }
+    }
 }
 
 
