@@ -3,19 +3,38 @@ let minNumber;
 let maxNumber;
 let turn;
 let guess;
-
-let scoreList; 
-let playerScore;
-let totalGuesses;
+/**
+ * Sparar spelare och botars poäng under spelomgången.
+ */
+let scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
+/**
+ * Sparar spelarens poäng, till för highscore.
+ */
+let playerScore = 0;
+/**
+ *  Sparar antal gissningar
+ */
+let totalGuesses = 0;
+/**
+ * Sparar tidigare gissningar.
+ */
 let previousGuess;
+
+let startButton = document.querySelector('#startgameButton');
+
+
+// start button
+startButton.addEventListener('click', () => {
+    scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
+    playerScore = 0;
+    totalGuess = 0;
+    secretNumber = getRandom(minNumber, maxNumber);
+})
 
 window.addEventListener("load", init);
 
 function init(){
-    let scoreList = [0, 0, 0, 0];
-    let playerScore = 0;
-    let totalGuesses = 0;
-    minNumber = 0;
+    minNumber = 1;
     maxNumber = 20;
     turn = 0;
     let previousGuess = maxNumber;
@@ -222,7 +241,7 @@ function display(textToDisplay){
 function calculateScore (secretNumber, guess, player) {
     if (guess >= secretNumber) {
         let difPercentage = (guess - secretNumber) / secretNumber; 
-        let scoreToAdd = round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
+        let scoreToAdd = Math.round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
         if (player === "Du") {
         playerScore += scoreToAdd;
         scoreList[0] += playerScore;
@@ -238,7 +257,7 @@ function calculateScore (secretNumber, guess, player) {
         }
     } else if (guess < secretNumber) {
         let difPercentage = (secretNumber - guess) / secretNumber;
-        let scoreToAdd = round((1 - difPercentage) * 100 * 3);
+        let scoreToAdd = Math.round((1 - difPercentage) * 100 * 3);
         if (player === "Du") {
             playerScore += scoreToAdd;
             scoreList[0] += playerScore;
