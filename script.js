@@ -22,21 +22,18 @@ let previousGuess;
 
 /** Array of user selected bots. */
 let bots = [];
-/** Nodelist of inputs/checkboxes for bots. */
-let botCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-
 
 // start game button in menu
 state.menuState.startButton.addEventListener('click', () => {
-    // reset selected bots to none
+    // empty array of user selected bots
     bots = [];
     // reset checkboxes to unchecked
-    botCheckboxes.forEach(checkbox => {
+    state.newGameState.botCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
 })
 
-// start playing button in new-game-state
+// start playing button in newGameState
 state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
@@ -54,8 +51,8 @@ function init(){
     secretNumber = getRandom(minNumber, maxNumber);
 
         // add event listener to bot checkboxes
-        for (let i = 0; i < botCheckboxes.length; i++) {
-            const checkbox = botCheckboxes[i];
+        for (let i = 0; i < state.newGameState.botCheckboxes.length; i++) {
+            const checkbox = state.newGameState.botCheckboxes[i];
             checkbox.addEventListener('change', () => {
                 selectBots(checkbox, i);
             })

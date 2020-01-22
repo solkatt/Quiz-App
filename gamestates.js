@@ -28,8 +28,10 @@ let state = {
     newGameState: {
         container: document.querySelector('.newGameCon'),
         hide: true,
+        /** Changes to gameplaystate onclick. */
         startPlayingButton: document.querySelector('#startPlayingButton'),
-        playerName: undefined
+        /** NodeList of all bot checkboxes. */
+        botCheckboxes: document.querySelectorAll('input[type="checkbox"]')
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
@@ -60,7 +62,10 @@ window.addEventListener('load', function () {
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
-        toggleDisplay(state.gameplayState);
+        if (3 <= bots.length) {
+            toggleDisplay(state.gameplayState);
+        }
+        document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
