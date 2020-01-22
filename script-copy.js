@@ -25,17 +25,56 @@ let previousGuess;
 
 let bots = [];
 let botsDiv = document.querySelector('.newGameCon form')
-let botsInput = document.querySelectorAll('input[type="radio"]')
-let botsArray = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+let botsInput = document.querySelectorAll('input[type="checkbox"]')
+let botsArray = [];
 
 function selectBots() {
+    botsArray = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+
     for (let i = 0; i < botsInput.length; i++) {
         const bot = botsInput[i];
-        bot.addEventListener('click', () => {
-            bots.push(bot.value);
+        bot.addEventListener('change', () => {
+            if (bots[i] != bot.value && bot.checked == true) {
+                bots.push(bot.value);   
+            }
+            else {
+                for (let j = 0; j < bots.length; j++) {
+                    if (bots[j] == bot.value) {
+                        bots.splice(j, 1);
+                    }
+                }
+            }
             console.log(bots)
         })
     }
+}
+
+function addBots(bot, i) {
+    // for (let i = 0; i < bots.length; i++) {
+    //     if (bot.value == botsArray[i]) {
+    //         bots.push(bot.value);
+    //     }
+    // }
+    // botsArray.splice(i, 1);
+    // console.log(bots)
+    // console.log(botsArray)
+    if (bots[i] != bot.value && bot.checked) {
+        bots.push(bot.value);
+    }
+
+}
+
+function removeBots(bot) {
+    botsArray.push(bot.value);
+
+    for (let i = 0; i < bots.length; i++) {
+        if (bots[i] == bot.value) {
+            bots.splice(i, 1);
+        }
+
+    }
+    console.log(bots)
+    console.log(botsArray)
 }
 
 state.menuState.startButton.addEventListener('click', () => {
