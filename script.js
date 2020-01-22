@@ -35,7 +35,7 @@ window.addEventListener("load", init);
 
 function init(){
     minNumber = 1;
-    maxNumber = 20;
+    maxNumber = 20000;
     turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
@@ -50,6 +50,8 @@ function getRandom(minNumber, maxNumber){
 
 //checks when the player guesses
 document.querySelector(".checkUserGuess").addEventListener("click", checkUserGuess);
+
+setTimeout(checkUserGuess, 10000)
 
 function checkUserGuess(){
     //players guess
@@ -160,6 +162,7 @@ function botGuesses(player){
             if(turn <= 2){
                 guess = maxNumber;
                 displayOutput(player, guess, "wait");
+                setTimeout(checkUserGuess, 10000)
             } else {
                 displayOutput(player, guess, "win");
             }
