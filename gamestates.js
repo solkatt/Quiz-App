@@ -30,13 +30,19 @@ let state = {
         hide: true,
         scoreList: []
     },
+    // the state between menu and actual gameplay
+    newGameState: {
+        container: document.querySelector('.newGameCon'),
+        hide: true,
+        startPlayingButton: document.querySelector('#startPlayingButton'),
+        playerName: undefined
+    },
     gameplayState: {
         container: document.querySelector('.gameCon'),
         hide: true,
         numberInput: document.querySelector('#number--input'),
         numberSubmit: document.querySelector('[type="button"]'),
         playerInfo: {
-            name: undefined,
             points: 0
         }
     },
@@ -61,6 +67,10 @@ window.addEventListener('load', function () {
     })
     // start button
     state.menuState.startButton.addEventListener('click', () => {
+        toggleDisplay(state.newGameState);
+    })
+    // start playing button, after name is entered and bots selected
+    state.newGameState.startPlayingButton.addEventListener('click', () => {
         toggleDisplay(state.gameplayState);
     })
     // rules button
@@ -83,7 +93,7 @@ function toggleDisplay(gameState) {
     // show selected game state if it is hidden
     if (gameState.hide === true) {
         show(gameState);
-        // hide everything but selected game state and menu state
+        // hide everything but selected game state and back to menu button
         for (const key in state) {
             if (state[key] != gameState && state[key] != state.backToMenuButton) {
                 hide(state[key]);
