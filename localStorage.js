@@ -16,8 +16,9 @@ showHighScore();
 function gatherUsername(){
    const username = document.querySelector('#inputUsername');
     console.log(username.value)
-    addHighScoreToLocalStorage(username.value)
+    //addHighScoreToLocalStorage(username.value)
     //GÖR EVENTUELLT EN RETURN AV DETTA ATT ANVÄNDA I CALCULATE USERSCORE
+    return username.value
 }
 
 /**
@@ -57,11 +58,11 @@ function showHighScore(userScore){
  */
 function createLiElement(userScore){
     const li = document.createElement('li');
-    li.append(userScore.username)
+    li.append(userScore.username, ', ', userScore.score)
     return li;
 }
 
-function addHighScoreToLocalStorage(registeredUsername){
+function addHighScoreToLocalStorage(registeredUsername, playerScore){
     let userScore = {
         "username":registeredUsername,
         "score": playerScore

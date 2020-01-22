@@ -61,6 +61,8 @@ function checkUserGuess(){
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
 
+    addHighScoreToLocalStorage(gatherUsername(), playerScore);
+
     //Your Player
     if(guess == secretNumber){
         //showWinner(scoreList, playerScore, totalGuesses)
