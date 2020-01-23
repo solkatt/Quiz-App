@@ -65,6 +65,8 @@ function init(){
     addEventListenerToCheckbox();
 }
 
+window.addEventListener('load', init);
+
 //randomly assigns a number
 function getRandom(minNumber, maxNumber){
     return Math.floor(Math.random()*(maxNumber - minNumber) + minNumber);
