@@ -20,18 +20,13 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
-let startButton = document.querySelector('#startgameButton');
-
-
-// start button
-startButton.addEventListener('click', () => {
+// start playing button in newGameState
+state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
     totalGuess = 0;
     secretNumber = getRandom(minNumber, maxNumber);
 })
-
-window.addEventListener("load", init);
 
 function init(){
     minNumber = 1;
@@ -39,6 +34,8 @@ function init(){
     turn = 0;
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
+
+    addEventListenerToCheckbox();
 }
 
 window.addEventListener("load", init);
@@ -76,13 +73,10 @@ function checkUserGuess(){
         checkResult(player, guess);
     }
 
-    //remove after fixing 
-    let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
-
     //stops the bots from guessing if the player wins
     if(stopTheGame == false){
         // takes a guess for each bot
-        for (let bot of bots) {
+        for (let bot of state.newGameState.selectedBots) {
             if(guess == secretNumber){
              break;
             } else {
