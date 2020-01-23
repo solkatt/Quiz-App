@@ -1,8 +1,18 @@
+/**
+ * 
+ * @param {Number} secretNumber - the random number that players try to figure out
+ * @param {Number} minNumber - the smallest number in the guessing range
+ * @param {Number} maxNumber - the largest number in the guessing range
+ * @param {Number} turn - the number of turns that the game has taken
+ * @param {Number} guess - a players guess
+ */
+
 let secretNumber;
 let minNumber;
 let maxNumber;
 let turn;
 let guess;
+
 /**
  * Sparar spelare och botars poäng under spelomgången.
  */
@@ -20,28 +30,42 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
+//NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+     event.preventDefault();
+     checkUserGuess();
+    }
+});
+
 let startButton = document.querySelector('#startgameButton');
 
-
-// start button
-startButton.addEventListener('click', () => {
+// start playing button in newGameState
+state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
     totalGuess = 0;
     secretNumber = getRandom(minNumber, maxNumber);
 })
 
-window.addEventListener("load", init);
-
 function init(){
-    minNumber = 1;
-    maxNumber = 20;
     turn = 0;
+    minNumber = 1;
+    //checks local storage for a max value, if non set to 20
+    if (localStorage.getItem("maxNumber") === null) {
+        maxNumber = 20;
+    } else {
+        maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    }
+
+    setSettingValues();
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
+
+    addEventListenerToCheckbox();
 }
 
-window.addEventListener("load", init);
+window.addEventListener('load', init);
 
 //randomly assigns a number
 function getRandom(minNumber, maxNumber){
@@ -54,9 +78,14 @@ document.querySelector(".checkUserGuess").addEventListener("click", checkUserGue
 function checkUserGuess(){
     //players guess
     guess = parseInt(document.getElementById("user-guess")["0"].value);
+    console.log(guess);
     let player = "Du";
-    let youWin = false;
+    let stopTheGame = false;
     turn = turn + 1;
+
+    if (isNaN(guess)){
+        stopTheGame = true;
+    }
 
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
@@ -68,19 +97,16 @@ function checkUserGuess(){
         youWin = true;
         //THIS FUNCTION CAN EASILY BE MOVED DEPENDING ON WHEN WE WANT TO TALLY UP AND SAVE FINAL SCORE IN LOCAL STORAGE:
         addHighScoreToLocalStorage(gatherUsername(), playerScore);
-        
+        stopTheGame = true;
     } else {
         let previousGuess = guess;
         checkResult(player, guess);
     }
 
-    //remove after fixing 
-    let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
-
     //stops the bots from guessing if the player wins
-    if(youWin == false){
+    if(stopTheGame == false){
         // takes a guess for each bot
-        for (let bot of bots) {
+        for (let bot of state.newGameState.selectedBots) {
             if(guess == secretNumber){
              break;
             } else {
@@ -104,8 +130,8 @@ function botGuesses(player){
             break;
         case "LowBert": 
             player = "LowBert";
-            if (secretNumber == 0){
-                guess = 0;
+            if (secretNumber == minNumber){
+                guess = minNumber;
             } else {
                 guess = minNumber+1;
             }
@@ -189,44 +215,36 @@ function checkResult(player, guess){
 
 function displayOutput(player, guess, result){
     //swaps pictures och text
-    let swapPic = document.getElementById("display-image");
     let swapText = document.getElementById("display-text");
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
-            swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
             break;
         case "lower":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             maxNumber = guess;
             swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             display( player + " gissade " + guess + ", gissa lägre");
             break;
         case "higher":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             minNumber = guess;
             swapText.innerHTML = "Gissa högre: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa högre");
             break;
         case "too low":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
         case "too high":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
             break;
         case "wait":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             display(player + " väntar... ");
             break;
         case "error":
-            swapPic.src = "https://i.imgflip.com/1qwh2e.jpg";
             swapText.innerHTML = guess + " är inte en siffra "  + minNumber + "-" + maxNumber;
             display("Inte en siffra " + guess);
             break;
@@ -243,7 +261,7 @@ function display(textToDisplay){
 
 function calculateScore (secretNumber, guess, player) {
     if (guess >= secretNumber) {
-        let difPercentage = (guess - secretNumber) / secretNumber; 
+        let difPercentage = (guess - secretNumber) / guess; 
         let scoreToAdd = Math.round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
         if (player === "Du") {
         playerScore += scoreToAdd;

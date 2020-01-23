@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <title>Numbers</title>
+    <script defer src="gamestates.js" type="text/javascript"></script>
     <script defer src="script.js" type="text/javascript"></script>
+    <script defer src="./BotSelection.js"></script>
     <script defer src="localStorage.js" type="text/javascript"></script>
     <script defer src="Scoreboard.js" type="text/javascript"></script>
-    <script defer src="gamestates.js" type="text/javascript"></script>
+    <script defer src="settings.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -28,15 +30,32 @@
             <button id="settingsButton" type="button" value="Settings">Settings</button>
         </div>
 
+        <div class="newGameCon container hide">
+            <p> <!-- Code inserted from JS --> </p>
+            <form style="margin-top: 250px;"> <!-- satte dit stylingen annars syns den ej just nu -->
+                <label for="AverageBert">AverageBert</label>
+                <input type="checkbox" name="AverageBert" id="average" value="AverageBert">
+                <label for="LowBert">LowBert</label>
+                <input type="checkbox" name="LowBert" id="low" value="LowBert">
+                <label for="RandomBert">RandomBert</label>
+                <input type="checkbox" name="RandomBert" id="random" value="RandomBert">
+                <label for="HighBert">HighBert</label>
+                <input type="checkbox" name="HighBert" id="high" value="HighBert">
+                <label for="DumbBert">DumbBert</label>
+                <input type="checkbox" name="DumbBert" id="dumb" value="DumbBert">
+                <label for="SmartBert">SmartBert</label>
+                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert">
+            </form>
+            <button id="startPlayingButton" type="button" value="Start playing">Start playing</button>
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
+        </div>
+
         <div class="gameCon container hide">
             <h1>Numbers</h1>
-            <h2 id="display-text">0-20</h2>
-            <img id="display-image"
-                src="https://img.cinemablend.com/filter:scale/quill/4/e/b/f/d/3/4ebfd3962af3284166008d2a2925bc39d7dea9a2.jpg?mw=600"
-                alt="">
-            <form id="user-guess">
-                <input type="text" placeholder="Din gissning">
-                <input type="button" value="Gissa" class="checkUserGuess">
+            <h2 id="display-text">Guess between 0-20</h2>
+            <form id="user-guess" action="javascript:void(0);">
+                <input type="text" placeholder="Your guess">
+                <input type="button" value="Guess" class="checkUserGuess">
             </form>
 
             <div class="enterUsername">
@@ -91,6 +110,11 @@
                 tenetur incidunt sequi hic deleniti aspernatur laborum facilis. Corrupti delectus voluptatum, fugit
                 quae laboriosam temporibus tempora reiciendis.
             </p>
+            <form id="user-settings" action="javascript:void(0);">
+                <input type="text" placeholder="Max Range: 20">
+                <input type="button" value="Set Range" class="user-settings">
+                <p class="handle-range-settings-text"> </p>
+            </form>
             <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
 </div>
