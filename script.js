@@ -65,9 +65,14 @@ document.querySelector(".checkUserGuess").addEventListener("click", checkUserGue
 function checkUserGuess(){
     //players guess
     guess = parseInt(document.getElementById("user-guess")["0"].value);
+    console.log(guess);
     let player = "Du";
-    let youWin = false;
+    let stopTheGame = false;
     turn = turn + 1;
+
+    if (isNaN(guess)){
+        stopTheGame = true;
+    }
 
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
@@ -76,7 +81,7 @@ function checkUserGuess(){
     if(guess == secretNumber){
         //showWinner(scoreList, playerScore, totalGuesses)
         displayOutput(player, guess, "win");
-        youWin = true;
+        stopTheGame = true;
     } else {
         let previousGuess = guess;
         checkResult(player, guess);
@@ -86,7 +91,7 @@ function checkUserGuess(){
     let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
     //stops the bots from guessing if the player wins
-    if(youWin == false){
+    if(stopTheGame == false){
         // takes a guess for each bot
         for (let bot of bots) {
             if(guess == secretNumber){
@@ -198,44 +203,36 @@ function checkResult(player, guess){
 
 function displayOutput(player, guess, result){
     //swaps pictures och text
-    let swapPic = document.getElementById("display-image");
     let swapText = document.getElementById("display-text");
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
-            swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
             break;
         case "lower":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             maxNumber = guess;
             swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             display( player + " gissade " + guess + ", gissa lägre");
             break;
         case "higher":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             minNumber = guess;
             swapText.innerHTML = "Gissa högre: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa högre");
             break;
         case "too low":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
         case "too high":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
             break;
         case "wait":
-            swapPic.src = "https://www.meme-arsenal.com/memes/c200eba39c45882b7dd47b7411f123f3.jpg";
             swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             display(player + " väntar... ");
             break;
         case "error":
-            swapPic.src = "https://i.imgflip.com/1qwh2e.jpg";
             swapText.innerHTML = guess + " är inte en siffra "  + minNumber + "-" + maxNumber;
             display("Inte en siffra " + guess);
             break;
@@ -252,7 +249,7 @@ function display(textToDisplay){
 
 function calculateScore (secretNumber, guess, player) {
     if (guess >= secretNumber) {
-        let difPercentage = (guess - secretNumber) / secretNumber; 
+        let difPercentage = (guess - secretNumber) / guess; 
         let scoreToAdd = Math.round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
         if (player === "Du") {
         playerScore += scoreToAdd;
