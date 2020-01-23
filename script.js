@@ -29,6 +29,7 @@ startButton.addEventListener('click', () => {
     playerScore = 0;
     totalGuess = 0;
     secretNumber = getRandom(minNumber, maxNumber);
+    setTimeout(checkUserGuess, 10000);
 })
 
 window.addEventListener("load", init);
@@ -41,6 +42,16 @@ function init(){
     secretNumber = getRandom(minNumber, maxNumber);
 }
 
+var n = 10;
+setTimeout(countDown,10000);
+function countDown(){
+   n--;
+   if(n > 0){
+      setTimeout(countDown,10000);
+   }
+   console.log(n);
+}
+
 window.addEventListener("load", init);
 
 //randomly assigns a number
@@ -50,8 +61,6 @@ function getRandom(minNumber, maxNumber){
 
 //checks when the player guesses
 document.querySelector(".checkUserGuess").addEventListener("click", checkUserGuess);
-
-setTimeout(checkUserGuess, 10000)
 
 function checkUserGuess(){
     //players guess
