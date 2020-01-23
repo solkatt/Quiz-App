@@ -1,8 +1,18 @@
+/**
+ * 
+ * @param {Number} secretNumber - the random number that players try to figure out
+ * @param {Number} minNumber - the smallest number in the guessing range
+ * @param {Number} maxNumber - the largest number in the guessing range
+ * @param {Number} turn - the number of turns that the game has taken
+ * @param {Number} guess - a players guess
+ */
+
 let secretNumber;
 let minNumber;
 let maxNumber;
 let turn;
 let guess;
+
 /**
  * Sparar spelare och botars poäng under spelomgången.
  */
@@ -20,11 +30,18 @@ let totalGuesses = 0;
  */
 let previousGuess;
 
+//NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+     event.preventDefault();
+     checkUserGuess();
+    }
+});
+
 let startButton = document.querySelector('#startgameButton');
 
-
-// start button
-startButton.addEventListener('click', () => {
+// start playing button in newGameState
+state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
     totalGuess = 0;
@@ -32,27 +49,22 @@ startButton.addEventListener('click', () => {
     setTimeout(checkUserGuess, 10000);
 })
 
-window.addEventListener("load", init);
-
 function init(){
-    minNumber = 1;
-    maxNumber = 20000;
     turn = 0;
+    minNumber = 1;
+    //checks local storage for a max value, if non set to 20
+    if (localStorage.getItem("maxNumber") === null) {
+        maxNumber = 20;
+    } else {
+        maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    }
+
+    setSettingValues();
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
-}
 
-var n = 10;
-setTimeout(countDown,10000);
-function countDown(){
-   n--;
-   if(n > 0){
-      setTimeout(countDown,10000);
-   }
-   console.log(n);
+    addEventListenerToCheckbox();
 }
-
-window.addEventListener("load", init);
 
 //randomly assigns a number
 function getRandom(minNumber, maxNumber){
@@ -87,13 +99,10 @@ function checkUserGuess(){
         checkResult(player, guess);
     }
 
-    //remove after fixing 
-    let bots = ["AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
-
     //stops the bots from guessing if the player wins
     if(stopTheGame == false){
         // takes a guess for each bot
-        for (let bot of bots) {
+        for (let bot of state.newGameState.selectedBots) {
             if(guess == secretNumber){
              break;
             } else {
@@ -117,8 +126,8 @@ function botGuesses(player){
             break;
         case "LowBert": 
             player = "LowBert";
-            if (secretNumber == 0){
-                guess = 0;
+            if (secretNumber == minNumber){
+                guess = minNumber;
             } else {
                 guess = minNumber+1;
             }

@@ -18,27 +18,25 @@ let state = {
     },
     settingsState: {
         container: document.querySelector('.settingsCon'),
-        hide: true,
-        playerSettings: {
-            nrOfBots: 3,
-            soundOn: false,
-            showBotsGuesses: true
-        }
+        hide: true
     },
     highscoreState: {
         container: document.querySelector('.highscoreCon'),
+        hide: true
+    },
+    // the state between menu and actual gameplay
+    newGameState: {
+        container: document.querySelector('.newGameCon'),
         hide: true,
-        scoreList: []
+        selectedBots: [],
+        /** Changes to gameplaystate onclick. */
+        startPlayingButton: document.querySelector('#startPlayingButton'),
+        /** NodeList of all bot checkboxes. */
+        botCheckboxes: document.querySelectorAll('input[type="checkbox"]')
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
-        hide: true,
-        numberInput: document.querySelector('#number--input'),
-        numberSubmit: document.querySelector('[type="button"]'),
-        playerInfo: {
-            name: undefined,
-            points: 0
-        }
+        hide: true
     },
     rulesState: {
         container: document.querySelector('.rulesCon'),
@@ -61,7 +59,20 @@ window.addEventListener('load', function () {
     })
     // start button
     state.menuState.startButton.addEventListener('click', () => {
-        toggleDisplay(state.gameplayState);
+        toggleDisplay(state.newGameState);
+        // empty array of user selected bots
+        state.newGameState.selectedBots = [];
+        // reset checkboxes to unchecked
+        state.newGameState.botCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        })
+    })
+    // start playing button, after name is entered and bots selected
+    state.newGameState.startPlayingButton.addEventListener('click', () => {
+        if (3 <= state.newGameState.selectedBots.length) {
+            toggleDisplay(state.gameplayState);
+        }
+        document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
@@ -83,7 +94,7 @@ function toggleDisplay(gameState) {
     // show selected game state if it is hidden
     if (gameState.hide === true) {
         show(gameState);
-        // hide everything but selected game state and menu state
+        // hide everything but selected game state and back to menu button
         for (const key in state) {
             if (state[key] != gameState && state[key] != state.backToMenuButton) {
                 hide(state[key]);
