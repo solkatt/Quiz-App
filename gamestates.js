@@ -28,6 +28,7 @@ let state = {
     newGameState: {
         container: document.querySelector('.newGameCon'),
         hide: true,
+        selectedBots: [],
         /** Changes to gameplaystate onclick. */
         startPlayingButton: document.querySelector('#startPlayingButton'),
         /** NodeList of all bot checkboxes. */
@@ -59,10 +60,16 @@ window.addEventListener('load', function () {
     // start button
     state.menuState.startButton.addEventListener('click', () => {
         toggleDisplay(state.newGameState);
+        // empty array of user selected bots
+        state.newGameState.selectedBots = [];
+        // reset checkboxes to unchecked
+        state.newGameState.botCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        })
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
-        if (3 <= bots.length) {
+        if (3 <= state.newGameState.selectedBots.length) {
             toggleDisplay(state.gameplayState);
         }
         document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
