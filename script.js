@@ -105,11 +105,11 @@ function botGuesses(player){
             break;
         case "LowBert": 
             player = "LowBert";
-            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             if (secretNumber == 0){
                 guess = 0;
             } else {
                 guess = minNumber+1;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             }
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win");
@@ -137,11 +137,12 @@ function botGuesses(player){
             break;
         case "HighBert": 
             player = "HighBert";
-            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             if (secretNumber == maxNumber){
                 guess = maxNumber;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             } else {
                 guess = maxNumber-1;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             }
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win");
@@ -151,27 +152,31 @@ function botGuesses(player){
             break;
         case "DumbBert":
             player = "DumbBert";
-            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             //Unlike randombert, dumbert can guess already guessed guesses
             //This is to hide if it guesses right
             guess = Math.floor(Math.random()*(maxNumber - minNumber)+minNumber);
+            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             //If DumbBert guesses right it istead guesses the highest number
             if (secretNumber == guess){
                 guess = maxNumber;
                 checkResult(player, guess);
+                
             } else {
                 checkResult(player, guess);
             }
+            
             break;
         case "SmartBert": 
             player = "SmartBert";
-            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             if(turn <= 2){
-                guess = maxNumber;
+                guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
                 displayOutput(player, guess, "wait");
+                
             } else {
                 displayOutput(player, guess, "win");
             }
+            
             break;
     }
 }
@@ -202,8 +207,8 @@ function displayOutput(player, guess, result){
         case "win":
             numberOfGuesses[bots.indexOf(player)] ++;
             scoreList[bots.indexOf(player)] += 300;
-            scoreList[bots.indexOf(player)] = scoreList[bots.indexOf(player)]/numberOfGuesses[bots.indexOf(player)];
-            console.log(scoreList)
+            scoreList[bots.indexOf(player)] = Math.round(scoreList[bots.indexOf(player)]/numberOfGuesses[bots.indexOf(player)]);
+            console.log(scoreList + " scoreList in case win")
             swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
@@ -254,10 +259,10 @@ function display(textToDisplay){
 function calculateScore (secretNumber, guess, player, maxNumber, minNumber) {
     if (guess > secretNumber) {
         let distanceSecretMax = maxNumber - secretNumber; //Distance between highest possible number and correct answer
-        let guessDistanceFromSecret = guess - secretNumber; //Avstånd mellan gissning och rätt nummer
-        let partOfDistance = distanceSecretMax - guessDistanceFromSecret; //Hur stor del av avståndet har din gissning täckt
-        let mainPoints = (distanceSecretMax / maxNumber) * 100;
-        let scoreToAdd = Math.round(partOfDistance + mainPoints); //Multiplicera med 100 för snyggare score och 3 som decoy avrunda till heltal
+        let guessDistanceTowardsSecret = maxNumber - guess; //Distance guess has travelled towards correct answer
+        let partOfDistance = guessDistanceTowardsSecret / distanceSecretMax //How much progress have your guess led to in finding the correct answer
+        let scoreToAdd = Math.round(partOfDistance * 100 * 3); //Multiply with 100 for "Better looking" score, Multiple with 3 as a decoy if we show scores.
+        
         if (player === "Du") {
             numberOfGuesses[0]++;
             playerScore += scoreToAdd;
@@ -295,15 +300,10 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber) {
             scoreList[6] = Math.round(scoreList[6]/numberOfGuesses[6]);
         }
     } else if (guess < secretNumber) {
-        console.log(minNumber)
-        let distanceSecretMin = (secretNumber - (Math.round(minNumber/2))); //Avstånd mellan lägsta möjliga nummer och rätt nummer
-        console.log(distanceSecretMin)
-        let guessDistanceFromSecret = secretNumber - guess; //Avstånd mellan gissning och rätt nummer
-        console.log(guessDistanceFromSecret)
-        partOfDistance = distanceSecretMin - guessDistanceFromSecret; //Ju större spann och närmare gissning desto mer poäng.
-        console.log(partOfDistance)
-        let mainPoints = (distanceSecretMin / maxNumber) * 100;
-        let scoreToAdd = Math.round(partOfDistance + mainPoints);  //Multiplicera med 100 för snyggare score och 3 som decoy avrunda till heltal
+        let distanceSecretMin = secretNumber - minNumber; //Distance between lowest(minNumber) score and correct answer
+        let guessDistanceFromSecret = guess - minNumber; //Distance between guess and right answer
+        let partOfDistance = guessDistanceFromSecret / distanceSecretMin;
+        let scoreToAdd = Math.round(partOfDistance * 100 *3);  //Multiplicera med 100 för snyggare score och 3 som decoy avrunda till heltal
         if (player === "Du") {
             numberOfGuesses[0]++;
             playerScore += scoreToAdd;
