@@ -22,78 +22,90 @@
     <div class="menuCon startMenu">
         <div class="h1StartMenu">
             <h1>Numbers</h1>
-            <!-- <img alt="" src="assets/title.png"> -->
+            <img alt="Title" src="./assets/title.svg">
         </div>
         <button id="startgameButton" type="button" value="Start Game">Start Game</button>
         <button id="rulesButton" type="button" value="Rules">Rules</button>
         <button id="hightScoreButton" type="button" value="Hightscore">Highscore</button>
         <button id="settingsButton" type="button" value="Settings">Settings</button>
     </div>
-  
+
     <!-- HETTE TIDIGARE "usernameCon" -->
     <div class="newGameCon container hide">
-				<h2>Choose 3 opponents</h2>
-				<div class="whiteContainer">
-				<p> <!-- Code inserted from JS --> </p>
-				<form style="margin-top: 250px;"> <!-- satte dit stylingen annars syns den ej just nu -->
-						<label for="AverageBert">AverageBert</label>
-						<input type="checkbox" name="AverageBert" id="average" value="AverageBert">
-						<label for="LowBert">LowBert</label>
-						<input type="checkbox" name="LowBert" id="low" value="LowBert">
-						<label for="RandomBert">RandomBert</label>
-						<input type="checkbox" name="RandomBert" id="random" value="RandomBert">
-						<label for="HighBert">HighBert</label>
-						<input type="checkbox" name="HighBert" id="high" value="HighBert">
-						<label for="DumbBert">DumbBert</label>
-						<input type="checkbox" name="DumbBert" id="dumb" value="DumbBert">
-						<label for="SmartBert">SmartBert</label>
-						<input type="checkbox" name="SmartBert" id="smart" value="SmartBert">
-				</form>
-              
-				<div class="enterUsername">
-						<input type="text" id="inputUsername" placeholder="Enter your name here...">
-						<button id="submitUsername">Start playing!</button>
-        </div>
+        <h2>Choose 3 opponents</h2>
+        <div class="whiteContainer">
+            <p>
+                <!-- Code inserted from JS -->
+            </p>
+            <form>
+                <!-- satte dit stylingen annars syns den ej just nu -->
+                <label for="AverageBert">AverageBert</label>
+                <input type="checkbox" name="AverageBert" id="average" value="AverageBert">
+                <label for="LowBert">LowBert</label>
+                <input type="checkbox" name="LowBert" id="low" value="LowBert">
+                <label for="RandomBert">RandomBert</label>
+                <input type="checkbox" name="RandomBert" id="random" value="RandomBert">
+                <label for="HighBert">HighBert</label>
+                <input type="checkbox" name="HighBert" id="high" value="HighBert">
+                <label for="DumbBert">DumbBert</label>
+                <input type="checkbox" name="DumbBert" id="dumb" value="DumbBert">
+                <label for="SmartBert">SmartBert</label>
+                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert">
+            </form>
+                    <div class="enterUsername">
+                        <input type="text" id="inputUsername" placeholder="Enter your name here...">
+                        <button id="submitUsername">Start playing!</button>
+                    </div>
+
+            <div class="enterUsername">
+                <input type="text" id="inputUsername" placeholder="username">
+                <button id="submitUsername">start playing!</button>
+            </div>
+<!--        COMMENTED OUT 'til we need a second highscore to be displayed somewhere else (IF we need it). Right now the code only works
+            with one highscore-list.
+            <div class="highScoreContainer">
+                <ol class="highScore">
+                    HIGHSCORE INSERTED FROM JS
+                </ol>
+            </div> -->
             <div id="guessingList"></div>
-            <button class="backToMenuButton" type="button" value="index">Back to menu</button>     
-      	</div>
-  	</div>
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
+        </div>
+    </div>
 
     <div class="gameCon container hide">
-    		<div class="yellowContainer">
-        		<div class="botdiv">
-        				<img class="bots" alt="" src="assets/bot1.svg">
-        		</div>
-        		<div class="botdiv">
-            		<img class="bots" alt="" src="assets/bot2.svg">
-        		</div>
-        		<div class="botdiv">
-            		<img class="bots" alt="" src="assets/bot3.svg">
-        		</div>
+        <div class="yellowContainer">
+            <div class="botdiv">
+                <img class="bots" alt="" src="assets/bot1.svg">
+            </div>
+            <div class="botdiv">
+                <img class="bots" alt="" src="assets/bot2.svg">
+            </div>
+            <div class="botdiv">
+                <img class="bots" alt="" src="assets/bot3.svg">
+            </div>
         </div>
-          
+      
         <h2 id="display-text">Guess between 0-20</h2>
         <form id="user-guess" action="javascript:void(0);">
             <input type="text" placeholder="Your guess">
             <input type="button" value="Guess" class="checkUserGuess">
         </form>
     </div>
-	
-		<div class="highScoreCon container hide">
-    		<div class="highScoreContainer whiteContainer">
-        		<h2>Highscore</h2>
-            <div class="whiteContainer">
-            		<ol class="highScore">
+
+    <div class="highScoreCon container hide">
+        <div class="highScoreContainer whiteContainer">
+            <h2>Highscore</h2>
+                <ol class="highScore">
                     <!--HIGHSCORE INSERTED FROM JS-->
                 </ol>
                 <button class="backToMenuButton" type="button" value="index">Back to menu</button>
-            </div>
         </div>
 
         <div id="guessingList"></div>
         <button class="backToMenuButton" type="button" value="index">Back to menu</button>
-		</div>
-	
+    </div>
+
     <div class="rulesCon container hide">
         <h2>How to play</h2>
 
@@ -178,7 +190,7 @@
             <p class="handle-range-settings-text"> </p>
         </form>
         <button class="backToMenuButton" type="button" value="index">Back to menu</button>
-		</div>
+    </div>
 </body>
 
 </html>

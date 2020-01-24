@@ -89,11 +89,14 @@ function checkUserGuess(){
 
     calculateScore(secretNumber, guess, player);
     console.log(playerScore)
-
+    
     //Your Player
     if(guess == secretNumber){
         //showWinner(scoreList, playerScore, totalGuesses)
         displayOutput(player, guess, "win");
+        youWin = true;
+        //THIS FUNCTION CAN EASILY BE MOVED DEPENDING ON WHEN WE WANT TO TALLY UP AND SAVE FINAL SCORE IN LOCAL STORAGE:
+        addHighScoreToLocalStorage(gatherUsername(), playerScore);
         stopTheGame = true;
     } else {
         let previousGuess = guess;
@@ -290,4 +293,5 @@ function calculateScore (secretNumber, guess, player) {
                 scoreList[3] += scoreToAdd;
             }
     }
+   // addHighScoreToLocalStorage();
 }
