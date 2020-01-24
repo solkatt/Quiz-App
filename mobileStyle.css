@@ -42,6 +42,7 @@ body {
 
 }
 
+
 .whiteContainer {
   background-color: #FCFCFB;
   width: 90%;
@@ -64,6 +65,7 @@ body {
 
 .bots {
   width: 50px;
+
 }
 
 .botdiv {
@@ -76,12 +78,6 @@ h1 {
   color: #55608E;
   font-family: 'Luckiest Guy', cursive;
   letter-spacing: 1px;
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-h2 {
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;

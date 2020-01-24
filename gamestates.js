@@ -30,9 +30,9 @@ let state = {
         hide: true,
         selectedBots: [],
         /** Changes to gameplaystate onclick. */
-        startPlayingButton: document.querySelector('#startPlayingButton'),
+        startPlayingButton: document.querySelector('#submitUsername'),
         /** NodeList of all bot checkboxes. */
-        botCheckboxes: document.querySelectorAll('input[type="checkbox"]')
+        botCheckboxes: document.querySelectorAll('.newGameCon input[type="checkbox"]')
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
