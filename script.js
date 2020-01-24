@@ -16,20 +16,24 @@ let guess;
 /**
  * Sparar spelare och botars poäng under spelomgången.
  */
-let scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
+let scoreList; 
 /**
  * Sparar spelarens poäng, till för highscore.
  */
-let playerScore = 0;
+let playerScore;
 /**
- *  Sparar antal gissningar
+ *  Sparar antal gissningar för varje spelare/bot
  */
-let totalGuesses = 0;
+let numberOfGuesses;
 /**
  * Sparar tidigare gissningar.
  */
 let previousGuess;
 
+//Ha kvar var användbart for calculateScores()
+let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+
+let startButton = document.querySelector('#startgameButton');
 //NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -45,6 +49,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
     playerScore = 0;
     totalGuess = 0;
+    numberOfGuesses= [0, 0, 0, 0, 0, 0, 0];
     secretNumber = getRandom(minNumber, maxNumber);
 })
 
@@ -52,10 +57,10 @@ function init(){
     turn = 0;
     minNumber = 1;
     //checks local storage for a max value, if non set to 20
-    if (localStorage.getItem("maxNumber") === null) {
-        maxNumber = 20;
-    } else {
+    if ("maxNumber" in localStorage){
         maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    } else {
+        maxNumber = 20;
     }
 
     setSettingValues();
@@ -86,14 +91,16 @@ function checkUserGuess(){
     if (isNaN(guess)){
         stopTheGame = true;
     }
+    calculateScore(secretNumber, guess, player, maxNumber, minNumber);
 
-    calculateScore(secretNumber, guess, player);
-    console.log(playerScore)
 
     //Your Player
     if(guess == secretNumber){
-        //showWinner(scoreList, playerScore, totalGuesses)
+        //showWinner(scoreList, playerScore, numberOfGuesses[])
         displayOutput(player, guess, "win");
+        youWin = true;
+        //THIS FUNCTION CAN EASILY BE MOVED DEPENDING ON WHEN WE WANT TO TALLY UP AND SAVE FINAL SCORE IN LOCAL STORAGE:
+        addHighScoreToLocalStorage(gatherUsername(), playerScore);
         stopTheGame = true;
     } else {
         let previousGuess = guess;
@@ -119,6 +126,7 @@ function botGuesses(player){
         case "AverageBert":
             guess = Math.floor((maxNumber - minNumber)/2 + minNumber);
             player = "AverageBert";
+            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win");
                 } else {
@@ -131,6 +139,7 @@ function botGuesses(player){
                 guess = minNumber;
             } else {
                 guess = minNumber+1;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             }
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win");
@@ -148,6 +157,7 @@ function botGuesses(player){
                 guess = Math.floor(Math.random()*((maxNumber-1) - (minNumber+1))+(minNumber+1));
             }
             player = "RandomBert";
+            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
                 if (secretNumber == guess) {
                     displayOutput(player, guess, "win");
 
@@ -159,8 +169,10 @@ function botGuesses(player){
             player = "HighBert";
             if (secretNumber == maxNumber){
                 guess = maxNumber;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             } else {
                 guess = maxNumber-1;
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             }
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win");
@@ -173,22 +185,28 @@ function botGuesses(player){
             //Unlike randombert, dumbert can guess already guessed guesses
             //This is to hide if it guesses right
             guess = Math.floor(Math.random()*(maxNumber - minNumber)+minNumber);
+            calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             //If DumbBert guesses right it istead guesses the highest number
             if (secretNumber == guess){
                 guess = maxNumber;
                 checkResult(player, guess);
+                
             } else {
                 checkResult(player, guess);
             }
+            
             break;
         case "SmartBert": 
             player = "SmartBert";
             if(turn <= 2){
-                guess = maxNumber;
+                guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
+                calculateScore(secretNumber, guess, player, maxNumber, minNumber);
                 displayOutput(player, guess, "wait");
+                
             } else {
                 displayOutput(player, guess, "win");
             }
+            
             break;
     }
 }
@@ -216,6 +234,11 @@ function displayOutput(player, guess, result){
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
+            numberOfGuesses[bots.indexOf(player)] ++;
+            scoreList[bots.indexOf(player)] += 300;
+            scoreList[bots.indexOf(player)] = Math.round(scoreList[bots.indexOf(player)]/numberOfGuesses[bots.indexOf(player)]);
+            console.log(scoreList + " scoreList in case win")
+            swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
             break;
@@ -256,38 +279,90 @@ function display(textToDisplay){
     p.append(textToDisplay);
 }
 
-function calculateScore (secretNumber, guess, player) {
-    if (guess >= secretNumber) {
-        let difPercentage = (guess - secretNumber) / guess; 
-        let scoreToAdd = Math.round((1- difPercentage) * 100 * 3);//Hur stor del av distansen mellan rätt nummer är den nya gissningen (*100*3 för att poäng ska se bättre ut och vara svårare att använda för a lista ut svaret(decoy))
+function calculateScore (secretNumber, guess, player, maxNumber, minNumber) {
+    if (guess > secretNumber) {
+        let distanceSecretMax = maxNumber - secretNumber; //Distance between highest possible number and correct answer
+        let guessDistanceTowardsSecret = maxNumber - guess; //Distance guess has travelled towards correct answer
+        let partOfDistance = guessDistanceTowardsSecret / distanceSecretMax //How much progress have your guess led to in finding the correct answer
+        let scoreToAdd = Math.round(partOfDistance * 100 * 3); //Multiply with 100 for "Better looking" score, Multiple with 3 as a decoy if we show scores.
+        
         if (player === "Du") {
-        playerScore += scoreToAdd;
-        scoreList[0] += playerScore;
-        }
-        else if (player === "SnittBert") {
+            numberOfGuesses[0]++;
+            playerScore += scoreToAdd;
+            scoreList[0] += scoreToAdd;
+            scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]); //Delar på antal gissningar man gjort så att man inte får fördel av att fått gisa fler gånger
+        }   
+        else if (player === "AverageBert") {
+            numberOfGuesses[1]++;
             scoreList[1] += scoreToAdd;
+            scoreList[1] = Math.round(scoreList[1]/numberOfGuesses[1]);
         }
-        else if (player === "DumBert") {
+        else if (player === "LowBert") {
+            numberOfGuesses[2]++;
             scoreList[2] += scoreToAdd;
+            scoreList[2] = Math.round(scoreList[2]/numberOfGuesses[2]);
         }
-        else if (player === "SlumpBert") {
+        else if (player === "RandomBert") {
+            numberOfGuesses[3]++;
             scoreList[3] += scoreToAdd;
+            scoreList[3] = Math.round(scoreList[3]/numberOfGuesses[3]);
+        }
+        else if (player === "HighBert") {
+            numberOfGuesses[4]++;
+            scoreList[4] += scoreToAdd;
+            scoreList[4] = Math.round(scoreList[4]/numberOfGuesses[4]);
+        }
+        else if (player === "DumbBert") {
+            numberOfGuesses[5]++;
+            scoreList[5] += scoreToAdd;
+            scoreList[5] = Math.round(scoreList[5]/numberOfGuesses[5]);
+        }
+        else if (player === "SmartBert") {
+            numberOfGuesses[6]++;
+            scoreList[6] += scoreToAdd;
+            scoreList[6] = Math.round(scoreList[6]/numberOfGuesses[6]);
         }
     } else if (guess < secretNumber) {
-        let difPercentage = (secretNumber - guess) / secretNumber;
-        let scoreToAdd = Math.round((1 - difPercentage) * 100 * 3);
+        let distanceSecretMin = secretNumber - minNumber; //Distance between lowest(minNumber) score and correct answer
+        let guessDistanceFromSecret = guess - minNumber; //Distance between guess and right answer
+        let partOfDistance = guessDistanceFromSecret / distanceSecretMin;
+        let scoreToAdd = Math.round(partOfDistance * 100 *3);  //Multiplicera med 100 för snyggare score och 3 som decoy avrunda till heltal
         if (player === "Du") {
+            numberOfGuesses[0]++;
             playerScore += scoreToAdd;
             scoreList[0] += playerScore;
-            }
-            else if (player === "SnittBert") {
-                scoreList[1] += scoreToAdd;
-            }
-            else if (player === "DumBert") {
-                scoreList[2] += scoreToAdd;
-            }
-            else if (player === "SlumpBert") {
-                scoreList[3] += scoreToAdd;
-            }
+            scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]); //Delar på antal gissningar man gjort så att man inte får fördel om man gissar fler gånger.
+        }
+        else if (player === "AverageBert") {
+            numberOfGuesses[1]++;
+            scoreList[1] += scoreToAdd;
+            scoreList[1] = Math.round(scoreList[1]/numberOfGuesses[1]);
+        }
+        else if (player === "LowBert") {
+            numberOfGuesses[2]++;
+            scoreList[2] += scoreToAdd;
+            scoreList[2] = Math.round(scoreList[2]/numberOfGuesses[2]);
+        }
+        else if (player === "RandomBert") {
+            numberOfGuesses[3]++;
+            scoreList[3] += scoreToAdd;
+            scoreList[3] = Math.round(scoreList[3]/numberOfGuesses[3]);
+        }
+        else if (player === "HighBert") {
+            numberOfGuesses[4]++;
+            scoreList[4] += scoreToAdd;
+            scoreList[4] = Math.round(scoreList[4]/numberOfGuesses[4]);
+        }
+        else if (player === "DumbBert") {
+            numberOfGuesses[5]++;
+            scoreList[5] += scoreToAdd;
+            scoreList[5] = Math.round(scoreList[5]/numberOfGuesses[5]);
+        }
+        else if (player === "SmartBert") {
+            numberOfGuesses[6]++;
+            scoreList[6] += scoreToAdd;
+            scoreList[6] = Math.round(scoreList[6]/numberOfGuesses[6]);
+        }
     }
+   // addHighScoreToLocalStorage();
 }
