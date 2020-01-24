@@ -33,6 +33,7 @@ let previousGuess;
 //Ha kvar var användbart for calculateScores()
 let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
+// state.newGameState.selectedBots
 let startButton = document.querySelector('#startgameButton');
 //NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
 document.addEventListener("keyup", function(event) {
@@ -52,14 +53,15 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
 })
 
 function init(){
+    maxNumber = 20;
     turn = 0;
     minNumber = 1;
     //checks local storage for a max value, if non set to 20
-    if ("maxNumber" in localStorage){
-        maxNumber = parseInt(localStorage.getItem("maxNumber"));
-    } else {
-        maxNumber = 20;
-    }
+    // if ("maxNumber" in localStorage){
+    //     maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    // } else {
+    //     maxNumber = 20;
+    // }
 
     setSettingValues();
     let previousGuess = maxNumber;
@@ -183,6 +185,7 @@ function botGuesses(player){
             //Unlike randombert, dumbert can guess already guessed guesses
             //This is to hide if it guesses right
             guess = Math.floor(Math.random()*(maxNumber - minNumber)+minNumber);
+            console.log(guess)
             calculateScore(secretNumber, guess, player, maxNumber, minNumber);
             //If DumbBert guesses right it istead guesses the highest number
             if (secretNumber == guess){
