@@ -4,35 +4,21 @@
 const submitUsername = document.querySelector('#submitUsername');
 
 /**
- * the array to save the highscore in
- */
-
-/**
  * Adds clickevent to button and triggers the gatherUsername function
  */
 submitUsername.addEventListener('click', gatherUsername);
-showHighScore();
+
 /**
- * Handels the gathering of username and saving the userScore-object in local storage 
- * (for now, probably this will happen in another function when the score-functions are done).
+ * Shows Highscore in DOM. SHOULD BE MOVED AND CALLED IN OTHER FUNCTION
+ */
+showHighScore();
+
+/**
+ *  * Handels the gathering of username and saving the userScore-object in local storage 
  */
 function gatherUsername(){
-   const username = document.querySelector('#inputUsername');
-    console.log(username.value)
-
-    let userScore = {
-        "username":username.value
-      // "score": userHighscore
-    }
-    let highScore = getUserScoreFromLocalStorage();
-    highScore.push(userScore);
-
-    if(highScore.length > 5){
-        highScore.shift();
-    }
-    console.log(highScore)
-    //showHighScore(userScore);
-    saveUserScoreToLocalStorage(highScore);
+    const username = document.querySelector('#inputUsername');
+    return username.value;
 }
 
 /**
@@ -51,30 +37,63 @@ function getUserScoreFromLocalStorage(){
 }
 
 /**
- * Ranks and appends the list-elements to highsore ul with the right information from local storage.
+ * Appends the list-elements to highsore ol with the right information from local storage.
  * @param {Object} userScore - contains username and score
  */
 function showHighScore(userScore){
-    const ul = document.querySelector('.highScore');
+    const ol = document.querySelector('.highScore');
     const highScore = getUserScoreFromLocalStorage();
-    let rank = 1
     
     for (userScore of highScore) {
-        const li = createLiElement(rank, userScore);
-        rank ++
-        ul.append(li);
+        const li = createHighScoreListElements(userScore);
+        ol.append(li);
     }
 }
 
 /**
- * 
- * @param {Number} rank - the rank of userScore
- * @param {String} rankDot - some text between rank and score
+ * Creates List elements to display Highscore in.
  * @param {Object} userScore - conains username and score
  */
-function createLiElement(rank, userScore){
+function createHighScoreListElements(userScore){
     const li = document.createElement('li');
-    let rankDot = ". "
-    li.append(rank, rankDot, userScore.username)
+    li.append(userScore.username, ', ', userScore.score)
     return li;
 }
+
+/**
+ * Creates the userScore-object, adds it to highScore-array in local storage. Keeps array short.
+ * @param {String} registeredUsername - username that's registered through inputUsername
+ * @param {Number} playerScore - the calculated user-score
+ */
+function addHighScoreToLocalStorage(registeredUsername, playerScore){
+    let userScore = {
+        "username":registeredUsername,
+        "score": playerScore
+    }
+    updateHighScore(userScore);
+
+    let highScore = getUserScoreFromLocalStorage();
+    if(highScore.length > 5){
+        highScore.pop();
+        saveUserScoreToLocalStorage(highScore);
+    }
+}
+
+/**
+ * Finds and replaces / knocks down lower scores. Updates Highscore-array in local storage.
+ * @param {Object} userScore - object containing username and score
+ */
+function updateHighScore(userScore){
+    const highScore = getUserScoreFromLocalStorage();
+    let index 
+    for (let i = 0; i < highScore.length; i++) {
+        const storedHighScore = highScore[i];
+        if(userScore.score < storedHighScore.score){
+            index = i + 1;   
+        }
+    }
+    console.log(index + ' is the place to splice')
+    highScore.splice(index, 0, userScore);
+    saveUserScoreToLocalStorage(highScore);
+}  
+

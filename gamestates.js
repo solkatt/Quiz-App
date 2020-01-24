@@ -17,11 +17,16 @@ let state = {
         rulesButton: document.querySelector('#rulesButton')
     },
     settingsState: {
-        container: document.querySelector('.settingsCon'),
-        hide: true
+        container: document.querySelector('.settings'),
+        hide: true,
+        playerSettings: {
+            nrOfBots: 3,
+            soundOn: false,
+            showBotsGuesses: true
+        }
     },
     highscoreState: {
-        container: document.querySelector('.highscoreCon'),
+        container: document.querySelector('.highScoreCon'),
         hide: true
     },
     // the state between menu and actual gameplay
@@ -30,25 +35,26 @@ let state = {
         hide: true,
         selectedBots: [],
         /** Changes to gameplaystate onclick. */
-        startPlayingButton: document.querySelector('#startPlayingButton'),
+        startPlayingButton: document.querySelector('#submitUsername'),
         /** NodeList of all bot checkboxes. */
-        botCheckboxes: document.querySelectorAll('input[type="checkbox"]')
+        botCheckboxes: document.querySelectorAll('.newGameCon input[type="checkbox"]')
     },
     gameplayState: {
-        container: document.querySelector('.gameCon'),
-        hide: true
-    },
-    rulesState: {
-        container: document.querySelector('.rulesCon'),
-        hide: true
-    },
-    backToMenuButton: document.querySelectorAll('.backToMenuButton')
+        container: document.querySelector('.game--container'),
+        hide: true,
+        numberInput: document.querySelector('#number--input'),
+        numberSubmit: document.querySelector('[type="button"]'),
+        playerInfo: {
+            name: undefined,
+            points: 0
+        }
+    }
 }
 
 /**
- * Add click event listener to buttons on page load.
- */
-window.addEventListener('load', function () {
+ * Add click event listener to menu buttons.
+ 
+window.addEventListener('load', function() {
     // highscore button
     state.menuState.highscoreButton.addEventListener('click', () => {
         toggleDisplay(state.highscoreState);
@@ -72,31 +78,26 @@ window.addEventListener('load', function () {
         if (3 <= state.newGameState.selectedBots.length) {
             toggleDisplay(state.gameplayState);
         }
-        document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
+        document.querySelector('.newGameCon p').textContent = 'Du måste välja minst 3st motståndare.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
         toggleDisplay(state.rulesState);
     })
-    // adds event listeners to all back-to-menu-buttons
-    for (const button of state.backToMenuButton) {
-        button.addEventListener('click', () => {
-            toggleDisplay(state.menuState);
-        })
-    }
 })
+*/
 
 /**
  * Toggle visibility of html-element.
- * @param {HTMLDivElement} gameState The selected game state recieved from event listener.
+ * @param {HTMLDivElement} gameState The chosen game state recieved from event listener.
  */
 function toggleDisplay(gameState) {
-    // show selected game state if it is hidden
+    // show chosen game state if it is hidden
     if (gameState.hide === true) {
         show(gameState);
-        // hide everything but selected game state and back to menu button
+        // hide everything but chosen game state and menu state
         for (const key in state) {
-            if (state[key] != gameState && state[key] != state.backToMenuButton) {
+            if (state[key] != state.menuState && state[key] != gameState) {
                 hide(state[key]);
             }
         }
@@ -108,9 +109,9 @@ function toggleDisplay(gameState) {
 }
 
 /**
- * Change 'hide' property value on selected game state container.
+ * Change 'hide' property value on chosen game state container.
  * Add 'hide' class to html-element.
- * @param {HTMLDivElement} gameState The selected game state recieved from toggleDisplay() to hide.
+ * @param {HTMLDivElement} gameState 
  */
 function hide(gameState) {
     gameState.hide = true;
@@ -120,7 +121,7 @@ function hide(gameState) {
 /**
  * Change 'hide' property value on game state container.
  * Remove 'hide' class to html-element.
- * @param {HTMLDivElement} gameState The selected game state recieved from toggleDisplay() to show.
+ * @param {HTMLDivElement} gameState 
  */
 function show(gameState) {
     gameState.hide = false;
