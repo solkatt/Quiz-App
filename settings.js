@@ -1,4 +1,4 @@
-document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
+// document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
 
 //document.querySelector("#see-opponents-guesses").addEventListener("click", seeOpponentsGuesses);
 
