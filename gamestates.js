@@ -21,7 +21,7 @@ let state = {
         hide: true
     },
     highscoreState: {
-        container: document.querySelector('.highscoreCon'),
+        container: document.querySelector('.highScoreCon'),
         hide: true
     },
     // the state between menu and actual gameplay
@@ -30,9 +30,9 @@ let state = {
         hide: true,
         selectedBots: [],
         /** Changes to gameplaystate onclick. */
-        startPlayingButton: document.querySelector('#startPlayingButton'),
+        startPlayingButton: document.querySelector('#submitUsername'),
         /** NodeList of all bot checkboxes. */
-        botCheckboxes: document.querySelectorAll('input[type="checkbox"]')
+        botCheckboxes: document.querySelectorAll('.newGameCon input[type="checkbox"]')
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
@@ -72,7 +72,7 @@ window.addEventListener('load', function () {
         if (3 <= state.newGameState.selectedBots.length) {
             toggleDisplay(state.gameplayState);
         }
-        document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
+        document.querySelector('.newGameCon p').textContent = 'Du måste välja minst 3st motståndare.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
