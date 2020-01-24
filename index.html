@@ -58,6 +58,17 @@
                         <button id="submitUsername">Start playing!</button>
                     </div>
 
+            <div class="enterUsername">
+                <input type="text" id="inputUsername" placeholder="username">
+                <button id="submitUsername">start playing!</button>
+            </div>
+<!--        COMMENTED OUT 'til we need a second highscore to be displayed somewhere else (IF we need it). Right now the code only works
+            with one highscore-list.
+            <div class="highScoreContainer">
+                <ol class="highScore">
+                    HIGHSCORE INSERTED FROM JS
+                </ol>
+            </div> -->
             <div id="guessingList"></div>
             <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
@@ -75,7 +86,7 @@
                 <img class="bots" alt="" src="assets/bot3.svg">
             </div>
         </div>
-
+      
         <h2 id="display-text">Guess between 0-20</h2>
         <form id="user-guess" action="javascript:void(0);">
             <input type="text" placeholder="Your guess">
