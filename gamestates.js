@@ -72,7 +72,7 @@ window.addEventListener('load', function () {
         if (3 <= state.newGameState.selectedBots.length) {
             toggleDisplay(state.gameplayState);
         }
-        document.querySelector('.newGameCon > p').textContent = 'Du måste välja minst 3st motståndare.';
+        document.querySelector('.newGameCon p').textContent = 'Du måste välja minst 3st motståndare.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
