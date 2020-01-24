@@ -9,12 +9,12 @@
  */
 let state = {
     menuState: {
-        container: document.querySelector('.startMenu'),
+        container: document.querySelector('.menuCon'),
         hide: false,
-        startButton: document.querySelector('.startGameButton'),
-        rulesButton: document.querySelector('.rulessButton'),
-        highscoreButton: document.querySelector('.highscoreButton'),
-        settingsButton: document.querySelector('.settingsButton'),
+        startButton: document.querySelector('#startgameButton'),
+        settingsButton: document.querySelector('#settingsButton'),
+        highscoreButton: document.querySelector('#hightScoreButton'),
+        rulesButton: document.querySelector('#rulesButton')
     },
     settingsState: {
         container: document.querySelector('.settings'),
@@ -28,7 +28,11 @@ let state = {
     highscoreState: {
         container: document.querySelector('.highscore'),
         hide: true,
-        scoreList: []
+        selectedBots: [],
+        /** Changes to gameplaystate onclick. */
+        startPlayingButton: document.querySelector('#submitUsername'),
+        /** NodeList of all bot checkboxes. */
+        botCheckboxes: document.querySelectorAll('.newGameCon input[type="checkbox"]')
     },
     gameplayState: {
         container: document.querySelector('.game--container'),
