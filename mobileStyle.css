@@ -42,6 +42,7 @@ body {
 
 }
 
+
 .whiteContainer {
   background-color: #FCFCFB;
   width: 90%;
@@ -64,6 +65,7 @@ body {
 
 .bots {
   width: 50px;
+
 }
 
 .botdiv {
@@ -104,6 +106,7 @@ h2, .checkUserGuess, #inputUsername {
 #timePressureButton {
   color: #5F193D;
   background-color: #55608E;
+
 }
 
 p {
