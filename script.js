@@ -42,8 +42,6 @@ document.addEventListener("keyup", function(event) {
     }
 });
 
-let startButton = document.querySelector('#startgameButton');
-
 // start playing button in newGameState
 state.newGameState.startPlayingButton.addEventListener('click', () => {
     scoreList = [0, 0, 0, 0, 0 ,0, 0]; 
