@@ -21,7 +21,7 @@ let state = {
         hide: true
     },
     highscoreState: {
-        container: document.querySelector('.highscoreCon'),
+        container: document.querySelector('.highScoreCon'),
         hide: true
     },
     // the state between menu and actual gameplay
