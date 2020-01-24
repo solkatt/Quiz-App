@@ -57,10 +57,10 @@ function init(){
     turn = 0;
     minNumber = 1;
     //checks local storage for a max value, if non set to 20
-    if (localStorage.getItem("maxNumber") === null) {
-        maxNumber = 20;
-    } else {
+    if ("maxNumber" in localStorage){
         maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    } else {
+        maxNumber = 20;
     }
 
     setSettingValues();

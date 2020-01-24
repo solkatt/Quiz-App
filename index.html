@@ -148,10 +148,10 @@
         </label>
 
         <!-- OSKARS KOD ? KAN KOMMENTERAS UT MEN DÅ FÅR JAG FELMEDDELANDE...  -->
-        <form id="user-settings" action="javascript:void(0);">
-            <input type="text" placeholder="Max Range: 20">
-            <input type="button" value="Set Range" class="user-settings">
-            <p class="handle-range-settings-text"> </p>
+        <form class="settings-input" action="javascript:void(0);">
+            <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
+            <input type="text" placeholder="Max Range: 20" maxlength="3" onClick="this.setSelectionRange(0, this.value.length)">
+            <input type="button" value="Set Range" class="set-user-settings">
         </form>
         <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
