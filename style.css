@@ -87,6 +87,12 @@ h2 {
   padding-bottom: 20px;
 }
 
+h2 {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 p {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -104,6 +110,7 @@ h2, .checkUserGuess, #inputUsername {
 #timePressureButton {
   color: #5F193D;
   background-color: #55608E;
+
 }
 
 p {
