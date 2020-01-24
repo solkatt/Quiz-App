@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="desktopStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
     <title>Numbers</title>
+    <script defer src="gamestates.js" type="text/javascript"></script>
     <script defer src="script.js" type="text/javascript"></script>
+    <script defer src="BotSelection.js" type="text/javascript"></script>
     <script defer src="localStorage.js" type="text/javascript"></script>
     <script defer src="Scoreboard.js" type="text/javascript"></script>
-    <script defer src="gamestates.js" type="text/javascript"></script>
     <script defer src="settings.js" type="text/javascript"></script>
 </head>
 
@@ -163,10 +164,6 @@
     <div class="settingsCon container hide">
         <h2>Settings</h2>
         <button id="showOpponentsButton" type="button" value="Show opponents:">Show opponents: on</button>
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
         <button id="levelButton" type="button" value="Level">level:</button>
         <select id="selectRange">
             <option value="Range">Range 0-20</option>
@@ -174,10 +171,6 @@
             <option value="Range">Range 0-1000</option>
         </select>
         <button id="timePressureButton" type="button" value="Time pressure:">Time pressure: off</button>
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
 
         <!-- OSKARS KOD ? KAN KOMMENTERAS UT MEN DÅ FÅR JAG FELMEDDELANDE...  -->
         <form id="user-settings" action="javascript:void(0);">
