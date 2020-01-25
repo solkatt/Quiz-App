@@ -107,11 +107,12 @@ h2, .checkUserGuess, #inputUsername {
   background-color: #55608E;
 }
 
+/* BACKGROUND CHANGES ON CLICK EVENT SO THIS IS NOT NEEDED
 #timePressureButton {
   color: #5F193D;
   background-color: #55608E;
-
 }
+ */
 
 p {
   color: #55608E;
@@ -234,4 +235,10 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+/* Change background when buttons in 'settings' are clicked */
+.buttonClicked{
+  color: #5F193D;
+  background-color: #55608E;
 }
