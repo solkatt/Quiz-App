@@ -36,12 +36,14 @@ let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert
 // state.newGameState.selectedBots
 let startButton = document.querySelector('#startgameButton');
 //NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
+/*
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
      event.preventDefault();
      checkUserGuess();
     }
 });
+*/
 
 // start playing button in newGameState
 state.newGameState.startPlayingButton.addEventListener('click', () => {
@@ -239,7 +241,7 @@ function displayOutput(player, guess, result){
             scoreList[bots.indexOf(player)] += 300;
             scoreList[bots.indexOf(player)] = Math.round(scoreList[bots.indexOf(player)]/numberOfGuesses[bots.indexOf(player)]);
             console.log(scoreList + " scoreList in case win")
-            swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
+            // NOT USED RIGHT NOW swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             display(player + " gissade rätt: " + guess);
             break;
