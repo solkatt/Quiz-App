@@ -78,7 +78,6 @@ window.addEventListener('load', function () {
     state.newGameState.startPlayingButton.addEventListener('click', () => {
         if (2 <= state.newGameState.selectedBots.length) {
             toggleClass(state.gameplayState, 'hide');
-            printSelectedBots();
         }
         document.querySelector('.newGameCon p').textContent = 'Select at least 2 opponents.';
     })
@@ -94,6 +93,17 @@ window.addEventListener('load', function () {
         })
     }
 
+    //fixes input with enter button
+    document.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            if (state.gameplayState.hide == false) {
+                checkUserGuess();
+            }
+        }
+    });
+
+    // add event listners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
         if (state.settingsState.buttons.hasOwnProperty(key)) {
             const button = state.settingsState.buttons[key];
@@ -102,6 +112,14 @@ window.addEventListener('load', function () {
             })
         }
     }
+
+    state.settingsState.buttons.showBotsGuessButton.addEventListener('click', () => {
+        // vad som händer när man klickar på show bots previous guesses
+    })
+
+    state.settingsState.buttons.timePressureButton.addEventListener('click', () => {
+        // vad som händer när man klickar på tidpressknappen
+    })
 })
 
 /**
