@@ -36,12 +36,14 @@ let previousGuess;
 
 let startButton = document.querySelector('#startgameButton');
 //NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
+/*
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
      event.preventDefault();
      checkUserGuess();
     }
 });
+*/
 
 // start playing button in newGameState
 state.newGameState.startPlayingButton.addEventListener('click', () => {
