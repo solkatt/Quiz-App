@@ -106,7 +106,6 @@ h2, .checkUserGuess, #inputUsername {
 #timePressureButton {
   color: #5F193D;
   background-color: #55608E;
-
 }
 
 p {
@@ -136,7 +135,7 @@ p {
   width: 260px;
 }
 
-button {
+button, .set-user-settings {
   justify-content: center;
   background-color: #FBE29E;
   border: none;
@@ -149,15 +148,15 @@ button {
   transition-duration: 0.4s;
 }
 
-button, #hightScoreButton, #settingsButton, #startgameButton {
+button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton {
   width: 260px;
   height: 65px;
   margin: 20px;
 }
+
 a {
   text-decoration: none;
   font-size: 1.2em;
-
 }
 
 .backToMenuButton {
