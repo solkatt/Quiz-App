@@ -99,6 +99,8 @@ window.addEventListener('load', function () {
             event.preventDefault();
             if (state.gameplayState.hide == false) {
                 checkUserGuess();
+            } if (state.settingsState.hide == false) {
+                checkUserSettings();
             }
         }
     });
