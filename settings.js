@@ -27,7 +27,7 @@ function checkUserSettings(){
 
     } else {
         settings.settingMaxNumber = parseInt(settingMaxNumberBox.value);
-        settingMaxNumberBox.value = settings.settingMaxNumber + "✔";
+        settingMaxNumberBox.value = settings.settingMaxNumber + " ✔";
     } 
 
     if (timePressureButton.classList == "buttonClicked"){
@@ -48,9 +48,20 @@ function selectRangeText(){
 function setSettingValues(){
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let settings = JSON.parse(localStorage.getItem("settings"));
+    let timePressureButton = document.getElementById("timePressureButton")
+    let showOpponentsButton = document.getElementById("showOpponentsButton");
     if ("settings" in localStorage){
         settingMaxNumberBox.value = settings.settingMaxNumber;
+        if(settings.settingShowGuessesOn == false){
+            timePressureButton.querySelector('span') = "off";
+            timePressureButton.classList.add("buttonClicked");
+        }
+        if(settings.settingTimePressureOn == false){
+            showOpponentsButton.querySelector('span') = "off";
+            showOpponentsButton.classList.add("buttonClicked");
+        }
     } else {
         settingMaxNumberBox.placeholder = "20";
     }
+
 }
