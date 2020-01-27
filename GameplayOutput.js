@@ -69,11 +69,8 @@ function printBotGuess(player, guess, result) {
 
 function clearOnWin(winner, winnerScore) {
     state.gameplayState.stopTheGame = true;
-    setTimeout(() => {
-        toggleClass(state.gameoverState, 'hide');
-    }, 2500);
+    toggleClass(state.gameoverState, 'hide');
     state.newGameState.selectedBots.forEach(bot => {
-        console.log(winner)
         let score = document.createElement('p');
         score.classList.add('playerScore');
 
@@ -96,6 +93,9 @@ function clearOnWin(winner, winnerScore) {
 
         if (bot != winner) {
             botDiv.classList.add('botDiv', bot);
+            if (state.newGameState.selectedBots.length > 4) {
+                botDiv.classList.add('moreThanThreeBots');
+            }
             botDiv.append(img, playerText, score);
             state.gameoverState.botContainer.append(botDiv);
         }
@@ -113,4 +113,47 @@ function clearOnWin(winner, winnerScore) {
             state.gameoverState.winnerDiv.append(img, playerText, winnerScore);
         }
     })
-}   
+}
+
+function printSelectBotsCon() {
+    let allBots = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+    
+    allBots.forEach(bot => {
+        let botDiv = document.createElement('div');
+        botDiv.classList.add(bot, 'botWidth');
+
+        let img = document.createElement('img');
+        img.classList.add('botImg');
+        img.src = './assets/' + bot + '.svg';
+
+        let label = document.createElement('label');
+        label.setAttribute('for', bot);
+        label.append(img);
+
+        let input = document.createElement('input');
+        input.setAttribute('type', 'checkbox');
+        input.setAttribute('name', bot);
+        input.setAttribute('value', bot);
+        input.setAttribute('id', bot);
+        botDiv.addEventListener('click', () => {
+            if (input.checked == true) {
+                botDiv.classList.add('purple-bg');
+            }
+            else if (input.checked == false) {
+                botDiv.classList.remove('purple-bg');
+            }
+        })
+
+        let playerText = document.createElement('p');
+        playerText.classList.add('botText');
+        playerText.innerText = bot;
+
+        // let img = document.createElement('img');
+        // img.classList.add('botImg');
+        // img.src = './assets/' + bot + '.svg';
+
+        botDiv.append(label, input);
+        state.newGameState.selectBotsForm.append(botDiv);
+    })
+
+}
