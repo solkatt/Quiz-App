@@ -56,7 +56,15 @@ function showHighScore(userScore){
  */
 function createHighScoreListElements(userScore){
     const li = document.createElement('li');
-    li.append(userScore.username, ', ', userScore.score)
+    let div = document.createElement('div');
+    let div2 = document.createElement('div');
+    let span1 = document.createElement('span');
+    let span2 = document.createElement('span');
+    span1.append(userScore.username);
+    span2.append(userScore.score);
+    div.setAttribute('class', 'highScoreListItem');
+    div.append(span1, span2);
+    li.append(div);
     return li;
 }
 

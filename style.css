@@ -40,7 +40,6 @@ body {
   width: 320px;
   height: 200px;
   background-color: #55608E;
-
 }
 
 .whiteContainer {
@@ -161,10 +160,23 @@ button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton
   height: 65px;
   margin: 20px;
 }
+
 a {
   text-decoration: none;
   font-size: 1.2em;
+}
 
+ol{
+  padding: 1.5rem;
+}
+
+.highScoreListItem{
+  display:flex;
+  justify-content: space-between;
+}
+
+li{
+  padding: 0.5rem 0.2rem;
 }
 
 .backToMenuButton {
