@@ -41,9 +41,22 @@ let state = {
     gameplayState: {
         container: document.querySelector('.gameCon'),
         hide: true,
+        stopTheGame: true,
+        secretNumber: 0,
         yellowContainer: document.querySelector('.gameCon .yellowContainer'),
-        userGuess: document.querySelector('.user-guess'),
-        botContainer: document.querySelector('.display-bots')
+        guessButton: document.querySelector('.checkUserGuess'),
+        botContainer: document.querySelector('.display-bots'),
+        guessList: document.querySelector('.yellowContainer #guessingList'),
+        userGuess: document.querySelector('.user-guess-div'),
+        guessInput: document.querySelector('.user-guess > input'),
+        numberRange: document.querySelector('#display-text span')
+    },
+    gameoverState: {
+        container: document.querySelector('.gameoverCon'),
+        hide: true,
+        yellowContainer: document.querySelector('.gameoverCon .yellowContainer'),
+        botContainer: document.querySelector('.gameover-display-bots'),
+        winnerDiv: document.querySelector('.winner')
     },
     rulesState: {
         container: document.querySelector('.rulesCon'),
@@ -68,19 +81,20 @@ window.addEventListener('load', function () {
     // start button
     state.menuState.startButton.addEventListener('click', () => {
         toggleClass(state.newGameState, 'hide');
-        // empty array of user selected bots
-        state.newGameState.selectedBots.length = 0;
-        // reset checkboxes to unchecked
-        state.newGameState.botCheckboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        })
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
-        if (2 <= state.newGameState.selectedBots.length) {
+        if (2 > state.newGameState.selectedBots.length) {
+            document.querySelector('.newGameCon p').textContent = 'Select at least 2 opponents.';
+        }
+        else if (3 <= state.newGameState.selectedBots.length) {
+            state.gameplayState.stopTheGame = false;
+            if (document.querySelector('.newGameCon p')) {
+                document.querySelector('.newGameCon p').textContent = "";
+                state.newGameState.selectedBots.unshift("Du");
+            }
             toggleClass(state.gameplayState, 'hide');
         }
-        document.querySelector('.newGameCon p').textContent = 'Select at least 2 opponents.';
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
@@ -89,8 +103,17 @@ window.addEventListener('load', function () {
     // adds event listeners to all back-to-menu-buttons
     for (const button of state.backToMenuButton) {
         button.addEventListener('click', () => {
-            toggleClass(state.menuState, 'hide');
+            // empty gameplay outputs
+            state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
+                div.innerHTML = "";
+            })
+            // empty array of user selected bots
             state.newGameState.selectedBots.length = 0;
+            // reset checkboxes to unchecked
+            state.newGameState.botCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            })
+            toggleClass(state.menuState, 'hide');
         })
     }
 
