@@ -47,6 +47,14 @@ function showHighScore(placeForHighscore, userScore){
     }
 }
 
+function removeOldHighScore(olClassName){
+    let ol = document.querySelector(olClassName);
+while( ol.firstChild ){
+    ol.removeChild(ol.firstChild );
+} 
+}
+ 
+
 /**
  * Creates List elements to display Highscore in.
  * @param {Object} userScore - conains username and score
