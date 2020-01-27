@@ -1,6 +1,9 @@
 
 document.querySelector("#rangeButton").addEventListener("click", selectRangeText);
 
+document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
+
+
 function checkUserSettings(){
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let timePressureButton = document.getElementById("timePressureButton");
@@ -15,12 +18,10 @@ function checkUserSettings(){
         //If a non-number is put in, the setting-object resets it, so tempSettings gets settingMaxNumber from local storage
         if ("settings" in localStorage){
             let tempSettings = JSON.parse(localStorage.getItem("settings"));
-            settingMaxNumberBox.value = "";
-            settingMaxNumberBox.placeholder = "Err";
+            settingMaxNumberBox.value = "Err";
             settings.settingMaxNumber = tempSettings.settingMaxNumber;
         } else {
-            settingMaxNumberBox.value = "";
-            settingMaxNumberBox.placeholder = tempSettings.settingMaxNumber;;
+            settingMaxNumberBox.value = tempSettings.settingMaxNumber;
         }
 
     } else {
