@@ -8,10 +8,6 @@ const submitUsername = document.querySelector('#submitUsername');
  */
 submitUsername.addEventListener('click', gatherUsername);
 
-/**
- * Shows Highscore in DOM. SHOULD BE MOVED AND CALLED IN OTHER FUNCTION
- */
-showHighScore();
 
 /**
  *  * Handels the gathering of username and saving the userScore-object in local storage 
@@ -39,9 +35,10 @@ function getUserScoreFromLocalStorage(){
 /**
  * Appends the list-elements to highsore ol with the right information from local storage.
  * @param {Object} userScore - contains username and score
+ * @param {Element} placeForHighscore - contains class-name for the chosen ol where the highscore should be displayed.
  */
-function showHighScore(userScore){
-    const ol = document.querySelector('.highScore');
+function showHighScore(placeForHighscore, userScore){
+    const ol = document.querySelector(placeForHighscore);
     const highScore = getUserScoreFromLocalStorage();
     
     for (userScore of highScore) {
