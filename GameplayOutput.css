@@ -108,7 +108,7 @@
   
   .gameCon.container, .gameoverCon.container, .newGameCon.container {
     height: 100vh;
-    min-width: 320px;
+    border-radius: 0px 0px 20px 20px;
   }
   
   .gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
@@ -117,8 +117,7 @@
     justify-content: space-between;
     z-index: 1;
     height: 80vh;
-    max-width: 100vw;
-    min-width: 320px;
+    width: 300px;
     min-height: 450px;
     max-height: 500px;
     margin: 0 auto;
@@ -227,7 +226,6 @@
   }
   
 .newGameWhiteCon {
-    border-radius: 20px;
     height: unset;
     display: flex;
     flex-direction: column;
@@ -240,15 +238,18 @@
   
 .newGameWhiteCon:last-of-type {
     max-height: fit-content;
-    margin-top: 1rem;
  }
   
 .newGameCon h2 {
-    width: 100%;
     height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+}
+
+.newGameCon h2:last-of-type {
+    margin-top: 1rem;
 }
   
 .newGameCon .backToMenuButton {
