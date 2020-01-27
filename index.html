@@ -129,9 +129,11 @@
         <h2>Settings</h2>
         <form class="settings-input" action="javascript:void(0);">
         <button id="showOpponentsButton" type="button" value="Show opponents:">Show opponents: <span>on</span></button>
-        <button id="levelButton" type="button" value="Level">level:</button>
-        <input type="text" placeholder="Max Range: 20" maxlength="3"
-            onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
+        <div class="settingRangeContainer">
+            <button id="rangeButton" type="button" value="Level">Highest Nr:</button>
+            <input type="text" placeholder="Max Range: 20" maxlength="3"
+                onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
+        </div>
         <button id="timePressureButton" type="button" value="Time pressure:">Time pressure: <span>on</span></button>
         <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
         <input type="button" value="OK" class="set-user-settings">

@@ -74,6 +74,7 @@ window.addEventListener('load', function () {
     // highscore button
     state.menuState.highscoreButton.addEventListener('click', () => {
         toggleClass(state.highscoreState, 'hide');
+        showHighScore('.highScore');
     })
     // settings button
     state.menuState.settingsButton.addEventListener('click', () => {

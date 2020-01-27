@@ -161,15 +161,28 @@ button, .set-user-settings {
   transition-duration: 0.4s;
 }
 
-button, #hightScoreButton, #settingsButton, #startgameButton, #backToMenuButton {
-  width: 260px;
+button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton {
+  width: 230px;
   height: 65px;
   margin: 20px;
 }
+
+#rangeButton{
+  width: 160px;
+}
+
+.set-user-maxNumber{
+  width: 50px;
+  font-size: 0.8em;
+  font-weight: 600;
+  height: 63px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 a {
   text-decoration: none;
   font-size: 1.2em;
-
 }
 
 .backToMenuButton {

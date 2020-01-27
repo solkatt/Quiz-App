@@ -1,0 +1,59 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Times New Roman', Times, serif;
+}
+
+#timerAnimation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    width: 256px;
+    height: 256px;
+    transform: rotate(-90deg);
+    background-color: #5f193d;
+    border-radius: 20rem;
+    box-shadow: rgba(0, 0, 0, 0.123) -5px 5px;
+}
+
+
+
+ellipse {
+    ry: 118px;
+    rx: 118px;
+    cy: 128px;
+    cx: 128px;
+    stroke-width: 18;
+    stroke: #FBE29E;
+    fill: transparent;
+    stroke-dasharray: calc(123*3.1416*2);
+    stroke-dashoffset: 0;
+    transition: 1s all ease-in-out;
+}
+
+.ellipseAnim {
+    stroke-dashoffset: calc(123*3.1416*2);
+    transition-delay: 0.5s;
+
+    transition: all 10s linear;
+    animation: circle 2s timing-function;
+
+
+    /* animation: circleAnimation; */
+}
+
+/* ///////////// */
+#time {
+    font-size: 50px;
+    /* color: #FBE29E; */
+    color: rgb(255, 255, 255);
+
+    font-size: 800%;
+    font-weight: 900;
+
+    position: absolute;
+    transform: translate(-50%, -135%);
+    text-align: center;
+}
