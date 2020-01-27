@@ -32,7 +32,6 @@ body {
   width: 320px;
   height: 200px;
   background-color: #55608E;
-
 }
 
 .whiteContainer, .newGameWhiteCon {
@@ -260,6 +259,19 @@ input:checked + .slider:before {
   background-color: #55608E;
 }
 
+ol{
+  padding: 1.5rem;
+}
+
+.highScoreListItem{
+  display:flex;
+  justify-content: space-between;
+}
+
+li{
+  padding: 0.5rem 0.2rem;
+}
+}
 /* Gameplay output */
 .display-text, .display-text span {
   z-index: 5;
