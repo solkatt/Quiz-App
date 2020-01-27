@@ -16,6 +16,7 @@ function checkUserSettings(){
 
     if (isNaN(parseInt(settingMaxNumberBox.value))){
         //If a non-number is put in, the setting-object resets it, so tempSettings gets settingMaxNumber from local storage
+
         if ("settings" in localStorage){
             let tempSettings = JSON.parse(localStorage.getItem("settings"));
             settingMaxNumberBox.value = "Err";
@@ -32,7 +33,7 @@ function checkUserSettings(){
     if (timePressureButton.classList == "buttonClicked"){
         settings.settingTimePressureOn = false;
     }
-
+  
     if (showOpponentsButton.classList == "buttonClicked"){
         settings.settingShowGuessesOn = false;
     }
