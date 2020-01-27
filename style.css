@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -44,7 +45,7 @@ body {
 
 .whiteContainer {
   background-color: #FCFCFB;
-  width: 90%;
+  width: 100%;
   height: 330px;
   padding: 25px;
 }
@@ -71,15 +72,6 @@ body {
   background-color: #FBE29E;
   width: 60px;
 }
-
-/* h1 {
-  color: #55608E;
-  font-family: 'Luckiest Guy', cursive;
-  letter-spacing: 1px;
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-} */
 
 h2 {
   text-align: center;
@@ -110,7 +102,6 @@ h2, .checkUserGuess, #inputUsername {
 #timePressureButton {
   color: #5F193D;
   background-color: #55608E;
-
 }
 
 p {
@@ -161,7 +152,6 @@ button, #hightScoreButton, #settingsButton, #startgameButton {
 a {
   text-decoration: none;
   font-size: 1.2em;
-
 }
 
 .backToMenuButton {
@@ -183,7 +173,6 @@ a {
 .hide {
   display: none;
 }
-
 
 .switch {
   position: relative;

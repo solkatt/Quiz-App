@@ -1,6 +1,6 @@
-document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
+// document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
 
-document.querySelector(".see-opponents-guesses").addEventListener("click", seeOpponentsGuesses);
+//document.querySelector("#see-opponents-guesses").addEventListener("click", seeOpponentsGuesses);
 
 function seeOpponentsGuesses(){
     let settingsSeeOpponentsGuesses = true;

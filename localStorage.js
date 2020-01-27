@@ -96,4 +96,3 @@ function updateHighScore(userScore){
     highScore.splice(index, 0, userScore);
     saveUserScoreToLocalStorage(highScore);
 }  
-
