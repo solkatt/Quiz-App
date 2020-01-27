@@ -236,28 +236,28 @@
     overflow: hidden;
   }
   
-  .newGameWhiteCon:last-of-type {
+.newGameWhiteCon:last-of-type {
     max-height: fit-content;
     margin-top: 0;
-  }
+ }
   
-  .newGameCon h2 {
+.newGameCon h2 {
     width: 100%;
     height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .newGameCon .backToMenuButton {
+.newGameCon .backToMenuButton {
     position: unset;
     /* margin: 1rem auto; */
     height: 65px;
-  }
+}
   
-  .gameover-display-bots {
+.gameover-display-bots {
     /* margin: 1rem; */
-  }
+}
   
   #inputUsername {
     margin: 0 auto;
@@ -278,9 +278,6 @@
       margin: .5rem;
   }
 
-  input[type='checkbox']:checked, input[type='checkbox']{
-      border: 1px solid black;
-      background-color: red;
-      height: 2rem;
-      width: 2rem;
+  input[type='checkbox']:checked, input[type='checkbox'] {
+    display: none;
   }
