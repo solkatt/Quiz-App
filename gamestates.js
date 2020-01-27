@@ -33,6 +33,8 @@ let state = {
         container: document.querySelector('.newGameCon'),
         hide: true,
         selectedBots: [],
+        selectBotsCon: document.querySelector('.newGameCon .whiteContainer:first-of-type'),
+        selectBotsForm: document.querySelector('.select-bots-form'),
         /** Changes to gameplaystate onclick. */
         startPlayingButton: document.querySelector('#submitUsername'),
         /** NodeList of all bot checkboxes. */
@@ -81,11 +83,12 @@ window.addEventListener('load', function () {
     // start button
     state.menuState.startButton.addEventListener('click', () => {
         toggleClass(state.newGameState, 'hide');
+        printSelectBotsCon();
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
-        if (2 > state.newGameState.selectedBots.length) {
-            document.querySelector('.newGameCon p').textContent = 'Select at least 2 opponents.';
+        if (3 > state.newGameState.selectedBots.length) {
+            document.querySelector('.newGameCon p').textContent = 'Select at least 3 opponents.';
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;

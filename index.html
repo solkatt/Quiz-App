@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./fontfaces.css">
+    <link rel="stylesheet" href="./GameplayOutput.css">
     <!-- <link rel="stylesheet" href="mobileStyle.css"> -->
     <link rel="stylesheet" href="desktopStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
@@ -34,16 +35,14 @@
 
     <!-- HETTE TIDIGARE "usernameCon" -->
     <div class="newGameCon container hide">
-    <div class="whiteContainer">
-            <label for="Select Bots form">
-                <h2>Choose 3 opponents</h2>
-            </label>
+        <div class="newGameWhiteCon">
+            <h2>Choose 3 opponents</h2>
             <p>
                 <!-- Code inserted from JS -->
             </p>
-            <form name="Select Bots form">
+            <form name="Select Bots form" class="select-bots-form">
                 <!-- satte dit stylingen annars syns den ej just nu -->
-                <label for="AverageBert">AverageBert</label>
+                <!-- <label for="AverageBert">AverageBert</label>
                 <input type="checkbox" name="AverageBert" id="average" value="AverageBert"><br>
                 <label for="LowBert">LowBert</label>
                 <input type="checkbox" name="LowBert" id="low" value="LowBert"><br>
@@ -54,12 +53,12 @@
                 <label for="DumbBert">DumbBert</label>
                 <input type="checkbox" name="DumbBert" id="dumb" value="DumbBert"><br>
                 <label for="SmartBert">SmartBert</label>
-                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert"><br>
+                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert"><br> -->
             </form>
         </div>
-        <div class="whiteContainer">
+        <div class="newGameWhiteCon">
             <div class="enterUsername">
-                    <h2>Enter your name:</h2>
+                <h2>Enter your name:</h2>
                 <input type="text" name="inputUsername" id="inputUsername" placeholder="Enter your name here...">
                 <button id="submitUsername">Start playing!</button>
             </div>
