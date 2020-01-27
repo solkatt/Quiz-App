@@ -21,8 +21,8 @@
 <body>
     <!-- <div class="boxContainer"> -->
     <div class="menuCon startMenu">
-        <div>
-            <img alt="Title" src="./assets/title.svg">
+        <div class="h1StartMenu">
+            <img alt="Title" src="./assets/title.svg" style="z-index: 5; width: 230px; margin: -2.5rem 0 -4.5rem 0;">
         </div>
         <button id="startgameButton" type="button" value="Start Game">Start Game</button>
         <button id="rulesButton" type="button" value="Rules">Rules</button>
@@ -40,17 +40,17 @@
             <form>
                 <!-- satte dit stylingen annars syns den ej just nu -->
                 <label for="AverageBert">AverageBert</label>
-                <input type="checkbox" name="AverageBert" id="average" value="AverageBert">
+                <input type="checkbox" name="AverageBert" id="average" value="AverageBert"><br>
                 <label for="LowBert">LowBert</label>
-                <input type="checkbox" name="LowBert" id="low" value="LowBert">
+                <input type="checkbox" name="LowBert" id="low" value="LowBert"><br>
                 <label for="RandomBert">RandomBert</label>
-                <input type="checkbox" name="RandomBert" id="random" value="RandomBert">
+                <input type="checkbox" name="RandomBert" id="random" value="RandomBert"><br>
                 <label for="HighBert">HighBert</label>
-                <input type="checkbox" name="HighBert" id="high" value="HighBert">
+                <input type="checkbox" name="HighBert" id="high" value="HighBert"><br>
                 <label for="DumbBert">DumbBert</label>
-                <input type="checkbox" name="DumbBert" id="dumb" value="DumbBert">
+                <input type="checkbox" name="DumbBert" id="dumb" value="DumbBert"><br>
                 <label for="SmartBert">SmartBert</label>
-                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert">
+                <input type="checkbox" name="SmartBert" id="smart" value="SmartBert"><br>
             </form>
             <div class="enterUsername">
                 <input type="text" id="inputUsername" placeholder="Enter your name here...">
@@ -125,8 +125,22 @@
 
         <button id="timePressureButton" type="button" value="Time pressure:">Time pressure: off</button>
 
-        <!-- OSKARS KOD ? KAN KOMMENTERAS UT MEN DÅ FÅR JAG FELMEDDELANDE...  -->
+        <h2>Settings</h2>
         <form class="settings-input" action="javascript:void(0);">
+        <button id="showOpponentsButton" type="button" value="Show opponents:">Show opponents: <span>on</span></button>
+        <div class="settingRangeContainer">
+            <button id="rangeButton" type="button" value="Level">Highest Nr:</button>
+            <input type="text" placeholder="Max Range: 20" maxlength="3"
+                onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
+        </div>
+        <button id="timePressureButton" type="button" value="Time pressure:">Time pressure: <span>on</span></button>
+        <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
+        <input type="button" value="OK" class="set-user-settings">
+        </form>
+        <button class="backToMenuButton" type="button" value="index">Back to menu</button>
+
+    </div>
+
             <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
             <input type="text" placeholder="Max Range: 20" maxlength="3"
                 onClick="this.setSelectionRange(0, this.value.length)">
