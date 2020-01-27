@@ -66,8 +66,6 @@ function init(){
 
     setSettingValues();
     let previousGuess = maxNumber;
-
-    addEventListenerToCheckbox();
 }
 
 window.addEventListener('load', init);

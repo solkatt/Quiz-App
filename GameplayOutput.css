@@ -108,7 +108,7 @@
   
   .gameCon.container, .gameoverCon.container, .newGameCon.container {
     height: 100vh;
-    max-width: 100vw;
+    border-radius: 0px 0px 20px 20px;
   }
   
   .gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
@@ -117,10 +117,10 @@
     justify-content: space-between;
     z-index: 1;
     height: 80vh;
-    max-width: 100vw;
+    width: 300px;
     min-height: 450px;
     max-height: 500px;
-    margin: 2vh auto;
+    margin: 0 auto;
   }
   
   .user-guess-div {
@@ -159,9 +159,9 @@
     box-sizing: border-box;
     border-radius: .4rem;
     border: none;
-    padding: 1rem;
+    padding: .5rem 1rem;
     margin: 1rem;
-    height: 4rem;
+    height: 3.5rem;
     width: 40%;
     z-index: 2;
     font-size: 1.2rem;
@@ -174,11 +174,12 @@
   
   #enterUsername {
     align-self: flex-end;
+    margin-top: -1rem;
   }
   
   #submitUsername {
     z-index: 1;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto;
     padding: 0;
   }
   
@@ -225,11 +226,10 @@
   }
   
 .newGameWhiteCon {
-    border-radius: 20px;
     height: unset;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 4vh);
+    justify-content: space-between;
     max-height: unset;
     min-height: unset;
     padding: unset;
@@ -238,25 +238,24 @@
   
 .newGameWhiteCon:last-of-type {
     max-height: fit-content;
-    margin-top: 0;
  }
   
 .newGameCon h2 {
-    width: 100%;
     height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+}
+
+.newGameCon h2:last-of-type {
+    margin-top: 1rem;
 }
   
 .newGameCon .backToMenuButton {
     position: unset;
-    margin: 1rem auto; 
+    margin: 1rem auto;
     height: 65px;
-}
-  
-.gameover-display-bots {
-    /* margin: 1rem; */
 }
   
   #inputUsername {

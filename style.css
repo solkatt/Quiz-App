@@ -259,3 +259,281 @@ input:checked + .slider:before {
   color: #5F193D;
   background-color: #55608E;
 }
+
+/* Gameplay output */
+.display-text, .display-text span {
+  z-index: 5;
+  transition: all 1000ms ease-in-out;
+}
+
+.display-bots, .gameover-display-bots {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.display-bots > div, .gameover-display-bots > div {
+  justify-content: center;
+  background: #FCFCFB;
+  border-radius: 1rem;
+  padding: .3rem .3rem .8rem .3rem;
+  margin: .3rem .1rem 0 .1rem;
+  width: calc((100% / 3) - .5rem);
+}
+
+.moreThanThreeBots {
+  min-width: calc((100% / 4) - 1.1rem);
+  max-width: calc((100% / 2) - 1.1rem);
+}
+
+.botImg {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 .3rem;
+}
+
+.newGameCon .botImg {
+    margin: unset;
+    margin: .3rem;
+}
+
+.botText {
+  font-family: 'Josefin Sans Bold';
+  font-size: .8rem;
+  display: flex;
+  justify-content: center;
+  margin-top: -.1rem;
+  padding: 0;
+}
+
+.botGuess, .botResult {
+  margin: -.3rem;
+  padding: 0;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Josefin Sans BoldItalic', sans-serif;
+  font-size: 1.11rem;
+}
+
+.userGuess {
+  display: flex;
+  align-self: flex-end;
+}
+
+#guessingList {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  max-height: 10vh;
+}
+
+#guessingList p {
+  padding: 0;
+  margin: .5rem 1rem;
+}
+
+.user-guess {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-guess p {
+  margin: -.2rem 1rem;
+  padding: .2rem;
+}
+
+.user-guess p:first-of-type {
+  font-family: "Josefin Sans Bold", sans-serif;
+  font-size: 2.5rem;
+  color: #5F193D;
+}
+
+.user-guess p:last-of-type {
+  font-family: "Josefin Sans BoldItalic", sans-serif;
+  font-size: 2rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.gameCon .backToMenuButton, .gameoverCon .backToMenuButton {
+  position: unset;
+  padding: unset;
+  margin: 0 auto;
+  margin-bottom: 2vh;
+}
+
+.gameCon.container, .gameoverCon.container, .newGameCon.container {
+  height: 100vh;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  height: 80vh;
+  width: 300px;
+  min-height: 450px;
+  max-height: 500px;
+  margin: 0 auto;
+}
+
+.user-guess-div {
+  font-family: "Josefin Sans Bold", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2rem;
+  width: 100%;
+}
+
+.user-guess-div p {
+  margin: -.2rem auto;
+  padding: 0;
+}
+
+.user-guess-div p:first-of-type {
+  color: #5F193D;
+}
+
+.user-guess-div p:last-of-type {
+  font-family: "Josefin Sans BoldItalic", sans-serif;
+  font-size: 1.5rem;
+}
+
+.user-guess {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  border: none;
+  margin-top: -1.5rem;
+}
+
+.user-guess input, #inputUsername {
+  box-sizing: border-box;
+  border-radius: .4rem;
+  border: none;
+  padding: .5rem 1rem;
+  margin: 1rem;
+  height: 3.5rem;
+  width: 40%;
+  z-index: 2;
+  font-size: 1.2rem;
+  font-family: "Josefin Sans BoldItalic", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+#enterUsername {
+  align-self: flex-end;
+  margin-top: -1rem;
+}
+
+#submitUsername {
+  z-index: 1;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.winner {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  margin: auto;
+  background-color: #55608E;
+  border-radius: .6rem;
+  padding: .3rem;
+  width: 80%;
+  height: 20vh;
+}
+
+.winner .botImg {
+  background-color: red;
+  width: 35%;
+  height: 5rem;
+}
+
+.winner .botText {
+  /* display: flex; */
+  flex: 0 0 1rem;
+  z-index: 5;
+  margin: .4rem;
+  align-self: center;
+  color: #FBE29E;
+  width: 50%;
+  font-size: 1rem;
+  font-family: "Josefin Sans BoldItalic", sans-serif;
+  height: 2rem;
+}
+
+.winner .playerScore {
+  /* display: flex; */
+  flex: 0 0 1rem;
+  width: 50%;
+  color: #FBE29E;
+}
+
+.purple-bg {
+    background-color: #55608E;
+}
+
+.newGameWhiteCon {
+  height: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: unset;
+  min-height: unset;
+  padding: unset;
+  overflow: hidden;
+}
+
+.newGameWhiteCon:last-of-type {
+  max-height: fit-content;
+}
+
+.newGameCon h2 {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newGameCon .backToMenuButton {
+  position: unset;
+  margin: 1rem auto;
+  height: 65px;
+}
+
+#inputUsername {
+  margin: 0 auto;
+  color: #5F193D;
+  background-color: #FCFCFB;
+  width: 100%;
+}
+
+.select-bots-form {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.botWidth {
+    min-width: calc((100% / 3) - 1rem);
+    border-radius: 15px;
+    margin: .5rem;
+}
+
+input[type='checkbox']:checked, input[type='checkbox'] {
+  display: none;
+}
