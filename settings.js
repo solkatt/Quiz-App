@@ -26,7 +26,7 @@ function checkUserSettings(){
 
     } else {
         settings.settingMaxNumber = parseInt(settingMaxNumberBox.value);
-        settingMaxNumberBox.value = settings.settingMaxNumber;
+        settingMaxNumberBox.value = settings.settingMaxNumber + "✔";
     } 
 
     if (timePressureButton.classList == "buttonClicked"){
