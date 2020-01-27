@@ -86,7 +86,7 @@ window.addEventListener('load', function () {
         if (2 > state.newGameState.selectedBots.length) {
             document.querySelector('.newGameCon p').textContent = 'Select at least 2 opponents.';
         }
-        else if (2 <= state.newGameState.selectedBots.length) {
+        else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
             if (document.querySelector('.newGameCon p')) {
                 document.querySelector('.newGameCon p').textContent = "";

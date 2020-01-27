@@ -44,15 +44,9 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
     secretNumber = getRandom(minNumber, maxNumber);
     state.gameplayState.secretNumber = secretNumber;
-    if (2 <= state.newGameState.selectedBots.length) {
+    if (3 <= state.newGameState.selectedBots.length) {
         turn = 0;
         minNumber = 1;
-        //checks local storage for a max value, if non set to 20
-        if ("maxNumber" in localStorage) {
-            maxNumber = parseInt(localStorage.getItem("maxNumber"));
-        } else {
-            maxNumber = 20;
-        }
         state.gameoverState.botContainer.innerHTML = "";
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
