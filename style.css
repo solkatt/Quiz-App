@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -103,8 +104,9 @@ p {
   padding-bottom: 20px;
 }
 
-#inputUsername, button, a {
+#inputUsername, button, a, .set-user-settings {
   color: #5F193D;
+  
 }
 
 h2, .checkUserGuess, #inputUsername {
@@ -146,7 +148,7 @@ p {
   width: 260px;
 }
 
-button {
+button, .set-user-settings {
   justify-content: center;
   background-color: #FBE29E;
   border: none;

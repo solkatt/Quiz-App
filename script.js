@@ -35,15 +35,6 @@ let previousGuess;
 
 
 let startButton = document.querySelector('#startgameButton');
-//NEED A IF STATEMENT SO ITS ONLY WORK IN THE GAME MODE
-/*
-document.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-     event.preventDefault();
-     checkUserGuess();
-    }
-});
-*/
 
 // start playing button in newGameState
 state.newGameState.startPlayingButton.addEventListener('click', () => {
@@ -68,13 +59,13 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     }
 })
 
-function init() {
-    //maxNumber = 20;
+function init(){
     turn = 0;
     minNumber = 1;
     //checks local storage for a max value, if non set to 20
-    if ("maxNumber" in localStorage) {
-        maxNumber = parseInt(localStorage.getItem("maxNumber"));
+    if ("settings" in localStorage){
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        maxNumber = parseInt(settings.settingMaxNumber);
     } else {
         maxNumber = 20;
     }
