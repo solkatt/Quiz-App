@@ -73,7 +73,6 @@ function clearOnWin(winner, winnerScore, scoreList) {
         }
     }
 
-    console.log(scoreList)
     state.gameplayState.stopTheGame = true;
     toggleClass(state.gameoverState, 'hide');
     state.newGameState.selectedBots.forEach(bot => {
@@ -115,7 +114,6 @@ function clearOnWin(winner, winnerScore, scoreList) {
             score.innerText = winnerScore;
             img.src = state.gameoverState.userAvatar;
             winnerText.append(playerText, score);
-            console.log(score)
             state.gameoverState.winnerDiv.append(img, winnerText);
         }
 
@@ -131,7 +129,6 @@ function clearOnWin(winner, winnerScore, scoreList) {
 
 function printSelectBotsCon() {
     let allBots = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
-    console.log(getUserAvatar())
     allBots.forEach(bot => {
         let botDiv = document.createElement('div');
         botDiv.classList.add(bot, 'botWidth');

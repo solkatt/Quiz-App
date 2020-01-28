@@ -18,7 +18,6 @@ function selectBots(selectedBot, i) {
     // add selected bot value (bot name) to array of selected bots
     if (selectedBot.checked == true) {
         state.newGameState.selectedBots.push(selectedBot.value);
-        console.log(state.newGameState.selectedBots)
     }
     // remove any doubles, just in case
     else if (selectedBot.value == selectedBot) {
