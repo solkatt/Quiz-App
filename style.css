@@ -43,7 +43,7 @@ body {
 }
 
 .whiteContainer .rules {
-  height: 3900px;
+  height: 390px;
 }
 
 .whiteContainer .settings {
@@ -82,10 +82,14 @@ h2 {
   border-radius: 20px 20px 0px 0px;
 }
 
-h2 {
+h3 {
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-bottom: 10px;
+  font-weight: 500;
+
 }
 
 p {
@@ -97,7 +101,7 @@ p {
   color: #5F193D;
 }
 
-h2, .checkUserGuess, #inputUsername {
+h2, h3, .checkUserGuess, #inputUsername {
   color: #FBE29E;
   background-color: #55608E;
 }
@@ -135,9 +139,10 @@ p {
   align-items: center;
   border-color: #5F193D; 
   border-radius: 10px;
-  font-size: 1.5em;
+  font-size: 1.4em;
   letter-spacing: 0.05px;
   width: 260px;
+  font-weight: 300;
 }
 
 button, .set-user-settings {
@@ -392,7 +397,6 @@ li{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* margin-top: 5vh; */
   z-index: 1;
   height: 75vh;
   width: 300px;
@@ -555,10 +559,11 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 
 @media only screen and (min-height: 600px) {
   h2 {
-    margin-top: 14vh;
-  }
-
-  .gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
     margin-top: 10vh;
   }
+
+  h3 {
+    margin-top: 110px;
+  }
+
 }
