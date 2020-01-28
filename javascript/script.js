@@ -256,11 +256,11 @@ function displayOutput(player, guess, result){
             swapText.innerHTML = "Gissa högre: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa högre");
             break;
-        case "too low":
+        case "too high":
             swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
-        case "too high":
+        case "too low":
             swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
             break;
