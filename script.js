@@ -1,5 +1,4 @@
 /**
- * 
  * @param {Number} secretNumber - the random number that players try to figure out
  * @param {Number} minNumber - the smallest number in the guessing range
  * @param {Number} maxNumber - the largest number in the guessing range
@@ -7,7 +6,6 @@
  * @param {Number} guess - a players guess
  * @param {Number} botTimer - delays the bots answers
  */
-
 let secretNumber;
 let minNumber;
 let maxNumber;
@@ -15,27 +13,34 @@ let turn;
 let guess;
 let botTimer;
 
-/**
- * Sparar spelare och botars poäng under spelomgången.
- */
+/** 
+ * @param {Array}  scoreList - Saves players and bots scores to an array
+*/
 let scoreList; 
-/**
- * Sparar spelarens poäng, till för highscore.
- */
+/** 
+* @param {Number} playerScore - Saves the players score, useful for highscore
+*/
 let playerScore;
-/**
- *  Sparar antal gissningar för varje spelare/bot
- */
-let numberOfGuesses;
-/**
- * Sparar tidigare gissningar.
- */
+/** 
+ * @param {Number} totalGuess - Saves total number of guesses in a match, for game-over
+*/
+let totalGuess;
+/** 
+ * @param {Number} previousGuess - Saves previous guesses
+*/
 let previousGuess;
-
+/** 
+ * @param {Number} numberOfGuesses - Saves number of guesses for each player and bot 
+*/
+let numberOfGuesses;
+/** 
+ * @param {Number} timer - Saves how long it took to guess. 
+*/
 let timer;
 
-//Ha kvar var användbart for calculateScores()
-//let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
+
+
+
 
 
 let startButton = document.querySelector('#startgameButton');
@@ -251,6 +256,8 @@ function checkResult(player, guess){
 }
 
 function displayOutput(player, guess, result, timer){
+    totalGuess ++;
+    console.log(totalGuess)
     let bots = state.newGameState.selectedBots;
     //swaps pictures och text
     let swapText = document.getElementById("display-text");
