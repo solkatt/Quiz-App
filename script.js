@@ -67,8 +67,6 @@ function init(){
     setSettingValues();
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
-
-    addEventListenerToCheckbox();
 }
 
 window.addEventListener('load', init);
