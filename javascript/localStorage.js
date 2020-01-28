@@ -105,7 +105,6 @@ function updateHighScore(userScore){
             index = i + 1;   
         }
     }
-    console.log(index + ' is the place to splice')
     highScore.splice(index, 0, userScore);
     saveUserScoreToLocalStorage(highScore);
 }  
