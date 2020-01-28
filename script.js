@@ -258,7 +258,7 @@ function displayOutput(player, guess, result) {
             // display(player + " gissade rätt: " + guess);
             playerScore = scoreList[0];
             printBotGuess(player, guess, result);
-            clearOnWin(player, playerScore);
+            clearOnWin(player, playerScore, scoreList);
             console.log(playerScore + " playerScore")
             console.log(scoreList + " scoreList")
             break;

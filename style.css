@@ -66,6 +66,7 @@ body {
   flex-wrap: nowrap;
   background-color: #FBE29E;
   width: 60px;
+  max-height: 2rem;
 }
 
 h2 {
@@ -290,7 +291,7 @@ input:checked + .slider:before {
     margin: .3rem;
 }
 
-.botText {
+.botText:not(.winner .botText) {
   font-family: 'Josefin Sans Bold';
   font-size: .8rem;
   display: flex;
@@ -435,44 +436,6 @@ button {
   z-index: 1;
   margin: 0 auto;
   padding: 0;
-}
-
-.winner {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  margin: auto;
-  background-color: #55608E;
-  border-radius: .6rem;
-  padding: .3rem;
-  width: 80%;
-  height: 20vh;
-}
-
-.winner .botImg {
-  background-color: red;
-  width: 35%;
-  height: 5rem;
-}
-
-.winner .botText {
-  /* display: flex; */
-  flex: 0 0 1rem;
-  z-index: 5;
-  margin: .4rem;
-  align-self: center;
-  color: #FBE29E;
-  width: 50%;
-  font-size: 1rem;
-  font-family: "Josefin Sans BoldItalic", sans-serif;
-  height: 2rem;
-}
-
-.winner .playerScore {
-  /* display: flex; */
-  flex: 0 0 1rem;
-  width: 50%;
-  color: #FBE29E;
 }
 
 .purple-bg {
