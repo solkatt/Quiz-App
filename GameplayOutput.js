@@ -11,7 +11,6 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    state.gameplayState.numberRange.classList.add('textshadow');
     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
 }
 
@@ -67,10 +66,19 @@ function printBotGuess(player, guess, result) {
     }
 }
 
-function clearOnWin(winner, winnerScore) {
+function clearOnWin(winner, winnerScore, scoreList) {
+    for (let i = 0; i < scoreList.length; i++) {
+        if (scoreList[i] == 0 || scoreList[i] == "0") {
+            scoreList.splice(i, 1);
+        }
+    }
+
     state.gameplayState.stopTheGame = true;
     toggleClass(state.gameoverState, 'hide');
     state.newGameState.selectedBots.forEach(bot => {
+        
+        let winnerText = document.createElement('div');
+
         let score = document.createElement('p');
         score.classList.add('playerScore');
 
@@ -101,23 +109,26 @@ function clearOnWin(winner, winnerScore) {
         }
 
         else if ("Du" === winner) {
-            playerText.innerText = "[username]";
+            playerText.innerText = state.gameoverState.userName;
+            playerText.classList.remove('botText');
             score.innerText = winnerScore;
-            console.log(score)
-            state.gameoverState.winnerDiv.append(img, playerText, score);
+            img.src = state.gameoverState.userAvatar;
+            winnerText.append(playerText, score);
+            state.gameoverState.winnerDiv.append(img, winnerText);
         }
 
         else if (bot === winner) {
             playerText.innerText = bot + " won!";
+            playerText.classList.remove('botText');
             score.innerText = winnerScore;
-            state.gameoverState.winnerDiv.append(img, playerText, winnerScore);
+            winnerText.append(playerText, score);
+            state.gameoverState.winnerDiv.append(img, winnerText);
         }
     })
 }
 
 function printSelectBotsCon() {
     let allBots = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
-    
     allBots.forEach(bot => {
         let botDiv = document.createElement('div');
         botDiv.classList.add(bot, 'botWidth');
@@ -156,4 +167,12 @@ function printSelectBotsCon() {
         state.newGameState.selectBotsForm.append(botDiv);
     })
 
+}
+
+function getUserAvatar() {
+    return './assets/userAvatars/user' + randomAvatarNum() + '.svg'
+}
+
+function randomAvatarNum() {
+    return Math.floor(Math.random() * 6) + 1;
 }

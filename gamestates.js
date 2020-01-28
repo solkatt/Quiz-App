@@ -56,6 +56,8 @@ let state = {
     gameoverState: {
         container: document.querySelector('.gameoverCon'),
         hide: true,
+        userName: undefined,
+        userAvatar: 0,
         yellowContainer: document.querySelector('.gameoverCon .yellowContainer'),
         botContainer: document.querySelector('.gameover-display-bots'),
         winnerDiv: document.querySelector('.winner')
@@ -83,6 +85,7 @@ window.addEventListener('load', function () {
     })
     // start button
     state.menuState.startButton.addEventListener('click', () => {
+        state.gameoverState.userAvatar = getUserAvatar();
         toggleClass(state.newGameState, 'hide');
         state.newGameState.selectBotsForm.innerHTML = "";
         printSelectBotsCon();
@@ -90,6 +93,7 @@ window.addEventListener('load', function () {
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
+        state.gameoverState.userName = gatherUsername();
         if (2 > state.newGameState.selectedBots.length) {
             document.querySelector('.newGameCon p').textContent = 'Select at least 3 opponents.';
         }
@@ -111,6 +115,7 @@ window.addEventListener('load', function () {
             state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
                 div.innerHTML = "";
             })
+            state.gameplayState.botContainer.innerHTML = "";
             // empty array of user selected bots
             state.newGameState.selectedBots.length = 0;
             // reset checkboxes to unchecked
