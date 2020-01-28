@@ -278,11 +278,11 @@ function displayOutput(player, guess, result) {
             printBotGuess(player, guess, result);
             break;
         case "too high":
-            swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
+            // swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
         case "too low":
-            swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
+            // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
             break;
         case "wait":

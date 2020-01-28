@@ -11,7 +11,6 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    state.gameplayState.numberRange.classList.add('textshadow');
     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
 }
 
