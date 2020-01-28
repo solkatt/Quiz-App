@@ -12,6 +12,11 @@ let minNumber;
 let maxNumber;
 let turn;
 let guess;
+let isGameRunning = false;
+var isWaiting = false;
+var isRunning = false;
+var seconds = 10;
+var countdownTimer;
 
 /**
  * Sparar spelare och botars poäng under spelomgången.
@@ -43,7 +48,30 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     totalGuess = 0;
     numberOfGuesses= [0, 0, 0, 0, 0, 0, 0];
     secretNumber = getRandom(minNumber, maxNumber);
+    isGameRunning = true
 })
+if (isGameRunning = true){
+function GameTimer() {
+    var minutes = Math.round((seconds - 30) / 60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+    document.getElementById('waiting_time').innerHTML = minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        isRunning = true;
+        
+        if (finalCountdown) {
+            clearInterval(countdownTimer);
+        }
+
+    } else {
+        isWaiting = true;
+        seconds--;
+    }
+}
+countdownTimer = setInterval(GameTimer, 1000);
+}
 
 function init(){
     turn = 0;
@@ -63,6 +91,7 @@ function init(){
     addEventListenerToCheckbox();
 }
 
+
 window.addEventListener('load', init);
 
 //randomly assigns a number
@@ -81,7 +110,10 @@ function checkUserGuess(){
     let stopTheGame = false;
     turn = turn + 1;
 
-    if (isNaN(guess)){
+    if (isNaN(guess) && timeLimit == 0){
+        stopTheGame = false
+    }
+    else if (isNaN(guess)){
         stopTheGame = true;
     }
     calculateScore(secretNumber, guess, player, maxNumber, minNumber);
