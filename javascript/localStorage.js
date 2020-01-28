@@ -49,9 +49,9 @@ function showHighScore(placeForHighscore, userScore){
 
 function removeOldHighScore(olClassName){
     let ol = document.querySelector(olClassName);
-while( ol.firstChild ){
-    ol.removeChild(ol.firstChild );
-} 
+    while( ol.firstChild ){
+        ol.removeChild(ol.firstChild );
+    } 
 }
  
 
