@@ -462,42 +462,47 @@ button {
 }
 
 .winner {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  margin: auto;
-  background-color: #55608E;
-  border-radius: .6rem;
-  padding: .3rem;
-  width: 80%;
-  height: 20vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    background-color: #55608E;
+    border-radius: .6rem;
+    padding: 1rem;
+    width: 80%;
+    font-size: 1.3rem;
+    height: fit-content;
+    z-index: 19;
 }
 
-.winner .botImg {
-  background-color: red;
-  width: 35%;
-  height: 5rem;
-}
+.winner div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: #FBE29E;
+      justify-content: center;
+  }
 
-.winner .botText {
-  /* display: flex; */
-  flex: 0 0 1rem;
-  z-index: 5;
-  margin: .4rem;
-  align-self: center;
-  color: #FBE29E;
-  width: 50%;
-  font-size: 1rem;
-  font-family: "Josefin Sans BoldItalic", sans-serif;
-  height: 2rem;
-}
+  .winner .botImg {
+    padding: 0;
+    margin: 0;
+    width: 35%;
+    /* height: 5rem; */
+  }
+  
+  .winner p:first-of-type {
+    color: #FBE29E;
+    font-family: "Josefin Sans BoldItalic", sans-serif;
+  }
 
-.winner .playerScore {
-  /* display: flex; */
-  flex: 0 0 1rem;
-  width: 50%;
-  color: #FBE29E;
-}
+  .winner p {
+      padding: .2rem;
+  }
+  
+  .winner .playerScore {
+    width: 50%;
+    color: #FBE29E;
+  }
 
 .purple-bg {
     background-color: #55608E;
