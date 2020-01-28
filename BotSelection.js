@@ -1,6 +1,7 @@
 function addEventListenerToCheckbox() {
+    state.newGameState.botCheckboxes = document.querySelectorAll('.newGameCon input[type="checkbox"]');
     // add event listener to bot checkboxes
-    for (let i = 0; i < state.newGameState.botCheckboxes.length; i++) {
+    for (let i = 0; i < 6; i++) {
         const checkbox = state.newGameState.botCheckboxes[i];
         checkbox.addEventListener('change', () => {
             selectBots(checkbox, i);
