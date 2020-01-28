@@ -56,13 +56,9 @@ body {
 
 .yellowContainer {
   background-color: #FBE29E;
-  /* position: absolute; */
   margin: auto;
+  margin-top: 5vh;
   z-index: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 300px;
   height: 500px;
   border-radius: 20px;
@@ -135,7 +131,9 @@ p {
 }
 
 #inputUsername {
-  /* background-color: #5F193D; */
+  justify-content: center;
+  align-items: center;
+  border-color: #5F193D; 
   border-radius: 10px;
   font-size: 1.5em;
   letter-spacing: 0.05px;
@@ -149,7 +147,7 @@ button, .set-user-settings {
   text-decoration: none;
   font-size: 1.2em;
   font-weight: 700;
-  margin: 4px 2px;
+  margin: 8px 2px;
   cursor: pointer;
   border-radius: 10px;
   transition-duration: 0.4s;
@@ -183,6 +181,7 @@ a {
   position: absolute;
   bottom: 3vh;
   align-items: center;
+  margin: 1rem auto;
 }
 
 .enterUsername{
@@ -271,6 +270,8 @@ ol{
 
 li{
   padding: 0.5rem 0.2rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
 }
 
 
@@ -391,12 +392,12 @@ li{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* margin-top: 5vh; */
   z-index: 1;
-  height: 80vh;
+  height: 75vh;
   width: 300px;
   min-height: 400px;
   max-height: 500px;
-  margin: 0 auto;
 }
 
 .user-guess-div {
@@ -555,5 +556,9 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 @media only screen and (min-height: 600px) {
   h2 {
     margin-top: 14vh;
+  }
+
+  .gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
+    margin-top: 10vh;
   }
 }
