@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./gameoverstate.css">
     <!-- <link rel="stylesheet" href="./GameplayOutput.css"> -->
     <!-- <link rel="stylesheet" href="mobileStyle.css"> -->
-    <link rel="stylesheet" href="desktopStyle.css">
+    <!-- <link rel="stylesheet" href="desktopStyle.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
     <title>Numbers</title>
     <script defer src="gamestates.js" type="text/javascript"></script>
@@ -28,23 +28,22 @@
         <div class="title">
             <img alt="Title" src="./assets/title.svg" style="z-index: 5; width: 230px; margin: -2.5rem 0 -4.5rem 0;">
         </div>
-        <button id="startgameButton" type="button" value="Start Game">Start Game</button>
-        <button id="rulesButton" type="button" value="Rules">Rules</button>
-        <button id="hightScoreButton" type="button" value="Hightscore">Highscore</button>
-        <button id="settingsButton" type="button" value="Settings">Settings</button>
+        <div class="menuCon startMenu">
+            <button id="startgameButton" type="button" value="Start Game">Start Game</button>
+            <button id="rulesButton" type="button" value="Rules">Rules</button>
+            <button id="hightScoreButton" type="button" value="Hightscore">Highscore</button>
+            <button id="settingsButton" type="button" value="Settings">Settings</button>
+        </div>
     </div>
 
-    <!-- HETTE TIDIGARE "usernameCon" -->
     <div class="newGameCon container hide">
         <h2>Choose 3 opponents</h2>
         <div class="newGameWhiteCon">
-                <!-- Code inserted from JS -->
+            <!-- Code inserted from JS -->
             <form name="Select Bots form" class="select-bots-form">
                 <!-- Code inserted from JS -->
             </form>
-        </div>
-        <h2>Enter your name:</h2>
-        <div class="newGameWhiteCon">
+            <!-- <h2>Enter your name:</h2> -->
             <div class="enterUsername">
                 <input type="text" name="inputUsername" id="inputUsername" placeholder="Enter your name here...">
                 <button id="submitUsername">Start playing!</button>
@@ -79,13 +78,11 @@
 
     <div class="highScoreCon container hide">
         <h2>Highscore</h2>
-        <div class="highScoreContainer whiteContainer">           
+        <div class="highScoreContainer whiteContainer">
             <ol class="highScore">
                 <!--HIGHSCORE INSERTED FROM JS-->
             </ol>
-            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
-
         <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
@@ -113,18 +110,19 @@
     <div class="settingsCon container hide">
 
         <h2>Settings</h2>
-        <div class="whiteContainer">
+        <div class=" settings whiteContainer">
             <form class="settings-input" action="javascript:void(0);">
                 <button id="showOpponentsButton" type="button" value="Show opponents:">Show opponents:
                     <span>on</span></button>
                 <div class="settingRangeContainer">
-                    <button id="rangeButton" type="button" value="Level">Highest Nr:</button>
+                    <button id="rangeButton" type="button" value="Level">Highest nr:</button>
                     <input type="text" placeholder="Max Range: 20" maxlength="3"
                         onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
                 </div>
-                <button id="timePressureButton" type="button" value="Time pressure:">Time pressure: <span>on</span></button>
+                <button id="timePressureButton" type="button" value="Time pressure:">Time pressure:
+                    <span>on</span></button>
                 <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
-                <input type="button" value="OK" class="set-user-settings">
+                <input type="button" value="Save settings" class="set-user-settings">
             </form>
             <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>

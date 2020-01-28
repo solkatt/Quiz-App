@@ -1,4 +1,8 @@
 /* Gameplay output */
+h2 .display-text {
+  border-radius: 0;
+}
+
 .display-text, .display-text span {
     z-index: 5;
     transition: all 1000ms ease-in-out;

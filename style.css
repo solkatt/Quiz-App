@@ -32,27 +32,33 @@ body {
   width: 320px;
   height: 200px;
   background-color: #55608E;
-
 }
 
 .whiteContainer, .newGameWhiteCon {
   background-color: #FCFCFB;
   max-width: 100vw;
-  height: 360px;
   padding: 25px;
   margin: 0;
   border-radius: 0 0px 20px 20px;
 }
 
+.whiteContainer .rules {
+  height: 3900px;
+}
+
+.whiteContainer .settings {
+  height: 360px;
+}
+
+.whiteContainer .highScoreContainer {
+  height: 300px;
+}
+
 .yellowContainer {
   background-color: #FBE29E;
-  /* position: absolute; */
   margin: auto;
+  margin-top: 5vh;
   z-index: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 300px;
   height: 500px;
   border-radius: 20px;
@@ -84,8 +90,8 @@ h2 {
 }
 
 p {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  /* padding-top: 20px; */
+  /* padding-bottom: 20px; */
 }
 
 #inputUsername, button, a, .set-user-settings {
@@ -122,12 +128,16 @@ p {
   align-items: center;
   justify-content: center;
   margin: auto;
+  margin-top: 30px;
 }
 
 #inputUsername {
-  background-color: #5F193D;
+  justify-content: center;
+  align-items: center;
+  border-color: #5F193D; 
   border-radius: 10px;
   font-size: 1.5em;
+  letter-spacing: 0.05px;
   width: 260px;
 }
 
@@ -138,36 +148,29 @@ button, .set-user-settings {
   text-decoration: none;
   font-size: 1.2em;
   font-weight: 700;
-  margin: 4px 2px;
+  margin: 8px 2px;
   cursor: pointer;
   border-radius: 10px;
   transition-duration: 0.4s;
 }
 
 button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton {
-  width: 260px;
+  width: 250px;
   height: 65px;
 }
 
 #rangeButton{
   width: 160px;
-  margin: 0 20px 0 -20px;
 }
 
 .set-user-maxNumber{
-  color: #5F193D;
+  background-color: #FBE29E;
   width: 80px;
-  font-size: 0.8em;
-  font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 700;
   height: 63px;
   border-radius: 10px;
   text-align: center;
-}
-
-.settingRangeContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 a {
@@ -177,7 +180,9 @@ a {
 
 .backToMenuButton {
   position: absolute;
-  bottom: 20px;
+  bottom: 3vh;
+  align-items: center;
+  margin: 1rem auto;
 }
 
 .enterUsername{
@@ -252,6 +257,24 @@ input:checked + .slider:before {
   color: #5F193D;
   background-color: #55608E;
 }
+
+ol{
+  padding: 1.5rem;
+  font-size: 2em;
+  color: #55608E;
+}
+
+.highScoreListItem{
+  display:flex;
+  justify-content: space-between;
+}
+
+li{
+  padding: 0.5rem 0.2rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
 
 /* Gameplay output */
 .display-text, .display-text span {
@@ -354,12 +377,12 @@ input:checked + .slider:before {
   display: flex;
 }
 
-.gameCon .backToMenuButton, .gameoverCon .backToMenuButton {
+/* .gameCon .backToMenuButton, .gameoverCon .backToMenuButton {
   position: unset;
   padding: unset;
   margin: 0 auto;
-  margin-bottom: 2vh;
-}
+  margin-bottom: 3vh;
+} */
 
 .gameCon.container, .gameoverCon.container, .newGameCon.container {
   height: 100vh;
@@ -370,12 +393,12 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* margin-top: 5vh; */
   z-index: 1;
-  height: 80vh;
+  height: 75vh;
   width: 300px;
-  min-height: 450px;
+  min-height: 400px;
   max-height: 500px;
-  margin: 0 auto;
 }
 
 .user-guess-div {
@@ -435,6 +458,7 @@ button {
 #submitUsername {
   z-index: 1;
   margin: 0 auto;
+  margin-bottom: 15px;
   padding: 0;
 }
 
@@ -443,18 +467,12 @@ button {
 }
 
 .newGameWhiteCon {
-  height: unset;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: unset;
-  min-height: unset;
+  min-height: 400px;
   padding: unset;
   overflow: hidden;
-}
-
-.newGameWhiteCon:last-of-type {
-  max-height: fit-content;
 }
 
 .newGameCon h2 {
@@ -474,7 +492,7 @@ button {
   margin: 0 auto;
   color: #5F193D;
   background-color: #FCFCFB;
-  width: 100%;
+  width: 90%;
 }
 
 .select-bots-form {
@@ -491,4 +509,19 @@ button {
 
 input[type='checkbox']:checked, input[type='checkbox'] {
   display: none;
+}
+
+
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (min-height: 600px) {
+  h2 {
+    margin-top: 14vh;
+  }
+
+  .gameCon .yellowContainer, .gameoverCon .yellowContainer, .newGameWhiteCon {
+    margin-top: 10vh;
+  }
 }
