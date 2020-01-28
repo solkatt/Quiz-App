@@ -110,7 +110,7 @@ function checkUserGuess(){
         stopTheGame = true;
     } else {
         let previousGuess = guess;
-        checkResult(player, guess);
+        checkResult(player, guess, timer);
     }
 
     //stops the bots from guessing if the player wins
@@ -143,7 +143,7 @@ function botGuesses(player){
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win", timer);
                 } else {
-                checkResult(player, guess);
+                checkResult(player, guess, timer);
             }
             break;
         case "LowBert": 
@@ -159,7 +159,7 @@ function botGuesses(player){
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win", timer);
                 } else {
-                checkResult(player, guess);
+                checkResult(player, guess, timer);
             }
             break;
         case "RandomBert":
@@ -179,7 +179,7 @@ function botGuesses(player){
                     displayOutput(player, guess, "win", timer);
 
                     } else {
-                    checkResult(player, guess);
+                    checkResult(player, guess, timer);
             }
             break;
         case "HighBert": 
@@ -196,7 +196,7 @@ function botGuesses(player){
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win", timer);
                 } else {
-                checkResult(player, guess);
+                checkResult(player, guess, timer);
             }
             break;
         case "DumbBert":
@@ -210,10 +210,10 @@ function botGuesses(player){
             //If DumbBert guesses right it istead guesses the highest number
             if (secretNumber == guess){
                 guess = maxNumber;
-                checkResult(player, guess);
+                checkResult(player, guess, timer);
                 
             } else {
-                checkResult(player, guess);
+                checkResult(player, guess, timer);
             }
             
             break;
@@ -237,21 +237,20 @@ function botGuesses(player){
 function checkResult(player, guess){
     if(guess > secretNumber && guess > maxNumber){
         //keeps deliberatly wrong guesses from confusing the bots
-        displayOutput(player, guess, "too low");
+        displayOutput(player, guess, "too low", timer);
     } else if(guess > secretNumber){
-        displayOutput(player, guess, "lower");
+        displayOutput(player, guess, "lower", timer);
     } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
         //keeps deliberatly wrong guesses from confusing the bots
-        displayOutput(player, guess, "too high");
+        displayOutput(player, guess, "too high", timer);
     } else if(guess < secretNumber) {
-        displayOutput(player, guess, "higher");
+        displayOutput(player, guess, "higher", timer);
     } else {
-        displayOutput(player, guess, "error");
+        displayOutput(player, guess, "error", timer);
     }
 }
 
 function displayOutput(player, guess, result, timer){
-    console.log(timer)
     let bots = state.newGameState.selectedBots;
     //swaps pictures och text
     let swapText = document.getElementById("display-text");
