@@ -196,7 +196,7 @@ a {
 .enterUsername{
   position: relative;
   margin: auto;
-  top: 250px;
+  /*top: 250px;*/
   right: 0;
   bottom: 50px;
   left: 0;
@@ -264,4 +264,11 @@ input:checked + .slider:before {
 .buttonClicked{
   color: #5F193D;
   background-color: #55608E;
+}
+
+
+.botDescription {
+  margin: 0em;
+  padding: 0em;
+  font-size: 0.9rem;
 }
