@@ -1,5 +1,5 @@
 function addEventListenerToCheckbox() {
-    state.newGameState.botCheckboxes = document.querySelectorAll('.newGameCon .botWidth input');
+    state.newGameState.botCheckboxes = document.querySelectorAll('.newGameCon input[type="checkbox"]');
     console.log(state.newGameState.botCheckboxes)
     // add event listener to bot checkboxes
     for (let i = 0; i < 6; i++) {
