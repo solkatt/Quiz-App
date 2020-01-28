@@ -5,6 +5,7 @@
  * @param {Number} maxNumber - the largest number in the guessing range
  * @param {Number} turn - the number of turns that the game has taken
  * @param {Number} guess - a players guess
+ * @param {Number} botTimer - delays the bots answers
  */
 
 let secretNumber;
@@ -12,6 +13,7 @@ let minNumber;
 let maxNumber;
 let turn;
 let guess;
+let botTimer;
 
 /**
  * Sparar spelare och botars poäng under spelomgången.
@@ -79,6 +81,7 @@ function checkUserGuess(){
     guess = parseInt(document.getElementById("user-guess")["0"].value);
     let player = "Du";
     let stopTheGame = false;
+    botTimer = 0;
     turn = turn + 1;
 
     if (isNaN(guess)){
@@ -113,10 +116,16 @@ function checkUserGuess(){
     }
 }
 
+
+function delayBotGuesses() {
+
+}
+
 //switch that lets the bots make a guess
 function botGuesses(player){
     switch (player) {
         case "AverageBert":
+            botTimer = botTimer + 500;
             guess = Math.floor((maxNumber - minNumber)/2 + minNumber);
             player = "AverageBert";
             calculateScore(secretNumber, guess, player, maxNumber, minNumber);
@@ -128,6 +137,7 @@ function botGuesses(player){
             break;
         case "LowBert": 
             player = "LowBert";
+            botTimer = botTimer + 2000;
             if (secretNumber == minNumber){
                 guess = minNumber;
             } else {
@@ -150,6 +160,7 @@ function botGuesses(player){
                 guess = Math.floor(Math.random()*((maxNumber-1) - (minNumber+1))+(minNumber+1));
             }
             player = "RandomBert";
+            botTimer = botTimer + 1500;
             calculateScore(secretNumber, guess, player, maxNumber, minNumber);
                 if (secretNumber == guess) {
                     displayOutput(player, guess, "win");
@@ -160,6 +171,7 @@ function botGuesses(player){
             break;
         case "HighBert": 
             player = "HighBert";
+            botTimer = botTimer + 500;
             if (secretNumber == maxNumber){
                 guess = maxNumber;
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber);
@@ -175,6 +187,7 @@ function botGuesses(player){
             break;
         case "DumbBert":
             player = "DumbBert";
+            botTimer = botTimer + 1000;
             //Unlike randombert, dumbert can guess already guessed guesses
             //This is to hide if it guesses right
             guess = Math.floor(Math.random()*(maxNumber - minNumber)+minNumber);
@@ -191,6 +204,7 @@ function botGuesses(player){
             break;
         case "SmartBert": 
             player = "SmartBert";
+            botTimer = botTimer + 3000;
             if(turn <= 2){
                 guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber);
@@ -199,7 +213,6 @@ function botGuesses(player){
             } else {
                 displayOutput(player, guess, "win");
             }
-            
             break;
     }
 }
@@ -256,11 +269,11 @@ function displayOutput(player, guess, result){
             swapText.innerHTML = "Gissa högre: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa högre");
             break;
-        case "too low":
+        case "too high":
             swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             display( player + " gissade " + guess + ", gissa mycket lägre");
             break;
-        case "too high":
+        case "too low":
             swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             display(player + " gissade " + guess + ", gissa mycket högre");
             break;
@@ -277,6 +290,11 @@ function displayOutput(player, guess, result){
 
 //Just for checking the tests easier
 function display(textToDisplay){
+    setTimeout(function() {displayDelay(textToDisplay);}, botTimer);
+}
+
+function displayDelay(textToDisplay){
+    console.log(textToDisplay);
     const displayResult = document.getElementById("guessingList")
     const p = document.createElement("p");
     displayResult.append(p);
