@@ -4,7 +4,7 @@
 function printGameplay(minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
     printSelectedBots();
-    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber)
+    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber);
 }
 
 /**
@@ -52,7 +52,12 @@ function printSelectedBots() {
  * @param {number} guess - the player's guess as a number.
  * @param {string} result - the result from the player's guess.
  */
-function printBotGuess(player, guess, result) {
+function printBotGuess(player, guess, result, minNumber, maxNumber) {
+        setTimeout(function() {printBotGuessDelay(player, guess, result, minNumber, maxNumber);}, botDelay);
+}
+
+function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
+    updateNumberRange(minNumber, maxNumber);
     if (player != "Du") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
@@ -63,28 +68,48 @@ function printBotGuess(player, guess, result) {
     }
 }
 
+/**
+ * 
+ * @param {string} winner The winner name as string.
+ * @param {number} winnerScore The winner's score.
+ * @param {Array<number>} scoreList List of all player's scores.
+ */
 function clearOnWin(winner, winnerScore, scoreList) {
-    for (let i = 0; i < scoreList.length; i++) {
-        if (scoreList[i] == 0 || scoreList[i] == "0") {
-            scoreList.splice(i, 1);
-        }
+    if ("settings" in localStorage) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        maxNumber = parseInt(settings.settingMaxNumber);
+        updateNumberRange(minNumber, maxNumber);
     }
 
     state.gameplayState.stopTheGame = true;
     toggleClass(state.gameoverState, 'hide');
-    state.newGameState.selectedBots.forEach(bot => {
 
-        let winnerText = document.createElement('div');
+    removeOldHighScore('.gameoverCon .highScore');
+    showHighScore('.gameoverCon .highScore');
+
+    let winnerText = document.createElement('div');
+
+    let highscoreLis = document.querySelectorAll('.gameoverCon .highScore li');
+    for (let i = 0; i < highscoreLis.length; i++) {
+        const highscore = highscoreLis[i];
+        if (i == 3 || i == 4) {
+            highscoreLis.item(i).remove();
+        }
+    }
+
+    for (let i = 0; i < state.newGameState.selectedBots.length; i++) {
+        const bot = state.newGameState.selectedBots[i];
 
         let score = document.createElement('p');
         score.classList.add('playerScore');
 
-        if (bot != winner) {
-            score.innerText = "[score]";
-        }
-
         let img = document.createElement('img');
         img.classList.add('botImg');
+
+
+        if (bot == "Du" && winner != "Du") {
+            img.src = state.gameoverState.userAvatar;
+        }
 
         if (bot != "Du") {
             img.src = './assets/' + bot + '.svg';
@@ -97,29 +122,56 @@ function clearOnWin(winner, winnerScore, scoreList) {
         let botDiv = document.createElement('div');
 
         if (bot != winner) {
+            if (isNaN(scoreList[i]) || scoreList[i] == undefined) {
+                score.innerText = 0;
+            }
+            else {
+                score.innerText = scoreList[i];
+            }
+
             botDiv.classList.add('botDiv', bot);
+            console.log(state.newGameState.selectedBots)
             if (state.newGameState.selectedBots.length > 4) {
                 botDiv.classList.add('moreThanThreeBots');
+                if (!state.gameoverState.winnerHeading.classList.contains('moreThanThreeBots')) {
+                    state.gameoverState.winnerHeading.classList.add('moreThanThreeBots');
+                }
             }
+
+            else {
+                if (state.gameoverState.winnerHeading.classList.contains('moreThanThreeBots')) {
+                    state.gameoverState.winnerHeading.classList.remove('moreThanThreeBots');
+                }
+            }
+
             botDiv.append(img, playerText, score);
             state.gameoverState.botContainer.append(botDiv);
-        } else if ("Du" === winner) {
+        }
+
+        else if ("Du" === winner) {
+            state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
+            playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
-            playerText.classList.remove('botText');
             score.innerText = winnerScore;
             img.src = state.gameoverState.userAvatar;
             winnerText.append(playerText, score);
             state.gameoverState.winnerDiv.append(img, winnerText);
-        } else if (bot === winner) {
-            playerText.innerText = bot + " won!";
-            playerText.classList.remove('botText');
+        }
+
+        else if (bot === winner) {
+            state.gameoverState.winnerHeading.innerHTML = winner + " guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
+            playerText.classList.replace('botText', 'winnerName');
+            playerText.innerText = bot;
             score.innerText = winnerScore;
             winnerText.append(playerText, score);
             state.gameoverState.winnerDiv.append(img, winnerText);
         }
-    })
+    }
 }
 
+/**
+ * Creates html-elements and prints out each bot the user has selected.
+ */
 function printSelectBotsCon() {
     let allBots = ["AverageBert", "LowBert", "RandomBert", "HighBert", "DumbBert", "SmartBert"];
     allBots.forEach(bot => {
@@ -151,10 +203,6 @@ function printSelectBotsCon() {
         playerText.classList.add('botText');
         playerText.innerText = bot;
 
-        // let img = document.createElement('img');
-        // img.classList.add('botImg');
-        // img.src = './assets/' + bot + '.svg';
-
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
@@ -178,10 +226,16 @@ function printSelectBotsCon() {
 
 }
 
+/**
+ * @return {string} Returns string with random avatar for the user.
+ */
 function getUserAvatar() {
     return './assets/userAvatars/user' + randomAvatarNum() + '.svg'
 }
 
+/**
+ * @return {number} Returns random number between 1-6.
+ */
 function randomAvatarNum() {
     return Math.floor(Math.random() * 6) + 1;
 }
