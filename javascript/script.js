@@ -316,9 +316,16 @@ function displayOutput(player, guess, result, timer){
         case "win":
             let i = bots.indexOf(player);
             if (player === "You") {
+                if(timer === 0)  {
+                    numberOfGuesses[0]++;
+                    scoreList[0] += 100;
+                    scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]);
+                }
+                else {
                 numberOfGuesses[0]++;
                 scoreList[0] += 100 * timer;
                 scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]);
+                }
             } else if(player !== "You"){
                 numberOfGuesses[i] ++;
                 scoreList[i] += 100 * timer;
