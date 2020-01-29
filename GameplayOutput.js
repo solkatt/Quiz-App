@@ -4,7 +4,7 @@
 function printGameplay(minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
     printSelectedBots();
-    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber)
+    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber);
 }
 
 /**
@@ -54,7 +54,12 @@ function printSelectedBots() {
  * @param {number} guess - the player's guess as a number.
  * @param {string} result - the result from the player's guess.
  */
-function printBotGuess(player, guess, result) {
+function printBotGuess(player, guess, result, minNumber, maxNumber) {
+        setTimeout(function() {printBotGuessDelay(player, guess, result, minNumber, maxNumber);}, botDelay);
+}
+
+function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
+    updateNumberRange(minNumber, maxNumber);
     if (player != "Du") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');

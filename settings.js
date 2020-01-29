@@ -53,11 +53,11 @@ function setSettingValues(){
     if ("settings" in localStorage){
         settingMaxNumberBox.value = settings.settingMaxNumber;
         if(settings.settingShowGuessesOn == false){
-            timePressureButton.querySelector('span') = "off";
+            timePressureButton.querySelector('span').innerHTML = "off";
             timePressureButton.classList.add("buttonClicked");
         }
         if(settings.settingTimePressureOn == false){
-            showOpponentsButton.querySelector('span') = "off";
+            showOpponentsButton.querySelector('span').innerHTML = "off";
             showOpponentsButton.classList.add("buttonClicked");
         }
     } else {
