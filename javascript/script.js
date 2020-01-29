@@ -114,7 +114,7 @@ function checkUserGuess() {
     //players guess
     // old version. I hope the new version works!! guess = parseInt(document.getElementsByClassName("user-guess")["0"].value);
     guess = parseInt(parseInt(document.querySelector(".user-guess input[type='text']").value));
-    let player = "Du";
+    let player = "You";
     let stopTheGame = false;
     if (isNaN(guess) || undefined) {
         guess = minNumber + 1;
@@ -313,11 +313,11 @@ function displayOutput(player, guess, result, timer){
     switch (result) {
         case "win":
             let i = bots.indexOf(player) + 1;
-            if (player === "Du") {
+            if (player === "You") {
                 numberOfGuesses[0]++;
                 scoreList[0] += 100 * timer;
                 scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]);
-            } else if(player !== "Du"){
+            } else if(player !== "You"){
                 numberOfGuesses[i] ++;
                 scoreList[i] += 100 * timer;
                 scoreList[i] = Math.round(scoreList[i]/numberOfGuesses[i]);
@@ -387,7 +387,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         let partOfDistance = guessDistanceTowardsSecret / distanceSecretMax //How much progress have your guess led to in finding the correct answer
         let scoreToAdd = Math.round(partOfDistance * 100 * timer); //Multiply with 100 for "Better looking" score, Multiple with 3 as a decoy if we show scores.
         
-        if (player === "Du") {
+        if (player === "You") {
             numberOfGuesses[0]++;
             scoreList[0] += scoreToAdd;
             scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]); //Delar på antal gissningar man gjort så att man inte får fördel av att fått gisa fler gånger
@@ -407,7 +407,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         let partOfDistance = guessDistanceFromSecret / distanceSecretMin;
         let scoreToAdd = Math.round(partOfDistance * 100 * timer);  //Multiplicera med 100 för snyggare score och 3 som decoy avrunda till heltal
         
-        if (player === "Du") {
+        if (player === "You") {
             numberOfGuesses[0]++;
             scoreList[0] += scoreToAdd;
             scoreList[0] = Math.round(scoreList[0]/numberOfGuesses[0]); //Delar på antal gissningar man gjort så att man inte får fördel av att fått gisa fler gånger
