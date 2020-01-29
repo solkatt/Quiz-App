@@ -133,7 +133,8 @@ function clearOnWin(winner, winnerScore, scoreList) {
             }
 
             botDiv.classList.add('botDiv', bot);
-            if (state.newGameState.selectedBots.length > 3) {
+            console.log(state.newGameState.selectedBots)
+            if (state.newGameState.selectedBots.length > 4) {
                 botDiv.classList.add('moreThanThreeBots');
                 if (!state.gameoverState.winnerHeading.classList.contains('moreThanThreeBots')) {
                     state.gameoverState.winnerHeading.classList.add('moreThanThreeBots');

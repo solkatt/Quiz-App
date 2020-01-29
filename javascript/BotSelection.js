@@ -1,7 +1,7 @@
 /**
  * Add event listeners to bot images in bot selection div.
  */
-function addEventListenerToCheckbox() {
+function addEventListenerToBots() {
     state.newGameState.botCheckboxes = document.querySelectorAll('.newGameCon input[type="checkbox"]');
 
     // add event listener to bot checkboxes

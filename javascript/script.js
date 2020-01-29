@@ -51,8 +51,8 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     playerScore = 0;
     totalGuess = 0;
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
+    secretNumber = getRandom(minNumber, maxNumber);
     if (3 <= state.newGameState.selectedBots.length) {
-        secretNumber = getRandom(minNumber, maxNumber);
         state.gameplayState.secretNumber = secretNumber;
         turn = 0;
         minNumber = 1;
@@ -68,7 +68,6 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
         printGameplay(minNumber, maxNumber);
     }
     timer = 5;
-    secretNumber = getRandom(minNumber, maxNumber);
     let downloadTimer = setInterval(()=> {
         timer--;
         
