@@ -159,11 +159,11 @@ function printSelectBotsCon() {
         playerText.classList.add('botText');
         playerText.innerText = bot;
 
-        // let img = document.createElement('img');
-        // img.classList.add('botImg');
-        // img.src = './assets/' + bot + '.svg';
+        // let botDescriptionText = document.createElement('p');
+        // botDescriptionText.classList.add('botDescriptionText');
+        // botDescriptionText.innerText = blablabla;
 
-        botDiv.append(label, input);
+        botDiv.append(label, input, playerText);
         state.newGameState.selectBotsForm.append(botDiv);
     })
 

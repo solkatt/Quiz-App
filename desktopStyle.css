@@ -1,0 +1,6 @@
+@media only screen and (min-height: 600px) and (min-width:500px) {
+      .container {
+            width: 450px;
+            height: 700px;
+      }
+}

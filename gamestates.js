@@ -99,8 +99,8 @@ window.addEventListener('load', function () {
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
-                state.newGameState.selectedBots.unshift("Du");
-            
+            state.newGameState.selectedBots.unshift("Du");
+
             toggleClass(state.gameplayState, 'hide');
         }
     })
@@ -119,13 +119,12 @@ window.addEventListener('load', function () {
             // empty array of user selected bots
             state.newGameState.selectedBots.length = 0;
             // reset checkboxes to unchecked
-            state.newGameState.botCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            })
+// state.newGameState.botCheckboxes.forEach(checkbox => {
+//     checkbox.checked = false;
+// })
             toggleClass(state.menuState, 'hide');
         })
     }
-
     //fixes input with enter button
     document.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {

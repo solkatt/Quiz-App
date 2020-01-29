@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./fontfaces.css">
-    <!-- <link rel="stylesheet" href="./gameoverstate.css"> -->
+    <link rel="stylesheet" href="./gameoverstate.css">
     <!-- <link rel="stylesheet" href="./GameplayOutput.css"> -->
     <!-- <link rel="stylesheet" href="mobileStyle.css"> -->
-    <!-- <link rel="stylesheet" href="desktopStyle.css"> -->
+    <link rel="stylesheet" href="desktopStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
     <title>Numbers</title>
     <script defer src="gamestates.js" type="text/javascript"></script>
@@ -23,10 +23,9 @@
 </head>
 
 <body>
-    <!-- <div class="boxContainer"> -->
     <div class="menuCon startMenu">
         <div class="title">
-            <img alt="Title" src="./assets/title.svg" style="z-index: 5; width: 230px; margin: -2.5rem 0 -4.5rem 0;">
+            <img alt="Title" src="./assets/title.svg">
         </div>
         <div class="menuCon startMenu">
             <button id="startgameButton" type="button" value="Start Game">Start Game</button>
@@ -39,7 +38,6 @@
     <div class="newGameCon container hide">
         <h2>Choose 3 opponents</h2>
         <div class="newGameWhiteCon">
-            <!-- Code inserted from JS -->
             <form name="Select Bots form" class="select-bots-form">
                 <!-- Code inserted from JS -->
             </form>
@@ -52,28 +50,34 @@
         <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
+
+
+
+
+
+
     <div class="gameCon container hide">
         <div class="yellowContainer">
             <div class="display-bots">
-                <!-- Code inserted from JS -->
+                <!-- Code inserted from JS -->                  
             </div>
             <!-- <div id="guessingList"></div> ONLY USED FOR TESTING! -->
-            <h2 id="display-text">Guess between <span></span></h2>
+            <h1 id="display-text">Guess between <span></span></h1>
             <div class="user-guess-div"></div>
             <form class="user-guess" action="javascript:void(0);">
-                <input type="text" placeholder="Your guess">
-                <input type="button" value="Guess" class="checkUserGuess">
+                <input class="yourGuessInput" type="text" placeholder="Enter your guess">
+                <input class="yourGuessSubmit" type="button" value="Guess!" class="checkUserGuess">
             </form>
+            <!-- <button class="backToMenuButton" type="button" value="index">Back to menu</button> -->
         </div>
-        <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
     <div class="gameoverCon container hide">
         <div class="yellowContainer">
             <div class="gameover-display-bots"></div>
             <div class="winner"></div>
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
-        <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
     <div class="highScoreCon container hide">
@@ -82,8 +86,8 @@
             <ol class="highScore">
                 <!--HIGHSCORE INSERTED FROM JS-->
             </ol>
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
-        <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
     <div class="rulesCon container hide">
@@ -91,20 +95,16 @@
 
         <div class="rules whiteContainer">
             <p>
-                Welcome to Numbers, a version of the popular game Higher or Lower. The aim of the game is to
-                guess
-                the randomly selected integer between two given integers. <br><br>
+                Welcome to Numbers, a version of the popular game Higher or Lower. 
+                The aim of the game is to guess the randomly selected integer between two given integers. <br><br>
                 You do this by entering an integer and the computer answers with “higher” if the integer you
-                entered
-                is higher than the randomized integer or “lower” if the given integer is lower than the
-                randomized
-                integer. <br><br>
-                When you start the game, you get a choice of how many and which bots you want to battle against.
-                As
-                well as a short description about how each of the bots work.
+                entered is higher than the randomized integer or “lower” if the given integer is lower than the
+                randomized integer. <br><br>
+                Before you start the game, you get a choice of how many and which bots you want to battle against.
+                You can read a short description about how each of the bots work below.
             </p>
+            <button class="backToMenuButton" type="button" value="index">Back to menu</button>
         </div>
-        <button class="backToMenuButton" type="button" value="index">Back to menu</button>
     </div>
 
     <div class="settingsCon container hide">
