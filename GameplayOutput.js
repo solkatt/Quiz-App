@@ -141,6 +141,9 @@ function printSelectBotsCon() {
         label.setAttribute('for', bot);
         label.append(img);
 
+        let botDesc = document.createElement('label')
+        botDesc.setAttribute('for', bot)
+
         let input = document.createElement('input');
         input.setAttribute('type', 'checkbox');
         input.setAttribute('name', bot);
@@ -155,6 +158,8 @@ function printSelectBotsCon() {
             }
         })
 
+        
+
         let playerText = document.createElement('p');
         playerText.classList.add('botText');
         playerText.innerText = bot;
@@ -166,6 +171,7 @@ function printSelectBotsCon() {
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
+
 
 }
 
