@@ -124,6 +124,8 @@ window.addEventListener('load', function () {
             state.newGameState.botCheckboxes.forEach(checkbox => {
                 checkbox.checked = false;
             })
+            isThreeBotsSelected = true;
+            showCorrectStartbuttonText();
             toggleClass(state.menuState, 'hide');
         })
     }

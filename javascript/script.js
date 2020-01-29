@@ -410,7 +410,7 @@ function calculateScore(secretNumber, guess, player, maxNumber, minNumber) {
  */
 function showCorrectStartbuttonText(){
     if(!isThreeBotsSelected){
-        document.querySelector('#submitUsername').textContent = "That's not 3...";      
+        document.querySelector('#submitUsername').textContent = "That's not 3 bots...";      
     }
     else{
         document.querySelector('#submitUsername').textContent = "Start playing!";
