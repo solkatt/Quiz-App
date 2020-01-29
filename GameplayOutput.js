@@ -11,7 +11,16 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    let showGuesses = true;
+    let settings
+    if ("settings" in localStorage){
+            settings = JSON.parse(localStorage.getItem("settings"));
+        }
+    if (settings.settingShowGuessesOn == true){
+        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    } else {
+        state.gameplayState.numberRange.innerHTML =  "1 - " + settings.settingMaxNumber;;
+    }
 }
 
 /**
@@ -61,6 +70,18 @@ function printBotGuess(player, guess, result, minNumber, maxNumber) {
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
     if (player != "Du") {
+        let showGuesses = true;
+
+        // changes if setting has picked settingShowGuessesOn == false
+        if ("settings" in localStorage){
+                let settings = JSON.parse(localStorage.getItem("settings"));
+                showGuesses = settings.settingShowGuessesOn;
+            }
+     
+        if (showGuesses == false){
+            guess = "...";
+        }
+
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
         botGuessElement.innerText = guess;

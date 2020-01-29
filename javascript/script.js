@@ -244,7 +244,7 @@ function botGuesses(player) {
             if(turn <= 2){
                 guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
-                displayOutput(player, guess, "wait", timer);
+                displayOutput(player, guess, "waits", timer);
                 
             } else {
                 displayOutput(player, guess, "win", timer);
@@ -277,6 +277,7 @@ function displayOutput(player, guess, result, timer){
     //swaps pictures och text
     // let swapText = document.getElementById("display-text");
     //checks result and put it into words and pictures
+
     switch (result) {
         case "win":
             let i = bots.indexOf(player) + 1;
