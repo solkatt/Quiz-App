@@ -45,12 +45,14 @@ let state = {
         hide: true,
         stopTheGame: true,
         secretNumber: 0,
+        maxNumber: 0,
+        minNumber: 0,
         yellowContainer: document.querySelector('.gameCon .yellowContainer'),
         guessButton: document.querySelector('.checkUserGuess'),
         botContainer: document.querySelector('.display-bots'),
         guessList: document.querySelector('.yellowContainer #guessingList'),
         userGuess: document.querySelector('.user-guess-div'),
-        guessInput: document.querySelector('.user-guess > input'),
+        guessInput: document.querySelector('.user-guess > input[type="text"]'),
         numberRange: document.querySelector('#display-text span')
     },
     gameoverState: {
@@ -58,8 +60,11 @@ let state = {
         hide: true,
         userName: undefined,
         userAvatar: 0,
+        quitButton: document.querySelector('.quitButton'),
+        restartButton: document.querySelector('.restartButton'),
         yellowContainer: document.querySelector('.gameoverCon .yellowContainer'),
         botContainer: document.querySelector('.gameover-display-bots'),
+        winnerHeading: document.querySelector('.winnerH2'),
         winnerDiv: document.querySelector('.winner')
     },
     rulesState: {
@@ -76,8 +81,8 @@ window.addEventListener('load', function () {
     // highscore button
     state.menuState.highscoreButton.addEventListener('click', () => {
         toggleClass(state.highscoreState, 'hide');
-        removeOldHighScore('.highScore');
-        showHighScore('.highScore');
+        removeOldHighScore('.highScoreContainer .highScore');
+        showHighScore('.highScoreContainer .highScore');
     })
     // settings button
     state.menuState.settingsButton.addEventListener('click', () => {
@@ -85,17 +90,20 @@ window.addEventListener('load', function () {
     })
     // start button
     state.menuState.startButton.addEventListener('click', () => {
+        // generate random avatar for the user
         state.gameoverState.userAvatar = getUserAvatar();
+        // show newGameState
         toggleClass(state.newGameState, 'hide');
-        state.newGameState.selectBotsForm.innerHTML = "";
+        // print container where the user makes bot selection
         printSelectBotsCon();
-        addEventListenerToCheckbox();
+        // add event listener to bot images
+        addEventListenerToBots();
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
         state.gameoverState.userName = gatherUsername();
-        if (2 > state.newGameState.selectedBots.length) {
-            document.querySelector('.newGameCon p').textContent = 'Select at least 3 opponents.';
+        if (2 >= state.newGameState.selectedBots.length) {
+            // document.querySelector('.newGameCon p').textContent = 'Select at least 3 opponents.';
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
@@ -111,21 +119,9 @@ window.addEventListener('load', function () {
     // adds event listeners to all back-to-menu-buttons
     for (const button of state.backToMenuButton) {
         button.addEventListener('click', () => {
-            // empty gameplay outputs
-            state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
-                div.innerHTML = "";
-            })
-            state.gameplayState.botContainer.innerHTML = "";
-            // empty array of user selected bots
-            state.newGameState.selectedBots.length = 0;
-            // reset checkboxes to unchecked
-            state.newGameState.botCheckboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            })
-            toggleClass(state.menuState, 'hide');
+            clearBackToMenu();
         })
     }
-
     //fixes input with enter button
     document.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
@@ -137,8 +133,7 @@ window.addEventListener('load', function () {
             }
         }
     });
-
-    // add event listners to buttons in settingsState
+    // add event listeners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
         if (state.settingsState.buttons.hasOwnProperty(key)) {
             const button = state.settingsState.buttons[key];
@@ -147,19 +142,22 @@ window.addEventListener('load', function () {
             })
         }
     }
-
-    state.settingsState.buttons.showBotsGuessButton.addEventListener('click', () => {
-        // vad som händer när man klickar på show bots previous guesses
+    // add event listener to restart-button in gameoverState
+    state.gameoverState.restartButton.addEventListener('click', () => {
+        state.newGameState.selectedBots.splice(0, 1);
+        clearOnRestart();
+        toggleClass(state.newGameState, 'hide');
     })
-
-    state.settingsState.buttons.timePressureButton.addEventListener('click', () => {
-        // vad som händer när man klickar på tidpressknappen
+    // add event listener to quit-button in gameoverState
+    state.gameoverState.quitButton.addEventListener('click', () => {
+        clearOnQuit();
+        toggleClass(state.menuState, 'hide');
     })
 })
 
 /**
  * Toggle visibility of html-element.
- * @param {(HTMLDivElement|HTMLButtonElement)}  gameState The selected game state recieved from event listener.
+ * @param {(HTMLDivElement|HTMLButtonElement)}  gameState The selected game state or button recieved from event listener.
  */
 function toggleClass(gameState, classToToggle) {
     // show selected game state if it is hidden
@@ -199,7 +197,7 @@ function hide(gameState, classToToggle) {
 }
 
 /**
- * Toggle classes on buttons and change innerhtml.
+ * Toggle classes on buttons in settings and change innerhtml.
  * @param {HTMLButtonElement} button - the button as html element.
  * @param {string} classToToggle - the class to toggle.
  */
@@ -212,4 +210,60 @@ function changeButtonStyle(button, classToToggle) {
         button.querySelector('span').innerHTML = 'off';
         button.classList.add(classToToggle);
     }
+}
+
+/**
+ * Clear html-elements when user presses restart-button in gameoverState.
+ * Keeps bot selection and name input. The inputs can be changed.
+ */
+function clearOnRestart() {
+    // empty gameplay outputs
+    state.gameoverState.winnerHeading.innerHTML = "";
+    state.gameplayState.botContainer.innerHTML = "";
+    state.gameplayState.userGuess.innerHTML = "";
+    state.gameplayState.guessInput.value = "";
+    state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
+        div.innerHTML = "";
+    })
+}
+
+/**
+ * Clear html-elements when user selects quit-button in gameoverState.
+ */
+function clearOnQuit() {
+    // empty array of user selected bots
+    state.newGameState.selectedBots = [];
+    // empty gameplay outputs
+    state.gameoverState.winnerHeading.innerHTML = "";
+    state.newGameState.selectedBots.forEach(bot => {
+        if (bot == "Du") {
+            state.newGameState.selectedBots.splice(bot, 1);
+        }
+    })
+    document.querySelector('#inputUsername').value = "";
+    state.gameplayState.userGuess.innerHTML = "";
+    state.gameplayState.guessInput.value = "";
+    state.gameplayState.botContainer.innerHTML = "";
+    state.newGameState.selectBotsForm.innerHTML = "";
+    state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
+        div.innerHTML = "";
+    })
+}
+
+/**
+ * Clears html-elements when the user goes back.
+ */
+function clearBackToMenu() {
+    // empty array of user selected bots
+    state.newGameState.selectedBots = [];
+    // empty gameplay outputs
+    state.newGameState.botCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+    document.querySelector('#inputUsername').value = "";
+    state.gameoverState.winnerHeading.innerHTML = "";
+    state.newGameState.selectBotsForm.innerHTML = "";
+    state.gameplayState.botContainer.innerHTML = "";
+    // reset checkboxes to unchecked
+    toggleClass(state.menuState, 'hide');
 }

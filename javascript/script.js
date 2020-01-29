@@ -53,16 +53,18 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     totalGuess = 0;
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
     secretNumber = getRandom(minNumber, maxNumber);
-    state.gameplayState.secretNumber = secretNumber;
-    if (2 <= state.newGameState.selectedBots.length) {
-        if ("settings" in localStorage) {
-            let settings = JSON.parse(localStorage.getItem("settings"));
-            maxNumber = parseInt(settings.settingMaxNumber);
-            updateNumberRange(minNumber, maxNumber);
-        }
+    if (3 <= state.newGameState.selectedBots.length) {
+        state.gameplayState.secretNumber = secretNumber;
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
+        if ("settings" in localStorage) {
+            let settings = JSON.parse(localStorage.getItem("settings"));
+            maxNumber = parseInt(settings.settingMaxNumber);
+            state.gameplayState.maxNumber = maxNumber;
+            state.gameplayState.minNumber = minNumber;
+            updateNumberRange(minNumber, maxNumber);
+        }
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
     }
