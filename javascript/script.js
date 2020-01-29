@@ -314,7 +314,7 @@ function displayOutput(player, guess, result, timer){
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
-            let i = bots.indexOf(player) + 1;
+            let i = bots.indexOf(player);
             if (player === "You") {
                 numberOfGuesses[0]++;
                 scoreList[0] += 100 * timer;
@@ -396,7 +396,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         } else {
             bots.forEach(bot => {
                 if (player === bot) {
-                    let i = bots.indexOf(player) + 1
+                    let i = bots.indexOf(player);
                     numberOfGuesses[i]++;
                     scoreList[i] += scoreToAdd;
                     scoreList[i] = Math.round(scoreList[i]/numberOfGuesses[i]);
@@ -416,7 +416,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         }  else {
         bots.forEach(bot => {
             if (player === bot) {
-                let i = bots.indexOf(player) + 1
+                let i = bots.indexOf(player)
                 numberOfGuesses[i]++;
                 scoreList[i] += scoreToAdd;
                 scoreList[i] = Math.round(scoreList[i]/numberOfGuesses[i]);
@@ -425,4 +425,5 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         });
     } }
     // addHighScoreToLocalStorage();
+    console.log(scoreList + "Hur uppdateras scorelist")
 }
