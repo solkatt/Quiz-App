@@ -4,14 +4,14 @@
  * @param {Number} maxNumber - the largest number in the guessing range
  * @param {Number} turn - the number of turns that the game has taken
  * @param {Number} guess - a players guess
- * @param {Number} botTimer - delays the bots answers
+ * @param {Number} botDelay - the delay of bot output
  */
 let secretNumber;
 let minNumber;
 let maxNumber;
 let turn;
 let guess;
-let botTimer;
+let botDelay;
 
 /** 
  * @param {Array}  scoreList - Saves players and bots scores to an array
@@ -86,7 +86,6 @@ function init() {
     } else {
         maxNumber = 20;
     }
-
     setSettingValues();
     let previousGuess = maxNumber;
     secretNumber = getRandom(minNumber, maxNumber);
@@ -109,7 +108,7 @@ function checkUserGuess() {
     guess = parseInt(parseInt(document.querySelector(".user-guess input[type='text']").value));
     let player = "Du";
     let stopTheGame = false;
-    botTimer = 0;
+    botDelay = 0;
     turn = turn + 1;
 
     if (isNaN(guess)) {
@@ -133,30 +132,32 @@ function checkUserGuess() {
 
     //stops the bots from guessing if the player wins
     if (stopTheGame == false) {
-        // takes a guess for each bot
-        for (let bot of state.newGameState.selectedBots) {
-            if (guess == secretNumber) {
-                break;
-            } else {
-                botGuesses(bot);
-            }
-        }
+        // loops out for each bot
+        botLoop();
     }
 }
 
-
-function delayBotGuesses() {
-
+function botLoop(){
+    // takes a guess for each bot
+    let i = 0;
+    for (let bot of state.newGameState.selectedBots) {
+        if (guess == secretNumber) {
+            break;
+        } else {
+            i++;
+            botGuesses(bot);
+        }
+    }
 }
 
 //switch that lets the bots make a guess
 function botGuesses(player) {
     switch (player) {
         case "AverageBert":
-            botTimer = botTimer + 500;
-            timer = 4.5
+            timer = 2.5
             guess = Math.floor((maxNumber - minNumber) / 2 + minNumber);
             player = "AverageBert";
+            botDelay = botDelay + 2500;
             calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
             if (secretNumber == guess) {
                 displayOutput(player, guess, "win", timer);
@@ -166,12 +167,12 @@ function botGuesses(player) {
             break;
         case "LowBert":
             player = "LowBert";
-            botTimer = botTimer + 2000;
-            timer = 3;
-            if (secretNumber == minNumber){
+            timer = 4;
+            botDelay = botDelay + 1000;
+            if (secretNumber == minNumber) {
                 guess = minNumber;
             } else {
-                guess = minNumber+1;
+                guess = minNumber + 1;
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
             }
             if (secretNumber == guess) {
@@ -190,7 +191,7 @@ function botGuesses(player) {
                 guess = Math.floor(Math.random() * ((maxNumber - 1) - (minNumber + 1)) + (minNumber + 1));
             }
             player = "RandomBert";
-            botTimer = botTimer + 1500;
+            botDelay = botDelay + 1500;
             timer = 3.5
             calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
                 if (secretNumber == guess) {
@@ -202,9 +203,9 @@ function botGuesses(player) {
             break;
         case "HighBert":
             player = "HighBert";
-            botTimer = botTimer + 500;
-            timer = 4.5
-            if (secretNumber == maxNumber){
+            botDelay = botDelay + 1000;
+            timer = 4;
+            if (secretNumber == maxNumber) {
                 guess = maxNumber;
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
             } else {
@@ -219,8 +220,9 @@ function botGuesses(player) {
             break;
         case "DumbBert":
             player = "DumbBert";
-            botTimer = botTimer + 1000;
-            timer = 4
+            botDelay = botDelay + 500;
+            timer = 4.5;
+
             //Unlike randombert, dumbert can guess already guessed guesses
             //This is to hide if it guesses right
             guess = Math.floor(Math.random() * (maxNumber - minNumber) + minNumber);
@@ -237,7 +239,7 @@ function botGuesses(player) {
             break;
         case "SmartBert":
             player = "SmartBert";
-            botTimer = botTimer + 3000;
+            botDelay = botDelay + 3000;
             timer = 2
             if(turn <= 2){
                 guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
@@ -277,7 +279,7 @@ function displayOutput(player, guess, result, timer){
     //checks result and put it into words and pictures
     switch (result) {
         case "win":
-            let i = bots.indexOf(player) + 1
+            let i = bots.indexOf(player) + 1;
             if (player === "Du") {
                 numberOfGuesses[0]++;
                 scoreList[0] += 100 * timer;
@@ -301,8 +303,7 @@ function displayOutput(player, guess, result, timer){
             maxNumber = guess;
             // swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa lägre");
-            updateNumberRange(minNumber, maxNumber);
-            printBotGuess(player, guess, result);
+            printBotGuess(player, guess, result, minNumber, maxNumber);
             timer = 5;
             let downloadTimer = setInterval(()=> {
                 timer--;
@@ -317,7 +318,7 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = "Gissa högre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa högre");
             updateNumberRange(minNumber, maxNumber);
-            printBotGuess(player, guess, result);
+            printBotGuess(player, guess, result, minNumber, maxNumber);
             timer = 5;
             let downloadTimer2 = setInterval(()=> {
                 timer--;
@@ -350,9 +351,17 @@ function displayOutput(player, guess, result, timer){
                 }
               },1000);
             break;
-        case "wait":
+        case "too slow":
+            // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
+            // display(player + " gissade " + guess + ", gissa mycket högre");
+            updateNumberRange(minNumber, maxNumber);
+            printBotGuess(player, "--", result, minNumber, maxNumber);
+            break;
+        case "waits":
             // swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             // display(player + " väntar... ");
+            updateNumberRange(minNumber, maxNumber);
+            printBotGuess(player, "--", result, minNumber, maxNumber);
             timer = 5;
             let downloadTimer5 = setInterval(()=> {
                 timer--;
@@ -379,11 +388,6 @@ function displayOutput(player, guess, result, timer){
 
 //Just for checking the tests easier
 function display(textToDisplay){
-    setTimeout(function() {displayDelay(textToDisplay);}, botTimer);
-}
-
-function displayDelay(textToDisplay){
-    console.log(textToDisplay);
     const displayResult = document.getElementById("guessingList")
     const p = document.createElement("p");
     displayResult.append(p);

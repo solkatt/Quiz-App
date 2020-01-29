@@ -102,6 +102,7 @@ window.addEventListener('load', function () {
                 state.newGameState.selectedBots.unshift("Du");
             
             toggleClass(state.gameplayState, 'hide');
+            timePressure();
         }
     })
     // rules button
