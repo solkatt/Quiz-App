@@ -38,9 +38,7 @@ function printSelectedBots() {
             botText.classList.add('botText');
             botText.innerText = bot;
             botDiv.append(img, botText, botGuess, botResult);
-        }
-
-        else {
+        } else {
             botDiv.append(img, botGuess, botResult);
         }
 
@@ -60,8 +58,7 @@ function printBotGuess(player, guess, result) {
         let botResultElement = document.querySelector('.' + player + ' .botResult');
         botGuessElement.innerText = guess;
         botResultElement.innerText = result;
-    }
-    else if (player == "Du") {
+    } else if (player == "Du") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
     }
 }
@@ -76,7 +73,7 @@ function clearOnWin(winner, winnerScore, scoreList) {
     state.gameplayState.stopTheGame = true;
     toggleClass(state.gameoverState, 'hide');
     state.newGameState.selectedBots.forEach(bot => {
-        
+
         let winnerText = document.createElement('div');
 
         let score = document.createElement('p');
@@ -106,18 +103,14 @@ function clearOnWin(winner, winnerScore, scoreList) {
             }
             botDiv.append(img, playerText, score);
             state.gameoverState.botContainer.append(botDiv);
-        }
-
-        else if ("Du" === winner) {
+        } else if ("Du" === winner) {
             playerText.innerText = state.gameoverState.userName;
             playerText.classList.remove('botText');
             score.innerText = winnerScore;
             img.src = state.gameoverState.userAvatar;
             winnerText.append(playerText, score);
             state.gameoverState.winnerDiv.append(img, winnerText);
-        }
-
-        else if (bot === winner) {
+        } else if (bot === winner) {
             playerText.innerText = bot + " won!";
             playerText.classList.remove('botText');
             score.innerText = winnerScore;
@@ -149,8 +142,7 @@ function printSelectBotsCon() {
         botDiv.addEventListener('click', () => {
             if (input.checked == true) {
                 botDiv.classList.add('purple-bg');
-            }
-            else if (input.checked == false) {
+            } else if (input.checked == false) {
                 botDiv.classList.remove('purple-bg');
             }
         })
@@ -166,6 +158,23 @@ function printSelectBotsCon() {
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
+
+
+
+
+    let botInfoDiv = document.createElement('div');
+    botInfoDiv.setAttribute('id', 'botInfoDiv');
+    let botInfoToggle = document.createElement('h4');
+    botInfoToggle.setAttribute('id', 'botInfoToggle');
+    botInfoToggle.innerText = 'Read about the bots..';
+    botInfoDiv.appendChild(botInfoToggle);
+
+
+    botInfoToggle.addEventListener('click', toggleBotSelection);
+
+    state.newGameState.selectBotsForm.appendChild(botInfoDiv);
+
+
 
 }
 
