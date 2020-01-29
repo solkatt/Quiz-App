@@ -38,9 +38,7 @@ function printSelectedBots() {
             botText.classList.add('botText');
             botText.innerText = bot;
             botDiv.append(img, botText, botGuess, botResult);
-        }
-
-        else {
+        } else {
             botDiv.append(img, botGuess, botResult);
         }
 
@@ -65,8 +63,7 @@ function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
         let botResultElement = document.querySelector('.' + player + ' .botResult');
         botGuessElement.innerText = guess;
         botResultElement.innerText = result;
-    }
-    else if (player == "Du") {
+    } else if (player == "Du") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
     }
 }
@@ -197,8 +194,7 @@ function printSelectBotsCon() {
         botDiv.addEventListener('click', () => {
             if (input.checked == true) {
                 botDiv.classList.add('purple-bg');
-            }
-            else if (input.checked == false) {
+            } else if (input.checked == false) {
                 botDiv.classList.remove('purple-bg');
             }
         })
@@ -210,6 +206,23 @@ function printSelectBotsCon() {
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
+
+
+
+
+    let botInfoDiv = document.createElement('div');
+    botInfoDiv.setAttribute('id', 'botInfoDiv');
+    let botInfoToggle = document.createElement('h4');
+    botInfoToggle.setAttribute('id', 'botInfoToggle');
+    botInfoToggle.innerText = 'Read about the bots..';
+    botInfoDiv.appendChild(botInfoToggle);
+
+
+    botInfoToggle.addEventListener('click', toggleBotSelection);
+
+    state.newGameState.selectBotsForm.appendChild(botInfoDiv);
+
+
 
 }
 
