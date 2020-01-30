@@ -27,7 +27,7 @@ function updateNumberRange(minNumber, maxNumber) {
         state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
 
     }
-
+}
 /**
  * Prints user selected bots by creating DOM-elements.
  */
