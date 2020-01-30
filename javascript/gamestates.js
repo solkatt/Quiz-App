@@ -132,6 +132,19 @@ window.addEventListener('load', function () {
         button.addEventListener('click', () => {
         clearBackToMenu();
 
+            // empty gameplay outputs
+            state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
+                div.innerHTML = "";
+            })
+            state.gameplayState.botContainer.innerHTML = "";
+            // empty array of user selected bots
+            state.newGameState.selectedBots.length = 0;
+            // reset checkboxes to unchecked
+// state.newGameState.botCheckboxes.forEach(checkbox => {
+//     checkbox.checked = false;
+// })
+            toggleClass(state.menuState, 'hide');
+            clearBackToMenu();
         })
     }
     //fixes input with enter button
