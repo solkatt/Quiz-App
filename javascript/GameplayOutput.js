@@ -12,8 +12,8 @@ function printGameplay(minNumber, maxNumber) {
  */
 function updateNumberRange(minNumber, maxNumber) {
     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
-    if ("settings" in localStorage) {
-        let settings = JSON.parse(localStorage.getItem("settings"));
+    let settings = JSON.parse(localStorage.getItem("settings"));
+    if (!settings.settingShowGuessesOn){       
         settingMaxNumber = parseInt(settings.settingMaxNumber);
         state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
     } else {
