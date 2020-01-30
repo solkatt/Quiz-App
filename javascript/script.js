@@ -42,6 +42,8 @@ let timer;
  */
 let isThreeBotsSelected = true;
 
+let addEnter = true;
+
 //Ha kvar var användbart for calculateScores()
 //let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
@@ -54,9 +56,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     playerScore = 0;
     totalGuess = 0;
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
-    secretNumber = getRandom(minNumber, maxNumber);
     if (3 <= state.newGameState.selectedBots.length) {
-        state.gameplayState.secretNumber = secretNumber;
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
@@ -65,8 +65,9 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
             maxNumber = parseInt(settings.settingMaxNumber);
             state.gameplayState.maxNumber = maxNumber;
             state.gameplayState.minNumber = minNumber;
-            updateNumberRange(minNumber, maxNumber);
         }
+        secretNumber = getRandom(minNumber, maxNumber);
+        state.gameplayState.secretNumber = secretNumber;
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
     }
@@ -101,6 +102,7 @@ function getRandom(minNumber, maxNumber) {
 function addCheckUserGuessButton() {
     timer = 5;
     document.querySelector(".checkUserGuess").addEventListener("click", checkUserGuess);
+    addEnter = true;
     let downloadTimer = setInterval(()=> {
         timer--;
         if (timer === 0) {        
@@ -112,6 +114,7 @@ function addCheckUserGuessButton() {
 
 function removeUserGuessButton() {
     document.querySelector(".checkUserGuess").removeEventListener("click", checkUserGuess);
+    addEnter = false;
 }
 
 function checkUserGuess() {
@@ -136,8 +139,6 @@ function checkUserGuess() {
         //showWinner(scoreList, playerScore, numberOfGuesses[])
         displayOutput(player, guess, "win", timer);
         youWin = true;
-        //THIS FUNCTION CAN EASILY BE MOVED DEPENDING ON WHEN WE WANT TO TALLY UP AND SAVE FINAL SCORE IN LOCAL STORAGE:
-        addHighScoreToLocalStorage(gatherUsername(), playerScore);
         stopTheGame = true;
     } else {
         let previousGuess = guess;
@@ -300,12 +301,12 @@ function checkResult(player, guess) {
         //keeps deliberatly wrong guesses from confusing the bots
         displayOutput(player, guess, "too low", timer);
     } else if(guess > secretNumber){
-        displayOutput(player, guess, " guess lower", timer);
+        displayOutput(player, guess, "lower", timer);
     } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
         //keeps deliberatly wrong guesses from confusing the bots
         displayOutput(player, guess, "too high", timer);
     } else if(guess < secretNumber) {
-        displayOutput(player, guess, "guess higher", timer);
+        displayOutput(player, guess, "higher", timer);
     } else {
         displayOutput(player, guess, "error", timer);
     }
@@ -341,6 +342,7 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             // display(player + " gissade rätt: " + guess);
             playerScore = scoreList[0];
+            addHighScoreToLocalStorage(gatherUsername(), playerScore);
             state.gameoverState.scoreList = scoreList;
             let index = scoreList.indexOf(Math.max(...scoreList))
             let winnerScore = Math.max(...scoreList);
@@ -356,13 +358,14 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa lägre");
             printBotGuess(player, guess, result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "higher":
             minNumber = guess;
             // swapText.innerHTML = "Gissa högre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, guess, result, minNumber, maxNumber);
+
             break;
         case "too high":
             // swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
@@ -374,14 +377,14 @@ function displayOutput(player, guess, result, timer){
         case "too slow":
             // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa mycket högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "waits":
             // swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             // display(player + " väntar... ");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "error":
             // swapText.innerHTML = guess + " är inte en siffra " + minNumber + "-" + maxNumber;
@@ -400,12 +403,12 @@ function display(textToDisplay){
 
 function calculateScore (secretNumber, guess, player, maxNumber, minNumber, timer) {
     let bots = state.newGameState.selectedBots;
-    if (guess > secretNumber) {
+    
+    if (guess > secretNumber && guess <= maxNumber) {
         let distanceSecretMax = maxNumber - secretNumber; //Distance between highest possible number and correct answer
         let guessDistanceTowardsSecret = maxNumber - guess; //Distance guess has travelled towards correct answer
         let partOfDistance = guessDistanceTowardsSecret / distanceSecretMax //How much progress have your guess led to in finding the correct answer
         let scoreToAdd = Math.round(partOfDistance * 100 * timer); //Multiply with 100 for "Better looking" score, Multiple with 3 as a decoy if we show scores.
-        
         if (player === "You") {
             numberOfGuesses[0]++;
             scoreList[0] += scoreToAdd;
@@ -420,7 +423,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
                 }
             });
            }
-    } else if (guess < secretNumber) {
+    } else if (guess < secretNumber && guess >= minNumber) {
         let distanceSecretMin = secretNumber - minNumber; //Distance between lowest(minNumber) score and correct answer
         let guessDistanceFromSecret = guess - minNumber; //Distance between guess and right answer
         let partOfDistance = guessDistanceFromSecret / distanceSecretMin;

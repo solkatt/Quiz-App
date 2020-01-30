@@ -116,11 +116,7 @@
       font-size: 1.5rem;
       font-weight: 500;
     }
-    
-    p {
-      /* padding-top: 20px; */
-      /* padding-bottom: 20px; */
-    }
+
     
     button, a, .set-user-settings {
       color: #5F193D;
@@ -644,7 +640,7 @@
       }
     
       .title {
-            width: 100%;
+            width: 80%;
             max-width: 500px;
       }
     

@@ -196,7 +196,7 @@ function printSelectBotsCon() {
         input.setAttribute('name', bot);
         input.setAttribute('value', bot);
         input.setAttribute('id', bot);
-        img.addEventListener('click', () => {
+        botDiv.addEventListener('click', () => {
             if (input.checked == true) {
                 img.classList.add('purple-bg');
             } else if (input.checked == false) {
