@@ -300,12 +300,12 @@ function checkResult(player, guess) {
         //keeps deliberatly wrong guesses from confusing the bots
         displayOutput(player, guess, "too low", timer);
     } else if(guess > secretNumber){
-        displayOutput(player, guess, "lower", timer);
+        displayOutput(player, guess, " guess lower", timer);
     } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
         //keeps deliberatly wrong guesses from confusing the bots
         displayOutput(player, guess, "too high", timer);
     } else if(guess < secretNumber) {
-        displayOutput(player, guess, "higher", timer);
+        displayOutput(player, guess, "guess higher", timer);
     } else {
         displayOutput(player, guess, "error", timer);
     }
