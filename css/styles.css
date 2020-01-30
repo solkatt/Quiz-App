@@ -8,7 +8,7 @@
 body {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #5F193D;
-  background-image: url("./assets/NEW_background_pattern.svg");
+  background-image: url("../assets/NEW_background_pattern.svg");
   background-repeat: repeat;
   background-size: auto 18rem;
   width: 100%;
@@ -19,8 +19,11 @@ body {
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-height: 700px;
+  width: 90%;
+  max-height: 500px;
+  max-width: 500px;
 }
+
 
 .container {
   display: flex;
@@ -30,30 +33,27 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 300px;
-  max-height: 700px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .whiteContainer {
   background-color: #FCFCFB;
   width: 100%;
   padding: 22px;
-  height: 390px;
+  /* height: 390px; */
   margin: 0;
+  max-height: 380px;
   border-radius: 0 0px 20px 20px;
 }
 
-.whiteContainer .rules {
-  height: 390px;
-}
-
-.whiteContainer .settings {
+/* .whiteContainer .settings {
   height: 360px;
-}
+} */
 
-.whiteContainer .highScoreContainer {
+/* .whiteContainer .highScoreContainer {
   height: 300px;
-}
+} */
 
 .whiteContainer, .newGameWhiteCon {
   background-color: #FCFCFB;
@@ -69,7 +69,7 @@ body {
   margin-top: 5vh;
   z-index: 0;
   width: 100%;
-  height: 500px;
+  max-height: 500px;
   border-radius: 20px;
 }
 
@@ -77,19 +77,19 @@ body {
   width: 50px;
 }
 
-.botdiv {
+.botDiv {
   flex-wrap: nowrap;
   background-color: #FBE29E;
-  width: 60px;
+  /* width: 60px; */
+  align-items: center;
 }
 
 .title {
   z-index: 5;
-  width: 230px;
+  width: 90%;
   margin: 40px, auto;
   padding-top: 30px;
   padding-bottom: 30px;
-  margin-top: 10px;
 }
 
 h1 {
@@ -116,10 +116,6 @@ h3 {
   font-weight: 500;
 }
 
-p {
-  /* padding-top: 20px; */
-  /* padding-bottom: 20px; */
-}
 
 button, a, .set-user-settings {
   color: #5F193D;
@@ -141,120 +137,9 @@ p {
   align-items: center;
   justify-content: center;
   margin: auto;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-#botPresentation {
-  scroll-snap-type: mandatory;
-  scroll-snap-points-y: repeat(30rem);
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
   width: 100%;
-  height: 100%;
-  border-radius: 0 0 .5rem .5rem;
-  background-color: white;
-  transform: translate(0, 0);
-  z-index: 2;
-  position: relative;
 }
 
-.botProfilDiv {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  scroll-snap-align: start;
-}
-
-.botPhoto {
-  width: 75%;
-  transform: translate(0, 0%);
-  align-self: center;
-  padding: .5rem;
-  z-index: -1;
-}
-
-.botTitle {
-  margin: 0;
-  border-radius: 0;
-  margin-bottom: 1rem;
-}
-
-.botDescription {
-  font-size: 1rem;
-  padding: 1rem 1rem;
-  text-align: left;
-}
-
-/* ///////////////////// */
-
-.arrowDown {
-  color: rgba(73, 73, 73, 0.041);
-  position: absolute;
-  left: 50%;
-  top: 92%;
-  transform: translate(-50%, -50%);
-  animation: scrollBounce 2s infinite ease-in-out;
-}
-
-@keyframes scrollBounce {
-  0% {
-    transform: translate(-50%, -50%);
-  }
-  50% {
-    transform: translate(-50%, -20%);
-  }
-  100% {
-    transform: translate(-50%, -50%);
-  }
-}
-
-.toggleHide {
-  display: none;
-}
-
-#botInfoDiv {
-  width: 100%;
-  margin: auto;
-  margin-bottom: 4px;
-  color: #55608E;
-}
-
-#botInfoToggle {
-  text-align: center;
-  transition: transform 0.5s ease;
-}
-
-#botInfoToggle:hover {
-  color: #55608E;
-  cursor: pointer;
-  transform: scale(1.1);
-  transition: transform 0.5s ease;
-}
-
-/* //////////  X ////////////*/
-
-#closeDiv {
-  position: absolute;
-}
-
-.botCross {
-  position: fixed;
-  padding: .5rem;
-  cursor: pointer;
-  transition: transform 0.5s ease;
-  z-index: 10;
-}
-
-.botCross:hover {
-  color: #55608E;
-  transform: scale(1.1);
-  transition: transform 0.5s ease;
-}
 
 #inputUsername {
   justify-content: center;
@@ -265,7 +150,6 @@ p {
   border: none;
   padding: .5rem 1rem;
   height: 3rem;
-  /* z-index: 2; */
   margin: 0 auto;
   font-weight: 300;
   background-color: #FCFCFB;
@@ -289,20 +173,24 @@ button, .set-user-settings {
 }
 
 button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton {
-  width: 250px;
+  width: 80%;
+  max-width: 400px;
   height: 65px;
 }
 
 #rangeButton {
-  width: 160px;
+  width: 50%;
 }
 
 .set-user-maxNumber {
   background-color: white;
-  width: 80px;
+  color: #5F193D;
+  width: 30%;
+  margin-top: 12%;
+  margin-bottom: 8px;
   font-size: 1.5em;
   font-weight: 700;
-  height: 63px;
+  height: 65px;
   border-radius: 10px;
   text-align: center;
 }
@@ -313,12 +201,9 @@ a {
 }
 
 .backToMenuButton {
-  /* display:flex; */
   position: relative;
-  /* flex-direction: row; */
   /* bottom: 3vh; */
   align-items: center;
-  /* justify-content: flex-end; */
   margin: 1rem auto;
 }
 
@@ -420,6 +305,7 @@ li {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  max-height: 290px;
 }
 
 .display-bots>div, .gameover-display-bots>div {
@@ -431,20 +317,12 @@ li {
   width: calc((100% / 3) - .5rem);
 }
 
-.moreThanThreeBots {
-  min-width: calc((100% / 4) - 1.1rem);
-  max-width: calc((100% / 2) - 1.1rem);
-}
-
 .botImg {
   width: 80px;
   display: flex;
   justify-content: center;
   flex-direction: row;
   margin: 0 .3rem;
-}
-
-.newGameCon .botImg {
   margin: auto;
 }
 
@@ -467,13 +345,17 @@ li {
 } */
 
 .botGuess, .botResult {
-  margin: .4rem -.3rem -.3rem -.3rem;
+  margin-bottom: -.5rem;
   padding: 0;
   height: 1.5rem;
   display: flex;
   justify-content: center;
   font-family: 'Josefin Sans BoldItalic', sans-serif;
   font-size: 1.11rem;
+}
+
+.botGuess {
+  margin-top: -.5rem;
 }
 
 #guessingList {
@@ -488,11 +370,10 @@ li {
   margin: .5rem 1rem;
 }
 
-/* 
-.user-guess p {
-  margin: -.2rem 1rem;
-  padding: .2rem;
-} */
+
+.user-guess-div {
+  margin-bottom: .5rem;
+}
 
 .user-guess p:first-of-type {
   font-family: "Josefin Sans Bold", sans-serif;
@@ -503,6 +384,7 @@ li {
 .user-guess p:last-of-type {
   font-family: "Josefin Sans BoldItalic", sans-serif;
   font-size: 2rem;
+  font-weight: 900;
 }
 
 .user-guess-div p {
@@ -536,7 +418,7 @@ li {
   height: 75vh;
   width: 100%;
   min-height: 500px;
-  max-height: 600px;
+  /* max-height: 600px; */
 }
 
 .user-guess-div {
@@ -552,7 +434,7 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   border: none;
   text-align: center;
   margin-top: -1.5rem;
@@ -567,7 +449,7 @@ li {
   height: 3.5rem;
   z-index: 2;
   font-size: 1.1rem;
-  width: 170px;
+  width: 70%;
   text-align: center;
   font-family: "Josefin Sans BoldItalic", sans-serif;
 }
@@ -578,18 +460,29 @@ li {
   border: none;
   background-color: #55608E;
   color: #FBE29E;
-  padding: .5rem 1rem;
   margin: 1rem .7rem;
   height: 3.5rem;
   z-index: 2;
   font-size: 1.1rem;
-  width: 85px;
+  width: 30%;
   text-align: center;
   font-family: "Josefin Sans BoldItalic", sans-serif;
 }
 
 button {
   cursor: pointer;
+}
+
+.settingRangeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-input {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 #showOpponentsButton, #rangeButton, #rangeButtonInput, .set-user-settings {
@@ -603,51 +496,9 @@ button {
   padding: 0;
 }
 
-.winner {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: auto;
-  background-color: #55608E;
-  border-radius: .6rem;
-  padding: 1rem;
-  width: 80%;
-  font-size: 1.3rem;
-  height: fit-content;
-  z-index: 19;
-}
-
-.winner div {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  color: #FBE29E;
-  justify-content: center;
-}
-
-.winner .botImg {
-  padding: 0;
-  margin: 0;
-  width: 35%;
-  /* height: 5rem; */
-}
-
-.winner p:first-of-type {
-  color: #FBE29E;
-  font-family: "Josefin Sans BoldItalic", sans-serif;
-}
-
-.winner p {
-  padding: .2rem;
-}
-
-.winner .playerScore {
-  width: 50%;
-  color: #FBE29E;
-}
-
 .purple-bg {
   background-color: #55608E;
+  border-radius: 20px;
 }
 
 .newGameWhiteCon {
@@ -693,32 +544,70 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 
 .rulesText {
   line-height: 17px;
+  /* min-height: 456px;
+  max-height: 456px; */
 }
 
 /* MEDIA QUERIES */
 
 @media only screen and (min-height: 600px) {
   .boxContainer {
-    /* max-height: 900px; */
     width: 80%;
-    height: 450px;
   }
+
   .container {
     width: 100%;
-    height: 450px;
   }
+
   .whiteContainer {
     width: 100%;
-    height: 450px;
+    max-width: 500px;
+    min-height: 400px;
+    max-height: 500px;
   }
+
   .newGameWhiteCon {
     width: 100%;
-    height: 450px;
+    max-width: 500px;
+    min-height: 400px;
+    max-height: 500px;
   }
-    h2 {
+
+  .title {
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 500px;
+}
+  
+  h2 {
     margin-top: 8vh;
   }
-  h3 {
-    /* margin-top: 80px; */
+}
+
+
+
+@media only screen and (min-height: 600px) and (min-width:500px) {
+  .boxContainer {
+        width: 80%;
+  }
+
+  .container {
+        width: 100%;
+  }
+
+  .whiteContainer {
+        width: 100%;
+  }
+
+  .title {
+        width: 80%;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        max-width: 500px;
+  }
+
+  h2 {
+        font-size: 2.5rem;
   }
 }

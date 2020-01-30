@@ -8,7 +8,7 @@
 body {
   font-family: 'Josefin Sans', sans-serif;
   background-color: #5F193D;
-  background-image: url("./assets/New_background_pattern.svg");
+  background-image: url("./assets/NEW_background_pattern.svg");
   background-repeat: repeat;
   background-size: auto 18rem;
   width: 100%;
@@ -331,11 +331,16 @@ li {
 .botText {
   font-family: 'Josefin Sans Bold';
   font-size: .8rem;
+  color: #55608E;
   display: flex;
   justify-content: center;
   margin-top: -.1rem;
   padding: 0;
-}
+ }
+  
+ .purple-bg .botText {
+  color: #FBE29E;
+ }
 
 /* .botDescriptiontext {
   font-family: 'Josefin Sans Bold';

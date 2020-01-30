@@ -11,6 +11,7 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
+    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
     if ("settings" in localStorage) {
         let settings = JSON.parse(localStorage.getItem("settings"));
         settingMaxNumber = parseInt(settings.settingMaxNumber);
@@ -19,7 +20,6 @@ function updateNumberRange(minNumber, maxNumber) {
         state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
     }
 }
-
 /**
  * Prints user selected bots by creating DOM-elements.
  */
@@ -39,14 +39,11 @@ function printSelectedBots() {
         let botResult = document.createElement('p');
         botResult.classList.add('botResult');
 
-        if (state.newGameState.selectedBots.length > 3) {
             let botText = document.createElement('p');
             botText.classList.add('botText');
             botText.innerText = bot;
             botDiv.append(img, botText, botGuess, botResult);
-        } else {
-            botDiv.append(img, botGuess, botResult);
-        }
+        
 
         state.gameplayState.botContainer.append(botDiv);
     })
@@ -59,11 +56,11 @@ function printSelectedBots() {
  * @param {string} result - the result from the player's guess.
  */
 function printBotGuess(player, guess, result, minNumber, maxNumber) {
-        setTimeout(function() {printBotGuessDelay(player, guess, result, minNumber, maxNumber);}, botDelay);
+    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); updateNumberRange(minNumber, maxNumber); }, botDelay);
+    
 }
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
-    updateNumberRange(minNumber, maxNumber);
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
@@ -112,11 +109,11 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         img.classList.add('botImg');
 
 
-        if (bot == "You" && winner == "You") {
+        if (bot === "You") {
             img.src = state.gameoverState.userAvatar;
         }
 
-        if (bot != "You" && bot != "You") {
+        if (bot != "You") {
             img.src = './assets/' + bot + '.svg';
         }
 
@@ -155,7 +152,7 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         else if ("You" === winner) {
             "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score."
             state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + gatherUsername() + " got the highest score.";
-            img.src = state.gameoverState.userAvatar;
+            // img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
             score.innerText = winnerScore;
@@ -198,9 +195,9 @@ function printSelectBotsCon() {
         input.setAttribute('id', bot);
         botDiv.addEventListener('click', () => {
             if (input.checked == true) {
-                botDiv.classList.add('purple-bg');
+                img.classList.add('purple-bg');
             } else if (input.checked == false) {
-                botDiv.classList.remove('purple-bg');
+                img.classList.remove('purple-bg');
             }
         })
 
