@@ -396,12 +396,12 @@ function display(textToDisplay){
 
 function calculateScore (secretNumber, guess, player, maxNumber, minNumber, timer) {
     let bots = state.newGameState.selectedBots;
-    if (guess > secretNumber) {
+    
+    if (guess > secretNumber && guess <= maxNumber) {
         let distanceSecretMax = maxNumber - secretNumber; //Distance between highest possible number and correct answer
         let guessDistanceTowardsSecret = maxNumber - guess; //Distance guess has travelled towards correct answer
         let partOfDistance = guessDistanceTowardsSecret / distanceSecretMax //How much progress have your guess led to in finding the correct answer
         let scoreToAdd = Math.round(partOfDistance * 100 * timer); //Multiply with 100 for "Better looking" score, Multiple with 3 as a decoy if we show scores.
-        
         if (player === "You") {
             numberOfGuesses[0]++;
             scoreList[0] += scoreToAdd;
@@ -416,7 +416,7 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
                 }
             });
            }
-    } else if (guess < secretNumber) {
+    } else if (guess < secretNumber && guess >= minNumber) {
         let distanceSecretMin = secretNumber - minNumber; //Distance between lowest(minNumber) score and correct answer
         let guessDistanceFromSecret = guess - minNumber; //Distance between guess and right answer
         let partOfDistance = guessDistanceFromSecret / distanceSecretMin;
