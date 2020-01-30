@@ -317,13 +317,18 @@ li{
 }
 
 .botText {
-  font-family: 'Josefin Sans BoldItalic';
+  font-family: 'Josefin Sans Bold';
   font-size: .8rem;
+  color: #55608E;
   display: flex;
   justify-content: center;
   margin-top: -.1rem;
   padding: 0;
-}
+ }
+  
+ .purple-bg .botText {
+  color: #FBE29E;
+ }
 
 .botGuess, .botResult {
   margin: -.3rem;
