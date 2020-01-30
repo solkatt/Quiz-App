@@ -357,13 +357,14 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa lägre");
             printBotGuess(player, guess, result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "higher":
             minNumber = guess;
             // swapText.innerHTML = "Gissa högre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, guess, result, minNumber, maxNumber);
+
             break;
         case "too high":
             // swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
@@ -375,14 +376,14 @@ function displayOutput(player, guess, result, timer){
         case "too slow":
             // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa mycket högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "waits":
             // swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             // display(player + " väntar... ");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "error":
             // swapText.innerHTML = guess + " är inte en siffra " + minNumber + "-" + maxNumber;
