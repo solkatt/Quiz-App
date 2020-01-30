@@ -11,13 +11,18 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    if ("settings" in localStorage) {
-        let settings = JSON.parse(localStorage.getItem("settings"));
-        settingMaxNumber = parseInt(settings.settingMaxNumber);
-        state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
-    } else {
-        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
-    }
+    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    // The code works without this block V down here. It still gets the maxnumber from settings.
+    // if ("settings" in localStorage) {
+    //     let settings = JSON.parse(localStorage.getItem("settings"));
+    //     settingMaxNumber = parseInt(settings.settingMaxNumber);
+    //     if (maxNumber != settingMaxNumber) {
+            
+    //     }
+    //     state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
+    // } else {
+    //     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    // }
 }
 
 /**
@@ -63,7 +68,6 @@ function printBotGuess(player, guess, result, minNumber, maxNumber) {
 }
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
-    updateNumberRange(minNumber, maxNumber);
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
