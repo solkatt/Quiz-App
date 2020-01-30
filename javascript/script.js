@@ -148,6 +148,9 @@ function botLoop(){
             i++;
             botGuesses(bot);
         }
+        if (i == state.newGameState.selectedBots){
+            setTimeout(function(){ document.querySelector(".user-guess input[type='text']").select(); }, botDelay);
+        }
     }
 }
 
@@ -245,7 +248,7 @@ function botGuesses(player) {
             if(turn <= 2){
                 guess = maxNumber; //Because smartBert guesses maxNumber he gets 0 points since that's 0 progress towards correct answer 
                 calculateScore(secretNumber, guess, player, maxNumber, minNumber, timer);
-                displayOutput(player, guess, "wait", timer);
+                displayOutput(player, guess, "waits", timer);
                 
             } else {
                 displayOutput(player, guess, "win", timer);
