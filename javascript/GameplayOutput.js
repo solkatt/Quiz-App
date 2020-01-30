@@ -11,7 +11,13 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    if ("settings" in localStorage) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        settingMaxNumber = parseInt(settings.settingMaxNumber);
+        state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
+    } else {
+        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    }
 }
 
 /**
