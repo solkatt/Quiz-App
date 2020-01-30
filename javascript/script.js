@@ -56,9 +56,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     playerScore = 0;
     totalGuess = 0;
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
-    secretNumber = getRandom(minNumber, maxNumber);
     if (3 <= state.newGameState.selectedBots.length) {
-        state.gameplayState.secretNumber = secretNumber;
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
@@ -67,9 +65,9 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
             maxNumber = parseInt(settings.settingMaxNumber);
             state.gameplayState.maxNumber = maxNumber;
             state.gameplayState.minNumber = minNumber;
-
-
         }
+        secretNumber = getRandom(minNumber, maxNumber);
+        state.gameplayState.secretNumber = secretNumber;
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
     }
@@ -360,13 +358,14 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = "Gissa lägre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa lägre");
             printBotGuess(player, guess, result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "higher":
             minNumber = guess;
             // swapText.innerHTML = "Gissa högre: " + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, guess, result, minNumber, maxNumber);
+
             break;
         case "too high":
             // swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
@@ -378,14 +377,14 @@ function displayOutput(player, guess, result, timer){
         case "too slow":
             // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa mycket högre");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "waits":
             // swapText.innerHTML = player + " väntar..." + minNumber + "-" + maxNumber;
             // display(player + " väntar... ");
-            updateNumberRange(minNumber, maxNumber);
             printBotGuess(player, "--", result, minNumber, maxNumber);
+            // updateNumberRange(minNumber, maxNumber);
             break;
         case "error":
             // swapText.innerHTML = guess + " är inte en siffra " + minNumber + "-" + maxNumber;

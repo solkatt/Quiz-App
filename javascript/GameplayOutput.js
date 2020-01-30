@@ -67,15 +67,16 @@ function printSelectedBots() {
  * @param {string} result - the result from the player's guess.
  */
 function printBotGuess(player, guess, result, minNumber, maxNumber) {
-    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); }, botDelay);
+    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); updateNumberRange(minNumber, maxNumber); }, botDelay);
+    
 }
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
-        botGuessElement.innerHTML = guess;
-        botResultElement.innerHTML = result;
+        botGuessElement.innerText = guess;
+        botResultElement.innerText = result;
     }
     else if (player == "You") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
@@ -119,11 +120,11 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         img.classList.add('botImg');
 
 
-        if (bot == "You" && winner == "You") {
+        if (bot === "You") {
             img.src = state.gameoverState.userAvatar;
         }
 
-        if (bot != "You" && bot != "You") {
+        if (bot != "You") {
             img.src = './assets/' + bot + '.svg';
         }
 
@@ -162,7 +163,7 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         else if ("You" === winner) {
             "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score."
             state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + gatherUsername() + " got the highest score.";
-            img.src = state.gameoverState.userAvatar;
+            // img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
             score.innerText = winnerScore;
