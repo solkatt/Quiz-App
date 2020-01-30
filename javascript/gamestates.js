@@ -98,6 +98,10 @@ window.addEventListener('load', function () {
         printSelectBotsCon();
         // add event listener to bot images
         addEventListenerToBots();
+                        state.newGameState.botCheckboxes.forEach(checkbox => {
+                            checkbox.checked = false;
+                        })
+        
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
@@ -230,6 +234,9 @@ function clearOnRestart() {
  * Clear html-elements when user selects quit-button in gameoverState.
  */
 function clearOnQuit() {
+    state.newGameState.botCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
     // empty array of user selected bots
     state.newGameState.selectedBots = [];
     // empty gameplay outputs
@@ -256,9 +263,6 @@ function clearBackToMenu() {
     // empty array of user selected bots
     state.newGameState.selectedBots = [];
     // empty gameplay outputs
-    state.newGameState.botCheckboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    })
     document.querySelector('#inputUsername').value = "";
     state.gameoverState.winnerHeading.innerHTML = "";
     state.newGameState.selectBotsForm.innerHTML = "";
