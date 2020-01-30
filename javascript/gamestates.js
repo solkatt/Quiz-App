@@ -159,6 +159,7 @@ window.addEventListener('load', function () {
             event.preventDefault();
             if (state.gameplayState.hide == false && addEnter === true) {
                 checkUserGuess();
+                state.gameplayState.guessInput.value = "";
             } if (state.settingsState.hide == false) {
                 checkUserSettings();
             }
