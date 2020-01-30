@@ -15,6 +15,13 @@ body {
   height: 100vh;
 }
 
+.boxContainer {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-height: 700px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -24,7 +31,7 @@ body {
   bottom: 0;
   left: 0;
   width: 300px;
-  height: 600px;
+  max-height: 700px;
 }
 
 .whiteContainer {
@@ -122,13 +129,6 @@ h1, h2, h3, .checkUserGuess, #inputUsername {
   background-color: #55608E;
 }
 
-/* BACKGROUND CHANGES ON CLICK EVENT SO THIS IS NOT NEEDED
-#timePressureButton {
-  color: #5F193D;
-  background-color: #55608E;
-}
- */
-
 p {
   color: #55608E;
 }
@@ -199,9 +199,12 @@ a {
 }
 
 .backToMenuButton {
-  position: absolute;
-  bottom: 3vh;
+  /* display:flex; */
+  position: relative;
+  /* flex-direction: row; */
+  /* bottom: 3vh; */
   align-items: center;
+  /* justify-content: flex-end; */
   margin: 1rem auto;
 }
 
@@ -416,7 +419,7 @@ li {
   height: 75vh;
   width: 100%;
   min-height: 500px;
-  max-height: 700px;
+  max-height: 600px;
 }
 
 .user-guess-div {
