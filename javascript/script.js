@@ -340,10 +340,11 @@ function displayOutput(player, guess, result, timer){
             playerScore = scoreList[0];
             state.gameoverState.scoreList = scoreList;
             let index = scoreList.indexOf(Math.max(...scoreList))
-            console.log(scoreList.indexOf(Math.max(...scoreList)))
-            console.log(state.newGameState.selectedBots[index], scoreList.indexOf(Math.max(...scoreList)), Math.max(...scoreList))
+            let winnerScore = Math.max(...scoreList);
+            let winnerIndex = scoreList.indexOf(winnerScore);
+            let winnerName = state.newGameState.selectedBots[winnerIndex]
             printBotGuess(player, guess, result);
-            clearOnWin(state.newGameState.selectedBots[index], scoreList.indexOf(Math.max(...scoreList)), Math.max(...scoreList));
+            clearOnWin(winnerName, winnerIndex, winnerScore);
             console.log(playerScore + " playerScore")
             console.log(scoreList + " scoreList")
             break;
