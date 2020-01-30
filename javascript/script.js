@@ -140,8 +140,6 @@ function checkUserGuess() {
         //showWinner(scoreList, playerScore, numberOfGuesses[])
         displayOutput(player, guess, "win", timer);
         youWin = true;
-        //THIS FUNCTION CAN EASILY BE MOVED DEPENDING ON WHEN WE WANT TO TALLY UP AND SAVE FINAL SCORE IN LOCAL STORAGE:
-        addHighScoreToLocalStorage(gatherUsername(), playerScore);
         stopTheGame = true;
     } else {
         let previousGuess = guess;
@@ -345,6 +343,7 @@ function displayOutput(player, guess, result, timer){
             // swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             // display(player + " gissade rätt: " + guess);
             playerScore = scoreList[0];
+            addHighScoreToLocalStorage(gatherUsername(), playerScore);
             state.gameoverState.scoreList = scoreList;
             let index = scoreList.indexOf(Math.max(...scoreList))
             let winnerScore = Math.max(...scoreList);
