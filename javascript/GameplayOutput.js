@@ -33,10 +33,6 @@ function updateNumberRange(minNumber, maxNumber) {
  */
 function printSelectedBots() {
     state.newGameState.selectedBots.forEach(bot => {
-        let playerName = document.createElement('p');
-        playerName.innerText = bot;
-        playerName.classList.add('player-name');
-
         let botDiv = document.createElement('div');
         botDiv.classList.add('botDiv', bot);
 
@@ -51,14 +47,11 @@ function printSelectedBots() {
         let botResult = document.createElement('p');
         botResult.classList.add('botResult');
 
-        if (state.newGameState.selectedBots.length > 3) {
             let botText = document.createElement('p');
             botText.classList.add('botText');
             botText.innerText = bot;
-            botDiv.append(img, playerName, botText, botGuess, botResult);
-        } else {
-            botDiv.append(img, playerName, botGuess, botResult);
-        }
+            botDiv.append(img, botText, botGuess, botResult);
+        
 
         state.gameplayState.botContainer.append(botDiv);
     })
