@@ -57,6 +57,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
     totalGuess = 0;
     numberOfGuesses = [0, 0, 0, 0, 0, 0, 0];
     if (3 <= state.newGameState.selectedBots.length) {
+        addCheckUserGuessButton();
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
@@ -71,7 +72,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
     }
-    addCheckUserGuessButton();
+
 })
 
 function init() {
