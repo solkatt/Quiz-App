@@ -7,23 +7,41 @@ function printGameplay(minNumber, maxNumber) {
     console.log('printgameplay', state.gameplayState.secretNumber, maxNumber);
 }
 
+function applyNumberSettings(minNumber, maxNumber) {
+    if ("settings" in localStorage) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        if (settings.settingShowGuessesOn == true) {
+            state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+        } else {
+            settingMaxNumber = parseInt(settings.settingMaxNumber);
+            state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
+        }
+
+    }
+    else {
+        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    }
+}
+
+
 /**
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+
+}
     // The code works without this block V down here. It still gets the maxnumber from settings.
     // if ("settings" in localStorage) {
     //     let settings = JSON.parse(localStorage.getItem("settings"));
     //     settingMaxNumber = parseInt(settings.settingMaxNumber);
     //     if (maxNumber != settingMaxNumber) {
-            
+
     //     }
     //     state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
     // } else {
     //     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
     // }
-}
 
 /**
  * Prints user selected bots by creating DOM-elements.
@@ -64,7 +82,7 @@ function printSelectedBots() {
  * @param {string} result - the result from the player's guess.
  */
 function printBotGuess(player, guess, result, minNumber, maxNumber) {
-        setTimeout(function() {printBotGuessDelay(player, guess, result, minNumber, maxNumber);}, botDelay);
+    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); }, botDelay);
 }
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
