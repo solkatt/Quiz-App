@@ -1,20 +1,20 @@
 function startTimer(duration, display) {
 
     var minTimer = duration, minutes, seconds;
-    
-    setInterval(function () {
 
-        countdownAnimation('start');
-       
+    state.countdownState.countdownInterval = setInterval(function () {
+
+        countdownAnimation('start', state.countdownState.countdownInterval);
+
         minutes = parseInt(minTimer / 60)
         seconds = parseInt(minTimer % 60);
 
-        seconds = seconds < 10 ? "" + seconds : seconds;
+        seconds = seconds < 3 ? "" + seconds : seconds;
 
-        display.textContent =  seconds;
+        display.textContent = seconds;
 
         if (--minTimer < 0) {
-            countdownAnimation('stop');
+            countdownAnimation('stop', state.countdownState.countdownInterval);
 
             ellipse.classList.remove("countdownAnimation");
             minTimer = duration
@@ -26,31 +26,27 @@ function startTimer(duration, display) {
 
 
 
-function countdownAnimation(state) {
-    if(state== 'start') {
+function countdownAnimation(gameState, interval) {
+    if (gameState == 'start') {
         console.log('START');
-        
+
         document.getElementById("ellipse").classList.add("ellipseAnim");
         // document.getElementById("ellipse").style.transition("mystyle");
 
-    } else if (state == 'stop') {
-        console.log('STOP')
+    } else if (gameState == 'stop') {
+        // console.log('STOP')
+        clearInterval(interval);
         document.getElementById("ellipse").classList.remove("ellipseAnim");
-
-
+        toggleClass(state.gameplayState, 'hide');
     }
-
-  }
-
+}
 
 
 
-
-
-
-window.onload = function () {
-    var oneMin = 10 * 1,
+function showCountdown() {
+    toggleClass(state.countdownState, 'hide');
+    document.querySelector('svg').classList.remove('hide');
+    var oneMin = 3 * 1,
         display = document.querySelector('#time');
     startTimer(oneMin, display);
-    
-};
+}

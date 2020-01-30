@@ -40,6 +40,12 @@ let state = {
         /** NodeList of all bot checkboxes. */
         botCheckboxes: 0
     },
+    countdownState: {
+        container: document.querySelector('.countdownCon'),
+        hide: true,
+        countdownInterval: undefined,
+        svg: document.querySelector('#ellipse'),
+    },
     gameplayState: {
         container: document.querySelector('.gameCon'),
         hide: true,
@@ -60,6 +66,7 @@ let state = {
         hide: true,
         userName: undefined,
         userAvatar: 0,
+        scoreList: [],
         quitButton: document.querySelector('.quitButton'),
         restartButton: document.querySelector('.restartButton'),
         yellowContainer: document.querySelector('.gameoverCon .yellowContainer'),
@@ -166,6 +173,7 @@ window.addEventListener('load', function () {
         toggleClass(state.menuState, 'hide');
     })
 })
+
 
 /**
  * Toggle visibility of html-element.
