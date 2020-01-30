@@ -58,12 +58,13 @@ function printBotGuess(player, guess, result, minNumber, maxNumber) {
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
-    if (player != "Du") {
+    if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
         botGuessElement.innerText = guess;
         botResultElement.innerText = result;
-    } else if (player == "Du") {
+    }
+    else if (player == "You") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
     }
 }
@@ -107,11 +108,11 @@ function clearOnWin(winner, winnerScore, scoreList) {
         img.classList.add('botImg');
 
 
-        if (bot == "Du" && winner != "Du") {
+        if (bot == "You" && winner != "You") {
             img.src = state.gameoverState.userAvatar;
         }
 
-        if (bot != "Du") {
+        if (bot != "You") {
             img.src = './assets/' + bot + '.svg';
         }
 
@@ -148,15 +149,9 @@ function clearOnWin(winner, winnerScore, scoreList) {
             state.gameoverState.botContainer.append(botDiv);
         }
 
-        // bots[scoreList.indexOf(Math.max(scoreList))]
+        else if ("You" === winner) {
+state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))]
 
-// vinnarpoäng Math.max(scoreList)
-
-// the secret number was (number). this person got the highest score
-
-        else if ("Du" === winner) {
-            console.log(state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))])
-            state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))]
             state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
