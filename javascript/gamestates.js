@@ -102,15 +102,22 @@ window.addEventListener('load', function () {
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
         state.gameoverState.userName = gatherUsername();
-        if (2 >= state.newGameState.selectedBots.length) {
-            // document.querySelector('.newGameCon p').textContent = 'Select at least 3 opponents.';
+
+        if (3 > state.newGameState.selectedBots.length) {
+            //document.querySelector('.notThree').textContent = 'Select at least 3 opponents.';
+            isThreeBotsSelected = false;
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
-            state.newGameState.selectedBots.unshift("Du");
+
+            state.newGameState.selectedBots.unshift("You");
+            
+
+            isThreeBotsSelected = true;
 
             toggleClass(state.gameplayState, 'hide');
         }
+        showCorrectStartbuttonText();
     })
     // rules button
     state.menuState.rulesButton.addEventListener('click', () => {
@@ -119,6 +126,8 @@ window.addEventListener('load', function () {
     // adds event listeners to all back-to-menu-buttons
     for (const button of state.backToMenuButton) {
         button.addEventListener('click', () => {
+        clearBackToMenu();
+
             // empty gameplay outputs
             state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
                 div.innerHTML = "";
@@ -278,4 +287,7 @@ function clearBackToMenu() {
     state.gameplayState.botContainer.innerHTML = "";
     // reset checkboxes to unchecked
     toggleClass(state.menuState, 'hide');
+
+    isThreeBotsSelected = true;
+    showCorrectStartbuttonText();
 }

@@ -58,12 +58,13 @@ function printBotGuess(player, guess, result, minNumber, maxNumber) {
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
-    if (player != "Du") {
+    if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
         botGuessElement.innerText = guess;
         botResultElement.innerText = result;
-    } else if (player == "Du") {
+    }
+    else if (player == "You") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
     }
 }
@@ -107,11 +108,11 @@ function clearOnWin(winner, winnerScore, scoreList) {
         img.classList.add('botImg');
 
 
-        if (bot == "Du" && winner != "Du") {
+        if (bot == "You" && winner != "You") {
             img.src = state.gameoverState.userAvatar;
         }
 
-        if (bot != "Du") {
+        if (bot != "You") {
             img.src = './assets/' + bot + '.svg';
         }
 
@@ -148,7 +149,7 @@ function clearOnWin(winner, winnerScore, scoreList) {
             state.gameoverState.botContainer.append(botDiv);
         }
 
-        else if ("Du" === winner) {
+        else if ("You" === winner) {
             state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
