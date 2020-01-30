@@ -150,6 +150,8 @@ function clearOnWin(winner, winnerScore, scoreList) {
         }
 
         else if ("You" === winner) {
+state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))]
+
             state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
@@ -160,7 +162,7 @@ function clearOnWin(winner, winnerScore, scoreList) {
         }
 
         else if (bot === winner) {
-            state.gameoverState.winnerHeading.innerHTML = winner + " guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
+            state.gameoverState.winnerHeading.innerHTML = winner + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = bot;
             score.innerText = winnerScore;
@@ -243,5 +245,5 @@ function getUserAvatar() {
  * @return {number} Returns random number between 1-6.
  */
 function randomAvatarNum() {
-    return Math.floor(Math.random() * 6) + 1;
+    return Math.floor(Math.random() * 9) + 1;
 }
