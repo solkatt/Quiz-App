@@ -213,9 +213,6 @@ p {
   }
 }
 
-.toggleHide {
-  display: none;
-}
 
 #botInfoDiv {
   width: 100%;
@@ -844,4 +841,8 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 .winnerH2.moreThanThreeBots {
   font-size: 100%;
   margin: .5rem auto;
+}
+
+.toggleHide {
+  display: none;
 }
