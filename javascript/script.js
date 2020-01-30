@@ -336,13 +336,18 @@ function displayOutput(player, guess, result, timer){
                 scoreList[i] += 100 * timer;
                 scoreList[i] = Math.round(scoreList[i]/numberOfGuesses[i]);
             }
-
+            console.log(scoreList)
             //swapPic.src = "https://www.wyzowl.com/wp-content/uploads/2019/01/winner-gif.gif";
             // swapText.innerHTML = guess + " Var rätt. " + player + " vann!";
             // display(player + " gissade rätt: " + guess);
             playerScore = scoreList[0];
+            state.gameoverState.scoreList = scoreList;
+            let index = scoreList.indexOf(Math.max(...scoreList))
+            let winnerScore = Math.max(...scoreList);
+            let winnerIndex = scoreList.indexOf(winnerScore);
+            let winnerName = state.newGameState.selectedBots[winnerIndex]
             printBotGuess(player, guess, result);
-            clearOnWin(player, playerScore, scoreList);
+            clearOnWin(winnerName, winnerIndex, winnerScore);
             console.log(playerScore + " playerScore")
             console.log(scoreList + " scoreList")
             break;
