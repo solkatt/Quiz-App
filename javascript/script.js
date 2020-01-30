@@ -299,12 +299,12 @@ function botGuesses(player) {
 function checkResult(player, guess) {
     if (guess > secretNumber && guess > maxNumber) {
         //keeps deliberatly wrong guesses from confusing the bots
-        displayOutput(player, guess, "too low", timer);
+        displayOutput(player, guess, "too high", timer);
     } else if(guess > secretNumber){
         displayOutput(player, guess, "lower", timer);
     } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
         //keeps deliberatly wrong guesses from confusing the bots
-        displayOutput(player, guess, "too high", timer);
+        displayOutput(player, guess, "too low", timer);
     } else if(guess < secretNumber) {
         displayOutput(player, guess, "higher", timer);
     } else {
@@ -370,9 +370,11 @@ function displayOutput(player, guess, result, timer){
         case "too high":
             // swapText.innerHTML = "Du gissade över maximum: " + maxNumber;
             // display(player + " gissade " + guess + ", gissa mycket lägre");
+            printBotGuess(player, guess, result, minNumber, maxNumber);
         case "too low":
             // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
             // display(player + " gissade " + guess + ", gissa mycket högre");
+            printBotGuess(player, guess, result, minNumber, maxNumber);
             break;
         case "too slow":
             // swapText.innerHTML = "Du gissade under minimum: "  + minNumber + "-" + maxNumber;
