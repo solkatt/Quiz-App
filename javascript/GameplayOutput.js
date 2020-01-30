@@ -202,6 +202,11 @@ function printSelectBotsCon() {
         playerText.classList.add('botText');
         playerText.innerText = bot;
 
+        // let botDescriptionText = document.createElement('p');
+        // botDescriptionText.classList.add('botDescriptionText');
+        // botDescriptionText.innerText = blablabla;
+
+        botDiv.append(label, input, playerText);
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
