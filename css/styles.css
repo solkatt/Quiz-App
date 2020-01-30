@@ -1,6 +1,6 @@
 * {
-      margin: 0;
-      padding: 0;
+  margin: 0;
+  padding: 0;
       outline: none;
       box-sizing: border-box;
     }
@@ -8,7 +8,7 @@
     body {
       font-family: 'Josefin Sans', sans-serif;
       background-color: #5F193D;
-      /* background-image: url("./assets/NEW_background_pattern.svg"); */
+      background-image: url("../assets/NEW_background_pattern.svg");
       background-repeat: repeat;
       background-size: auto 18rem;
       width: 100%;
@@ -503,48 +503,6 @@
       padding: 0;
     }
     
-    .winner {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      margin: auto;
-      background-color: #55608E;
-      border-radius: .6rem;
-      padding: 1rem;
-      width: 80%;
-      font-size: 1.3rem;
-      height: fit-content;
-      z-index: 19;
-    }
-    
-    .winner div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      color: #FBE29E;
-      justify-content: center;
-    }
-    
-    .winner .botImg {
-      padding: 0;
-      margin: 0;
-      width: 35%;
-      /* height: 5rem; */
-    }
-    
-    .winner p:first-of-type {
-      color: #FBE29E;
-      font-family: "Josefin Sans BoldItalic", sans-serif;
-    }
-    
-    .winner p {
-      padding: .2rem;
-    }
-    
-    .winner .playerScore {
-      width: 50%;
-      color: #FBE29E;
-    }
     
     .purple-bg {
       background-color: #55608E;
@@ -650,4 +608,174 @@
       h2 {
             font-size: 2.5rem;
       }
+    }
+
+    .buttonsAndHighscore {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-evenly;
+      margin-bottom: -.5rem;
+      height: 30%;
+      width: 100%;
+      padding: 0;
+    }
+    
+    .highscoreDiv {
+      background-color: #FCFCFB;
+      border-radius: 20px 20px 20px 20px;
+      width: 100%;
+      margin: 0 0 1rem 1rem;
+      height: calc(100% - 1rem);
+    }
+    
+    .highscoreDiv p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      font-family: 'Josefin Sans Bold', sans-serif;
+      width: 100%;
+    }
+    
+    .highscoreDiv .highScore {
+      padding: 0rem 2rem;
+      font-size: 100%;
+      width: 100%;
+      margin: 0 auto;
+    }
+    
+    .buttonsAndHighscore li {
+    padding: .6rem 0rem;
+    margin: 0 .2rem;
+    }
+    
+    .buttonsAndHighscore .highScoreListItem span:first-of-type {
+      min-width: 80%;
+    }
+    
+    .gameoverButtons {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 1rem 1rem 1rem .5rem;
+      padding: 0;
+    }
+    
+    
+    .quitButton, .restartButton {
+      height: 3.9rem;
+      width: 7rem;
+      background-color: #55608E;
+      color: #FBE29E;
+      padding: 0;
+      margin: .2rem;
+    }  
+    .winner p:first-of-type {
+      color: #FBE29E;
+      font-family: "Josefin Sans BoldItalic", sans-serif;
+    }
+    
+    .winner p {
+        padding: .2rem;
+        margin: .2rem;
+    }
+    
+    .winner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #55608E;
+      border-radius: .6rem;
+      padding: 1rem;
+      width: 80%;
+      font-size: 1.3rem;
+      max-height: 5.5rem;
+        z-index: 19;
+    }
+    
+    .winner div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      color: #FBE29E;
+      justify-content: center;
+    }
+    
+    .winner .botImg {
+      padding: 0;
+      margin: 0;
+      width: 35%;
+    
+    }
+    
+    .winner p:first-of-type {
+      color: #FBE29E;
+      font-family: "Josefin Sans BoldItalic", sans-serif;
+    }
+    
+    .winner p {
+        padding: .2rem;
+    }
+    
+    .winner .playerScore {
+      width: 50%;
+      color: #FBE29E;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .gameoverCon .botDiv {
+      height: 8rem;
+    }
+    
+    .gameoverCon .botImg {
+      max-width: 100%;
+    }
+    
+    .gameoverCon h2 {
+      border-radius: 0px;
+    }
+    
+    .botDiv.moreThanThreeBots {
+      max-height: 5.5rem;
+    }
+    
+    .moreThanThreeBots p {
+      margin: .2rem .1rem 0 .1rem;
+      padding: 0;
+      margin-top: -.5rem;
+    }
+    
+    .moreThanThreeBots .botText {
+      margin-top: .2rem;
+    }
+    
+    .winnerH2 {
+      background-color: #5F193D;
+      font-size: 120%;
+      margin-top: auto;
+      /* height: 5rem; */
+      padding: 1rem;
+    }
+    
+    .gameover-display-bots .botDiv, .gameover-display-bots .playerScore, .gameover-display-bots .botImg {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
+    }
+    
+    .gameover-display-bots {
+      padding-top: .2rem;
+    }
+    
+    .moreThanThreeBots .botImg {
+      width: 60%;
+      margin: -.3rem auto;
+    }
+    
+    .winnerH2.moreThanThreeBots {
+      font-size: 100%;
+      margin: .5rem auto;
     }
