@@ -1,17 +1,11 @@
-// let toggleRulesBtn = document.querySelector('#toggleRulesBtn').addEventListener('click', toggleRulesPage);
-// let toggleBotBtn = document.querySelector('#toggleBotBtn');
-// toggleBotBtn.addEventListener('click', toggleBotPage);
 
 
 let newGameWhiteCon = document.querySelector('.newGameWhiteCon');
-// let botContainer = document.querySelector('#botPresentation');
 
 let enterUsername = document.querySelector('.enterUsername');
 
 let selectBotsForm = document.querySelector('.select-bots-form');
 
-// selectBotsForm.classList.add('toggleHide');
-// enterUsername.classList.add('toggleHide');
 
 
 
@@ -23,29 +17,9 @@ botContainer.classList.add('toggleHide');
 
 
 
-// BUTTONS TOGGLE/////////
-
-//////// TOGGLE X
-
-//botInfoToggle.addEventListener('click', toggleBotSelection);
-
-
-
-
-
-//// TOGGLE ?????/////
-
-// let botInfoToggle = document.createElement('i');
-// botInfoToggle.setAttribute('class', 'fa fa-times botCross');
-// botInfoToggle.setAttribute('aria-hidden', 'true');
-// botInfoToggle.setAttribute('style', 'font-size: 2rem;');
-
-
-
-
-
-
-
+let closeDiv = document.createElement('div');
+closeDiv.setAttribute('id', 'closeDiv');
+closeDiv.classList.add('toggleHide');
 
 
 /////////// PRINT THE STUFF/////////////////////
@@ -56,6 +30,28 @@ function printBotContainer() {
     // botContainer.classList.add('hide');
     newGameWhiteCon.appendChild(botContainer);
     // selectBotsForm.appendChild(botInfoToggle);
+
+   // Close X Div Relative/Absolute/
+   
+
+
+
+    // Close X
+
+    let botSelectionToggle = document.createElement('i');
+    botSelectionToggle.setAttribute('class', 'fa fa-times botCross');
+    botSelectionToggle.setAttribute('aria-hidden', 'true');
+    botSelectionToggle.setAttribute('style', 'font-size: 2rem;');
+
+    botSelectionToggle.addEventListener('click', toggleBotInfo);
+
+
+     closeDiv.appendChild(botSelectionToggle);
+     newGameWhiteCon.appendChild(closeDiv);
+
+
+
+    // botContainer.appendChild(botSelectionToggle);
 
 
 
@@ -94,16 +90,7 @@ function BotProfile(name, description, img, arrow) {
     this.iconDown.setAttribute('aria-hidden', 'true');
     this.iconDown.setAttribute('style', 'font-size: 2rem;');
 
-    let botSelectionToggle = document.createElement('i');
-    botSelectionToggle.setAttribute('class', 'fa fa-times botCross');
-    botSelectionToggle.setAttribute('aria-hidden', 'true');
-    botSelectionToggle.setAttribute('style', 'font-size: 2rem;');
-
-    botSelectionToggle.addEventListener('click', toggleBotInfo);
-
-
-    botContainer.appendChild(botSelectionToggle);
-
+ 
 
 
 
@@ -141,6 +128,9 @@ function toggleBotInfo() {
 
     botContainer.classList.add('toggleHide');
 
+    closeDiv.classList.add('toggleHide');
+
+
 }
 
 function toggleBotSelection() {
@@ -148,4 +138,8 @@ function toggleBotSelection() {
     enterUsername.classList.add('toggleHide');
 
     botContainer.classList.remove('toggleHide');
+    closeDiv.classList.remove('toggleHide');
+    botContainer.scrollTop = 0;
+
+
 }
