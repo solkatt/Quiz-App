@@ -37,11 +37,13 @@ let numberOfGuesses;
  * @param {Number} timer - Saves how long it took to guess. 
 */
 let timer;
+/**
+ * If user chooses 0-2 bots before pressing start Playing, this is false.
+ */
+let isThreeBotsSelected = true;
 
-
-
-
-
+//Ha kvar var användbart for calculateScores()
+//let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
 let startButton = document.querySelector('#startgameButton');
 
@@ -440,4 +442,15 @@ function calculateScore (secretNumber, guess, player, maxNumber, minNumber, time
         });
     }
     // addHighScoreToLocalStorage();
+}
+/**
+ * Handles button text shown depending on if player has chosen accepted number of bots.
+ */
+function showCorrectStartbuttonText(){
+    if(!isThreeBotsSelected){
+        document.querySelector('#submitUsername').textContent = "That's not 3 opponents...";      
+    }
+    else{
+        document.querySelector('#submitUsername').textContent = "Start playing!";
+    }
 }
