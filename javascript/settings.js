@@ -6,12 +6,12 @@ document.querySelector(".set-user-settings").addEventListener("click", checkUser
 
 function checkUserSettings(){
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
-    let timePressureButton = document.getElementById("timePressureButton");
+
     let showOpponentsButton = document.getElementById("showOpponentsButton");
     let settings = {
         settingShowGuessesOn: true,
         settingMaxNumber: 20,
-        settingTimePressureOn: true
+
     }
 
     if (isNaN(parseInt(settingMaxNumberBox.value))){
@@ -30,9 +30,9 @@ function checkUserSettings(){
         settingMaxNumberBox.value = settings.settingMaxNumber + " ✔";
     } 
 
-    if (timePressureButton.classList == "buttonClicked"){
-        settings.settingTimePressureOn = false;
-    }
+
+
+
   
     if (showOpponentsButton.classList == "buttonClicked"){
         settings.settingShowGuessesOn = false;
@@ -48,14 +48,14 @@ function selectRangeText(){
 function setSettingValues(){
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let settings = JSON.parse(localStorage.getItem("settings"));
-    let timePressureButton = document.getElementById("timePressureButton")
+
     let showOpponentsButton = document.getElementById("showOpponentsButton");
     if ("settings" in localStorage){
         settingMaxNumberBox.value = settings.settingMaxNumber;
-        if(settings.settingShowGuessesOn == false){
-            timePressureButton.querySelector('span').innerHTML = "off";
-            timePressureButton.classList.add("buttonClicked");
-        }
+
+
+
+
         if(settings.settingTimePressureOn == false){
             showOpponentsButton.querySelector('span').innerHTML = "off";
             showOpponentsButton.classList.add("buttonClicked");
