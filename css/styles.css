@@ -86,11 +86,10 @@ body {
 
 .title {
   z-index: 5;
-  width: 230px;
+  width: 90%;
   margin: 40px, auto;
   padding-top: 30px;
   padding-bottom: 30px;
-  margin-top: 10px;
 }
 
 h1 {
@@ -151,7 +150,6 @@ p {
   border: none;
   padding: .5rem 1rem;
   height: 3rem;
-  /* z-index: 2; */
   margin: 0 auto;
   font-weight: 300;
   background-color: #FCFCFB;
@@ -570,6 +568,13 @@ input[type='checkbox']:checked, input[type='checkbox'] {
     min-height: 400px;
     max-height: 500px;
   }
+
+  .title {
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 500px;
+}
   
   h2 {
     margin-top: 8vh;
@@ -593,6 +598,8 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 
   .title {
         width: 80%;
+        padding-top: 20px;
+        padding-bottom: 10px;
         max-width: 500px;
   }
 
