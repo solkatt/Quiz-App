@@ -148,7 +148,15 @@ function clearOnWin(winner, winnerScore, scoreList) {
             state.gameoverState.botContainer.append(botDiv);
         }
 
+        // bots[scoreList.indexOf(Math.max(scoreList))]
+
+// vinnarpoäng Math.max(scoreList)
+
+// the secret number was (number). this person got the highest score
+
         else if ("Du" === winner) {
+            console.log(state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))])
+            state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))]
             state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
