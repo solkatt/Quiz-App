@@ -157,7 +157,7 @@ window.addEventListener('load', function () {
     document.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
-            if (state.gameplayState.hide == false) {
+            if (state.gameplayState.hide == false && addEnter === true) {
                 checkUserGuess();
             } if (state.settingsState.hide == false) {
                 checkUserSettings();

@@ -41,16 +41,17 @@
         </div>
 
         <!-- NEW GAME -->
-        <div class="newGameCon container hide">
-            <h2>Choose 3-6 bots</h2>
+        <div class="boxContainer">
+                    <form name="Select Bots form" class="select-bots-form">
+                    </form>
+                    <h3 class="enterYourName">Enter your name:</h3>
+                    <div class="enterUsername">
+                        <input type="text" name="inputUsername" id="inputUsername" placeholder="Enter your name here..."
+                            maxlength="6">
+                        <button id="submitUsername">Start playing!</button>
+                    </div>
             <div class="newGameWhiteCon whiteContainer">
-                <form name="Select Bots form" class="select-bots-form">
-                    <!-- Code inserted from JS -->
-                </form>
-                <h3 class="enterYourName">Enter your name:</h3>
-                <div class="enterUsername">
-                    <input type="text" name="inputUsername" id="inputUsername" placeholder="Enter your name here...">
-                    <button id="submitUsername">Start playing!</button>
+            <h2>Choose 3-6 bots</h2>
                 </div>
             </div>
             <button class="backToMenuButton" type="button" value="index">Back to menu</button>
