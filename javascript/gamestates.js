@@ -20,8 +20,7 @@ let state = {
         container: document.querySelector('.settingsCon'),
         hide: true,
         buttons: {
-            showBotsGuessButton: document.querySelector('#showOpponentsButton'),
-            timePressureButton: document.querySelector('#timePressureButton')
+            rangeButton: document.querySelector('#showOpponentsButton'),
         }
     },
     highscoreState: {
@@ -39,6 +38,12 @@ let state = {
         startPlayingButton: document.querySelector('#submitUsername'),
         /** NodeList of all bot checkboxes. */
         botCheckboxes: 0
+    },
+    countdownState: {
+        container: document.querySelector('.countdownCon'),
+        hide: true,
+        countdownInterval: undefined,
+        svg: document.querySelector('#ellipse'),
     },
     gameplayState: {
         container: document.querySelector('.gameCon'),
@@ -60,6 +65,7 @@ let state = {
         hide: true,
         userName: undefined,
         userAvatar: 0,
+        scoreList: [],
         quitButton: document.querySelector('.quitButton'),
         restartButton: document.querySelector('.restartButton'),
         yellowContainer: document.querySelector('.gameoverCon .yellowContainer'),
@@ -91,9 +97,9 @@ window.addEventListener('load', function () {
     // start button
     state.menuState.startButton.addEventListener('click', () => {
         // generate random avatar for the user
-        state.gameoverState.userAvatar = getUserAvatar();
         // show newGameState
         toggleClass(state.newGameState, 'hide');
+        state.gameoverState.userAvatar = getUserAvatar();
         // print container where the user makes bot selection
         printSelectBotsCon();
         // add event listener to bot images
@@ -132,6 +138,19 @@ window.addEventListener('load', function () {
         button.addEventListener('click', () => {
         clearBackToMenu();
 
+            // empty gameplay outputs
+            state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
+                div.innerHTML = "";
+            })
+            state.gameplayState.botContainer.innerHTML = "";
+            // empty array of user selected bots
+            state.newGameState.selectedBots.length = 0;
+            // reset checkboxes to unchecked
+// state.newGameState.botCheckboxes.forEach(checkbox => {
+//     checkbox.checked = false;
+// })
+            toggleClass(state.menuState, 'hide');
+            clearBackToMenu();
         })
     }
     //fixes input with enter button
@@ -147,6 +166,7 @@ window.addEventListener('load', function () {
     });
     // add event listeners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
+        console.log(state.settingsState.buttons)
         if (state.settingsState.buttons.hasOwnProperty(key)) {
             const button = state.settingsState.buttons[key];
             button.addEventListener('click', () => {
@@ -166,6 +186,7 @@ window.addEventListener('load', function () {
         toggleClass(state.menuState, 'hide');
     })
 })
+
 
 /**
  * Toggle visibility of html-element.
