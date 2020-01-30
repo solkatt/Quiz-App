@@ -109,8 +109,12 @@ window.addEventListener('load', function () {
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
-            state.newGameState.selectedBots.unshift("Du");
+
+            state.newGameState.selectedBots.unshift("You");
+            
+
             isThreeBotsSelected = true;
+
             toggleClass(state.gameplayState, 'hide');
         }
         showCorrectStartbuttonText();
@@ -270,6 +274,7 @@ function clearBackToMenu() {
     state.gameplayState.botContainer.innerHTML = "";
     // reset checkboxes to unchecked
     toggleClass(state.menuState, 'hide');
+
     isThreeBotsSelected = true;
     showCorrectStartbuttonText();
 }
