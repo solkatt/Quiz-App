@@ -11,7 +11,13 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    if ("settings" in localStorage) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
+        settingMaxNumber = parseInt(settings.settingMaxNumber);
+        state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
+    } else {
+        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    }
 }
 
 /**
@@ -75,7 +81,7 @@ function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
  * @param {number} winnerScore The winner's score.
  * @param {Array<number>} scoreList List of all player's scores.
  */
-function clearOnWin(winner, winnerScore, scoreList) {
+function clearOnWin(winner, winnerIndex, winnerScore) {
     if ("settings" in localStorage) {
         let settings = JSON.parse(localStorage.getItem("settings"));
         maxNumber = parseInt(settings.settingMaxNumber);
@@ -89,10 +95,8 @@ function clearOnWin(winner, winnerScore, scoreList) {
     showHighScore('.gameoverCon .highScore');
 
     let winnerText = document.createElement('div');
-
     let highscoreLis = document.querySelectorAll('.gameoverCon .highScore li');
     for (let i = 0; i < highscoreLis.length; i++) {
-        const highscore = highscoreLis[i];
         if (i == 3 || i == 4) {
             highscoreLis.item(i).remove();
         }
@@ -108,11 +112,11 @@ function clearOnWin(winner, winnerScore, scoreList) {
         img.classList.add('botImg');
 
 
-        if (bot == "You" && winner != "You") {
+        if (bot == "You" && winner == "You") {
             img.src = state.gameoverState.userAvatar;
         }
 
-        if (bot != "You") {
+        if (bot != "You" && bot != "You") {
             img.src = './assets/' + bot + '.svg';
         }
 
@@ -131,7 +135,6 @@ function clearOnWin(winner, winnerScore, scoreList) {
             }
 
             botDiv.classList.add('botDiv', bot);
-            console.log(state.newGameState.selectedBots)
             if (state.newGameState.selectedBots.length > 4) {
                 botDiv.classList.add('moreThanThreeBots');
                 if (!state.gameoverState.winnerHeading.classList.contains('moreThanThreeBots')) {
@@ -150,19 +153,18 @@ function clearOnWin(winner, winnerScore, scoreList) {
         }
 
         else if ("You" === winner) {
-state.newGameState.selectedBots[state.gameoverState.scoreList.indexOf(Math.max(scoreList))]
-
-            state.gameoverState.winnerHeading.innerHTML = gatherUsername() + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
+            "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score."
+            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + gatherUsername() + " got the highest score.";
+            img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
             score.innerText = winnerScore;
-            img.src = state.gameoverState.userAvatar;
             winnerText.append(playerText, score);
             state.gameoverState.winnerDiv.append(img, winnerText);
         }
 
         else if (bot === winner) {
-            state.gameoverState.winnerHeading.innerHTML = winner + "'s guess was correct! The secret number was " + state.gameplayState.secretNumber + ".";
+            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score.";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = bot;
             score.innerText = winnerScore;
@@ -238,7 +240,7 @@ function printSelectBotsCon() {
  * @return {string} Returns string with random avatar for the user.
  */
 function getUserAvatar() {
-    return './assets/userAvatars/user' + randomAvatarNum() + '.svg'
+    return "/assets/userAvatars/user" + randomAvatarNum() + ".svg"
 }
 
 /**

@@ -1,6 +1,6 @@
-body {
+/* body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Times New Roman', Times, serif;
-}
+} */
 
 #timerAnimation {
     display: flex;
@@ -9,7 +9,8 @@ body {
     align-items: center;
 }
 
-svg {
+/* previously 'svg', now .ellipse */
+.ellipse {
     width: 256px;
     height: 256px;
     transform: rotate(-90deg);
@@ -31,6 +32,10 @@ ellipse {
     stroke-dasharray: calc(123*3.1416*2);
     stroke-dashoffset: 0;
     transition: 1s all ease-in-out;
+}
+
+.hide {
+    display:none;
 }
 
 .ellipseAnim {
