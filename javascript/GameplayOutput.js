@@ -11,13 +11,21 @@ function printGameplay(minNumber, maxNumber) {
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
 function updateNumberRange(minNumber, maxNumber) {
-    if ("settings" in localStorage) {
-        let settings = JSON.parse(localStorage.getItem("settings"));
-        settingMaxNumber = parseInt(settings.settingMaxNumber);
-        state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
-    } else {
-        state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
-    }
+    state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+
+    // if ("settings" in localStorage) {
+    //     let settings = JSON.parse(localStorage.getItem("settings"));
+    //     if (setting.settingShowGuessesOn == true) {
+    //         state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    //     } else {
+    //         settingMaxNumber = parseInt(settings.settingMaxNumber);
+    //         state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
+    //     }
+
+    // } else {
+    //     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
+    // }
+
 }
 
 /**
@@ -59,16 +67,15 @@ function printSelectedBots() {
  * @param {string} result - the result from the player's guess.
  */
 function printBotGuess(player, guess, result, minNumber, maxNumber) {
-        setTimeout(function() {printBotGuessDelay(player, guess, result, minNumber, maxNumber);}, botDelay);
+    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); }, botDelay);
 }
 
 function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
-    updateNumberRange(minNumber, maxNumber);
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
-        botGuessElement.innerText = guess;
-        botResultElement.innerText = result;
+        botGuessElement.innerHTML = guess;
+        botResultElement.innerHTML = result;
     }
     else if (player == "You") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
