@@ -354,6 +354,10 @@ li {
   font-size: 1.11rem;
 }
 
+.botGuess {
+  margin-top: -.5rem;
+}
+
 #guessingList {
   display: flex;
   justify-content: space-around;
