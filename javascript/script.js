@@ -42,6 +42,8 @@ let timer;
  */
 let isThreeBotsSelected = true;
 
+let addEnter = true;
+
 //Ha kvar var användbart for calculateScores()
 //let bots = ["Du", "AverageBert", "LowBert" , "RandomBert", "HighBert", "DumbBert", "SmartBert"];
 
@@ -101,6 +103,7 @@ function getRandom(minNumber, maxNumber) {
 function addCheckUserGuessButton() {
     timer = 5;
     document.querySelector(".checkUserGuess").addEventListener("click", checkUserGuess);
+    addEnter = true;
     let downloadTimer = setInterval(()=> {
         timer--;
         if (timer === 0) {        
@@ -112,6 +115,7 @@ function addCheckUserGuessButton() {
 
 function removeUserGuessButton() {
     document.querySelector(".checkUserGuess").removeEventListener("click", checkUserGuess);
+    addEnter = false;
 }
 
 function checkUserGuess() {
