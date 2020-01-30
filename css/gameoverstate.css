@@ -173,8 +173,11 @@
             margin: 0;
         }
 
+        .gameover-display-bots .botDiv {
+            margin: .2rem;
+        }
+
       .gameover-display-bots {
-        padding-top: .2rem;
         flex-wrap: wrap;
       }
       
