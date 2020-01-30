@@ -1,17 +1,18 @@
 @media only screen and (min-height: 600px) and (min-width:500px) {
       .boxContainer {
-            /* max-height: 900px; */
             width: 80%;
-            height: 500px;
       }
 
       .container {
             width: 100%;
-            height: 500px;
       }
 
       .whiteContainer {
             width: 100%;
-            height: 500px;
+      }
+
+      .title {
+            width: 100%;
+            max-width: 500px;
       }
 }

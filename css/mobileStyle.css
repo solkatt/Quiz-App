@@ -20,6 +20,7 @@ body {
   flex-direction: column;
   margin: auto;
   max-height: 700px;
+  max-width: 700px;
 }
 
 .container {
@@ -31,29 +32,29 @@ body {
   bottom: 0;
   left: 0;
   width: 300px;
-  max-height: 700px;
+  /* max-height: 700px; */
 }
 
 .whiteContainer {
   background-color: #FCFCFB;
   width: 100%;
   padding: 22px;
-  height: 390px;
+  /* height: 390px; */
   margin: 0;
   border-radius: 0 0px 20px 20px;
 }
 
-.whiteContainer .rules {
+/* .whiteContainer .rules {
   height: 390px;
-}
+} */
 
-.whiteContainer .settings {
+/* .whiteContainer .settings {
   height: 360px;
-}
+} */
 
-.whiteContainer .highScoreContainer {
+/* .whiteContainer .highScoreContainer {
   height: 300px;
-}
+} */
 
 .whiteContainer, .newGameWhiteCon {
   background-color: #FCFCFB;
@@ -69,7 +70,7 @@ body {
   margin-top: 5vh;
   z-index: 0;
   width: 100%;
-  height: 500px;
+  /* height: 500px; */
   border-radius: 20px;
 }
 
@@ -141,6 +142,7 @@ p {
   align-items: center;
   justify-content: center;
   margin: auto;
+  width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -289,20 +291,22 @@ button, .set-user-settings {
 }
 
 button, .set-user-settings, #hightScoreButton, #settingsButton, #startgameButton {
-  width: 250px;
+  width: 70%;
+  max-width: 400px;
   height: 65px;
 }
 
 #rangeButton {
-  width: 160px;
+  width: 50%;
 }
 
 .set-user-maxNumber {
   background-color: white;
-  width: 80px;
+  color: #5F193D;
+  width: 20%;
   font-size: 1.5em;
   font-weight: 700;
-  height: 63px;
+  height: 65px;
   border-radius: 10px;
   text-align: center;
 }
@@ -313,12 +317,9 @@ a {
 }
 
 .backToMenuButton {
-  /* display:flex; */
   position: relative;
-  /* flex-direction: row; */
   /* bottom: 3vh; */
   align-items: center;
-  /* justify-content: flex-end; */
   margin: 1rem auto;
 }
 
@@ -536,7 +537,7 @@ li {
   height: 75vh;
   width: 100%;
   min-height: 500px;
-  max-height: 600px;
+  /* max-height: 600px; */
 }
 
 .user-guess-div {
@@ -552,7 +553,7 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   border: none;
   text-align: center;
   margin-top: -1.5rem;
@@ -567,7 +568,7 @@ li {
   height: 3.5rem;
   z-index: 2;
   font-size: 1.1rem;
-  width: 170px;
+  width: 70%;
   text-align: center;
   font-family: "Josefin Sans BoldItalic", sans-serif;
 }
@@ -578,18 +579,23 @@ li {
   border: none;
   background-color: #55608E;
   color: #FBE29E;
-  padding: .5rem 1rem;
   margin: 1rem .7rem;
   height: 3.5rem;
   z-index: 2;
   font-size: 1.1rem;
-  width: 85px;
+  width: 30%;
   text-align: center;
   font-family: "Josefin Sans BoldItalic", sans-serif;
 }
 
 button {
   cursor: pointer;
+}
+
+.settings-input {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 #showOpponentsButton, #rangeButton, #rangeButtonInput, .set-user-settings {
@@ -692,33 +698,31 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 }
 
 .rulesText {
-  line-height: 17px;
+  line-height: 15px;
 }
+
 
 /* MEDIA QUERIES */
 
 @media only screen and (min-height: 600px) {
   .boxContainer {
-    /* max-height: 900px; */
     width: 80%;
-    height: 450px;
   }
+
   .container {
     width: 100%;
-    height: 450px;
   }
+
   .whiteContainer {
     width: 100%;
-    height: 450px;
   }
+
   .newGameWhiteCon {
     width: 100%;
-    height: 450px;
   }
+
     h2 {
     margin-top: 8vh;
   }
-  h3 {
-    /* margin-top: 80px; */
-  }
+
 }
