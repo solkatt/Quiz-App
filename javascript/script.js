@@ -65,7 +65,7 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
             maxNumber = parseInt(settings.settingMaxNumber);
             state.gameplayState.maxNumber = maxNumber;
             state.gameplayState.minNumber = minNumber;
-            updateNumberRange(minNumber, maxNumber);
+            applyNumberSettings(minNumber, maxNumber);
         }
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
