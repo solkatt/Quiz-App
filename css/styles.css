@@ -548,6 +548,7 @@
     
     .purple-bg {
       background-color: #55608E;
+      border-radius: 20px;
     }
     
     .newGameWhiteCon {
@@ -592,7 +593,7 @@
     }
     
     .rulesText {
-      line-height: 18px;
+      line-height: 17px;
       /* min-height: 456px;
       max-height: 456px; */
     }
