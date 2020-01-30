@@ -6,7 +6,7 @@ let enterUsername = document.querySelector('.enterUsername');
 
 let selectBotsForm = document.querySelector('.select-bots-form');
 
-
+let enterYourName = document.querySelector('.enterYourName')
 
 
 
@@ -125,6 +125,7 @@ function toggleBotInfo() {
 
     selectBotsForm.classList.remove('toggleHide');
     enterUsername.classList.remove('toggleHide');
+    enterYourName.classList.remove('toggleHide');
 
     botContainer.classList.add('toggleHide');
 
@@ -136,6 +137,7 @@ function toggleBotInfo() {
 function toggleBotSelection() {
     selectBotsForm.classList.add('toggleHide');
     enterUsername.classList.add('toggleHide');
+    enterYourName.classList.add('toggleHide');
 
     botContainer.classList.remove('toggleHide');
     closeDiv.classList.remove('toggleHide');
