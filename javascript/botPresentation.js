@@ -63,12 +63,12 @@ function printBotContainer() {
 
 /////////////////BOTS////////////////
 
-let bot1 = new BotProfile('DumbBert', 'guesses wrong all the time. He likes to call himself a glue connoisseur', 'DumbBert.svg');
-let bot2 = new BotProfile('AverageBert', 'he likes to guess the average number. He’s like every average Joe.', 'AverageBert.svg');
-let bot3 = new BotProfile('RandomBert', 'always guesses randomly. He loves soft things especially on the floors and walls', 'RandomBert.svg');
-let bot4 = new BotProfile('LowBert', 'he loves to guess the lowest number. He’s not the most confident.', 'LowBert.svg');
-let bot5 = new BotProfile('HighBert', ' guesses the highest number. His favorite activity is walking in the forest and picking mushrooms.', 'HighBert.svg');
-let bot6 = new BotProfile('SmartBert', 'guesses right on turn three. He says he’s as smart as Albert Einstein bet we are all pretty sure he cheats.', 'SmartBert.svg');
+let bot1 = new BotProfile('DumbBert', 'Guesses wrong all the time. He likes to call himself a glue connoisseur.', 'DumbBert.svg');
+let bot2 = new BotProfile('AverageBert', 'He likes to guess the average number. He’s like every average Joe.', 'AverageBert.svg');
+let bot3 = new BotProfile('RandomBert', 'Always guesses randomly. He loves soft things especially on the floors and walls.', 'RandomBert.svg');
+let bot4 = new BotProfile('LowBert', 'He loves to guess the lowest number. He’s not the most confident.', 'LowBert.svg');
+let bot5 = new BotProfile('HighBert', 'Guesses the highest number. His favorite activity is walking in the forest and picking mushrooms.', 'HighBert.svg');
+let bot6 = new BotProfile('SmartBert', 'Guesses right on turn three. He says he’s as smart as Albert Einstein bet we are all pretty sure he cheats.', 'SmartBert.svg');
 
 
 function BotProfile(name, description, img, arrow) {
