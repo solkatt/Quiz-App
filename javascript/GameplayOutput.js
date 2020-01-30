@@ -67,8 +67,8 @@ function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
-        botGuessElement.innerText = guess;
-        botResultElement.innerText = result;
+        botGuessElement.innerHTML = guess;
+        botResultElement.innerHTML = result;
     }
     else if (player == "You") {
         state.gameplayState.userGuess.innerHTML = "<p>" + guess + "</p><p>" + result + "</p>";
