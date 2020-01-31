@@ -136,18 +136,14 @@
                     <form class="settings-input" action="javascript:void(0);">
                         <button id="showOpponentsButton" type="button" value="Show opponents:">Update number range: <span>on</span></button>
                         <div class="settingRangeContainer">
-                            <button id="rangeButton" type="button" value="Level">Highest
-                                nr:</button>
+                            <button id="rangeButton" type="button" value="Level">Highest nr:</button>
                             <input type="text" placeholder="Max Range: 20" maxlength="3"
                                 onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
                         </div>
-                        <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
                         <input type="button" value="Save settings" class="set-user-settings">
                     </form>
-
                 </div>
-                <button class="backToMenuButton" type="button" value="index">Back to
-                    menu</button>
+                <button class="backToMenuButton" type="button" value="index">Back to menu</button>
             </div>
         </div>
 
@@ -157,7 +153,6 @@
                 <svg class="ellipse">
                     <ellipse id="ellipse" />
                 </svg>
-
                 <div id="visual-timer">
                     <div id="timer-wrapper"><span id="time">3</span></div>
                 </div>
@@ -166,5 +161,4 @@
         </div>
     </div>
 </body>
-
 </html>
