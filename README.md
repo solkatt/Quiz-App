@@ -10,5 +10,5 @@ In 'Settings' you also have the option to make the game more difficult by not up
 
 ## Built With
 
-[Github Repo](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-[Github Pages](https://solkatt.github.io/Quiz-App/index.html) - Dependency Management
+[Github Repo](https://github.com/solkatt/Quiz-App.git) 
+[Github Pages](https://solkatt.github.io/Quiz-App/index.html)t
