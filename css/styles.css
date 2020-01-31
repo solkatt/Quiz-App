@@ -47,14 +47,6 @@ body {
   border-radius: 0 0px 20px 20px;
 }
 
-/* .whiteContainer .settings {
-  height: 360px;
-} */
-
-/* .whiteContainer .highScoreContainer {
-  height: 300px;
-} */
-
 .whiteContainer, .newGameWhiteCon {
   background-color: #FCFCFB;
   width: 100%;
@@ -116,7 +108,6 @@ h3 {
   font-weight: 500;
 }
 
-
 button, a, .set-user-settings {
   color: #5F193D;
 }
@@ -139,7 +130,6 @@ p {
   margin: auto;
   width: 100%;
 }
-
 
 #inputUsername {
   justify-content: center;
@@ -269,8 +259,6 @@ input:checked+.slider:before {
   transform: translateX(26px);
 }
 
-/* Change background when buttons in 'settings' are clicked */
-
 .buttonClicked {
   color: #5F193D;
   background-color: #55608E;
@@ -325,21 +313,12 @@ li {
   margin: 0 .3rem;
   margin: auto;
 }
-/* .botDescriptiontext {
-  font-family: 'Josefin Sans Bold';
-  font-size: 0.5rem;
-  letter-spacing: 0.2px;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-} */
 
 .botText {
   font-family: 'Josefin Sans Bold';
   font-size: .8rem;
   display: flex;
   justify-content: center;
-  /* margin-top: -.1rem; */
   padding: 0;
 }
 
@@ -368,7 +347,6 @@ li {
   padding: 0;
   margin: .5rem 1rem;
 }
-
 
 .user-guess-div {
   margin-bottom: .5rem;
@@ -417,7 +395,6 @@ li {
   height: 75vh;
   width: 100%;
   min-height: 500px;
-  /* max-height: 600px; */
 }
 
 .user-guess-div {
@@ -543,8 +520,6 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 
 .rulesText {
   line-height: 17px;
-  /* min-height: 456px;
-  max-height: 456px; */
 }
 
 /* MEDIA QUERIES */
@@ -583,8 +558,6 @@ input[type='checkbox']:checked, input[type='checkbox'] {
     margin-top: 8vh;
   }
 }
-
-
 
 @media only screen and (min-height: 600px) and (min-width:500px) {
   .boxContainer {
