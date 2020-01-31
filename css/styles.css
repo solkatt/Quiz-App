@@ -354,9 +354,9 @@ li {
   font-size: 1.11rem;
 }
 
-.botGuess {
+/* .botGuess {
   margin-top: -.5rem;
-}
+} */
 
 #guessingList {
   display: flex;
