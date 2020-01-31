@@ -27,16 +27,13 @@ let state = {
         container: document.querySelector('.highScoreCon'),
         hide: true
     },
-    // the state between menu and actual gameplay
     newGameState: {
         container: document.querySelector('.newGameCon'),
         hide: true,
         selectedBots: [],
         selectBotsCon: document.querySelector('.newGameCon .whiteContainer:first-of-type'),
         selectBotsForm: document.querySelector('.select-bots-form'),
-        /** Changes to gameplaystate onclick. */
         startPlayingButton: document.querySelector('#submitUsername'),
-        /** NodeList of all bot checkboxes. */
         botCheckboxes: 0
     },
     countdownState: {
@@ -96,35 +93,27 @@ window.addEventListener('load', function () {
     })
     // start button
     state.menuState.startButton.addEventListener('click', () => {
-        // generate random avatar for the user
+
         // show newGameState
         toggleClass(state.newGameState, 'hide');
         state.gameoverState.userAvatar = getUserAvatar();
-        // print container where the user makes bot selection
         printSelectBotsCon();
-        // add event listener to bot images
         addEventListenerToBots();
-                        state.newGameState.botCheckboxes.forEach(checkbox => {
-                            checkbox.checked = false;
-                        })
-        
+        state.newGameState.botCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        })
     })
     // start playing button, after name is entered and bots selected
     state.newGameState.startPlayingButton.addEventListener('click', () => {
         state.gameoverState.userName = gatherUsername();
 
         if (3 > state.newGameState.selectedBots.length) {
-            //document.querySelector('.notThree').textContent = 'Select at least 3 opponents.';
             isThreeBotsSelected = false;
         }
         else if (3 <= state.newGameState.selectedBots.length) {
             state.gameplayState.stopTheGame = false;
-
-            state.newGameState.selectedBots.unshift("You");
-            
-
+            state.newGameState.selectedBots.unshift("You");           
             isThreeBotsSelected = true;
-
             toggleClass(state.gameplayState, 'hide');
         }
         showCorrectStartbuttonText();
@@ -138,17 +127,11 @@ window.addEventListener('load', function () {
         button.addEventListener('click', () => {
         clearBackToMenu();
 
-            // empty gameplay outputs
             state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
                 div.innerHTML = "";
             })
             state.gameplayState.botContainer.innerHTML = "";
-            // empty array of user selected bots
             state.newGameState.selectedBots.length = 0;
-            // reset checkboxes to unchecked
-// state.newGameState.botCheckboxes.forEach(checkbox => {
-//     checkbox.checked = false;
-// })
             toggleClass(state.menuState, 'hide');
             clearBackToMenu();
         })
@@ -169,7 +152,6 @@ window.addEventListener('load', function () {
     state.gameplayState.guessInput.addEventListener('click', () => {
         state.gameplayState.guessInput.value = "";
         })
-
     // add event listeners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
         console.log(state.settingsState.buttons)
@@ -193,23 +175,19 @@ window.addEventListener('load', function () {
     })
 })
 
-
 /**
  * Toggle visibility of html-element.
  * @param {(HTMLDivElement|HTMLButtonElement)}  gameState The selected game state or button recieved from event listener.
  */
 function toggleClass(gameState, classToToggle) {
-    // show selected game state if it is hidden
     if (gameState.hide === true) {
         show(gameState, classToToggle);
-        // hide everything but selected game state and back to menu button
         for (const key in state) {
             if (state[key] != gameState && state[key] != state.backToMenuButton) {
                 hide(state[key], classToToggle);
             }
         }
     }
-    // hide game state if it is not hidden
     else if (gameState.hide === false) {
         hide(gameState, classToToggle);
     }
@@ -256,7 +234,6 @@ function changeButtonStyle(button, classToToggle) {
  * Keeps bot selection and name input. The inputs can be changed.
  */
 function clearOnRestart() {
-    // empty gameplay outputs
     state.gameoverState.winnerHeading.innerHTML = "";
     state.gameplayState.botContainer.innerHTML = "";
     state.gameplayState.userGuess.innerHTML = "";
@@ -273,9 +250,7 @@ function clearOnQuit() {
     state.newGameState.botCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
-    // empty array of user selected bots
     state.newGameState.selectedBots = [];
-    // empty gameplay outputs
     state.gameoverState.winnerHeading.innerHTML = "";
     state.newGameState.selectedBots.forEach(bot => {
         if (bot == "Du") {
@@ -296,16 +271,12 @@ function clearOnQuit() {
  * Clears html-elements when the user goes back.
  */
 function clearBackToMenu() {
-    // empty array of user selected bots
     state.newGameState.selectedBots = [];
-    // empty gameplay outputs
     document.querySelector('#inputUsername').value = "";
     state.gameoverState.winnerHeading.innerHTML = "";
     state.newGameState.selectBotsForm.innerHTML = "";
     state.gameplayState.botContainer.innerHTML = "";
-    // reset checkboxes to unchecked
     toggleClass(state.menuState, 'hide');
-
     isThreeBotsSelected = true;
     showCorrectStartbuttonText();
 }
