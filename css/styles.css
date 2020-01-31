@@ -325,6 +325,14 @@ li {
   margin: 0 .3rem;
   margin: auto;
 }
+/* .botDescriptiontext {
+  font-family: 'Josefin Sans Bold';
+  font-size: 0.5rem;
+  letter-spacing: 0.2px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+} */
 
 .botText {
   font-family: 'Josefin Sans Bold';
@@ -335,15 +343,6 @@ li {
   padding: 0;
 }
 
-/* .botDescriptiontext {
-  font-family: 'Josefin Sans Bold';
-  font-size: 0.5rem;
-  letter-spacing: 0.2px;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-} */
-
 .botGuess, .botResult {
   margin-bottom: -.5rem;
   padding: 0;
@@ -351,12 +350,12 @@ li {
   display: flex;
   justify-content: center;
   font-family: 'Josefin Sans BoldItalic', sans-serif;
-  font-size: 1.11rem;
+  font-size: 1rem;
 }
 
-/* .botGuess {
-  margin-top: -.5rem;
-} */
+#display-text {
+  margin-top: .5rem;
+}
 
 #guessingList {
   display: flex;
