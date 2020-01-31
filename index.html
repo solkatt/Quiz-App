@@ -22,7 +22,6 @@
     <script src="https://use.fontawesome.com/519e29e5cf.js"></script>
 
 </head>
-
 <body>
     <div class="boxContainer">
         <!-- MENU -->
@@ -56,21 +55,20 @@
                 <button class="backToMenuButton" type="button" value="index">Back to menu</button>
             </div>
 
-
             <!-- GAME -->
             <div class="gameCon container hide">
                 <div class="yellowContainer">
                     <div class="display-bots">
                         <!-- Code inserted from JS -->
                     </div>
-                    <!-- <div id="guessingList"></div> ONLY USED FOR TESTING! -->
                     <h1 id="display-text">Guess between <span></span></h1>
-                    <div class="user-guess-div"></div>
+                    <div class="user-guess-div">
+                        <!-- User guess isnerted frpm JS-->
+                    </div>
                     <form class="user-guess" action="javascript:void(0);">
                         <input class="yourGuessInput" type="text" placeholder="Enter your guess">
                         <input class="yourGuessSubmit checkUserGuess" type="button" value="Guess!">
                     </form>
-                    <!-- <button class="backToMenuButton" type="button" value="index">Back to menu</button> -->
                 </div>
             </div>
 
@@ -80,8 +78,9 @@
                     <div class="gameover-display-bots">
                         <!--Code inserted from JS-->
                     </div>
-                    <h2 class="winnerH2"><span class="gameoverWinner"></span>'s guess was correct!<br>The secret
-                        number was<span class="secretNumberText"></span></h2>
+                    <h2 class="winnerH2">
+                        <span class="gameoverWinner"></span>'s guess was correct!<br>The secret number was<span class="secretNumberText"></span>
+                    </h2>
                     <div class="winner">
                         <!--Code inserted from JS-->
                     </div>
@@ -118,12 +117,12 @@
                     <p class="rulesText">
                         Welcome to Numbers, a version of the popular game Higher or Lower. The aim of
                         the game is to guess the randomly selected number between two given numbers.
-                        You do this by entering an number and the computer answers with “higher” if the
-                        number you entered is higher than the randomized number or “lower” if the given
-                        number is lower than the randomized number. <br>
+                        You do this by entering a number and the computer answers with “higher” if the
+                        number you entered is lower than the randomized number or “lower” if the given
+                        number is higher than the randomized number, but beware, if you answer too slowly you loose points.
+                        <br><br>
                         When you start the game, you get a choice of how many and which bots you want to
-                        battle against. As well as a short description about how each of the bots work.
-                        <br>
+                        battle against, they all have own personalities!
                         <br>
                     </p>
                 </div>
