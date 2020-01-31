@@ -237,7 +237,7 @@ function printSelectBotsCon() {
  * @return {string} Returns string with random avatar for the user.
  */
 function getUserAvatar() {
-    return "/assets/userAvatars/user" + randomAvatarNum() + ".svg"
+    return "./assets/userAvatars/user" + randomAvatarNum() + ".svg"
 }
 
 /**
