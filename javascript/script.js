@@ -82,7 +82,7 @@ function init() {
         let settings = JSON.parse(localStorage.getItem("settings"));
         maxNumber = parseInt(settings.settingMaxNumber);
     } else {
-        maxNumber = 100;
+        maxNumber = 20;
     }
     setSettingValues();
     let previousGuess = maxNumber;
