@@ -3,9 +3,14 @@ document.querySelector("#rangeButton").addEventListener("click", selectRangeText
 document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
 
 
+
 function checkUserSettings() {
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let showOpponentsButton = document.getElementById("showOpponentsButton");
+    let settings = {
+        settingShowGuessesOn: true,
+        settingMaxNumber: 20,
+    }
 
     if (isNaN(parseInt(settingMaxNumberBox.value))) {
         //If a non-number is put in, the setting-object resets it, so tempSettings gets settingMaxNumber from local storage
