@@ -173,7 +173,11 @@ function botLoop(){
             botGuesses(bot);
         }
         if (i == state.newGameState.selectedBots.length){
-            setTimeout(function(){ document.querySelector(".user-guess input[type='text']").select(); }, botDelay);
+            //Selects the input field and swaps the text when everyone has guessed
+            setTimeout(function(){
+            document.querySelector(".user-guess input[type='text']").select();
+            state.gameplayState.userGuess.innerHTML = "<p>" + "Guess Now" + "</p><p>---</p>";
+            }, botDelay);
         }
     }
 }
