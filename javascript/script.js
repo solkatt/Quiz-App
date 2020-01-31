@@ -163,7 +163,7 @@ function botLoop(){
             i++;
             botGuesses(bot);
         }
-        if (i == state.newGameState.selectedBots){
+        if (i == state.newGameState.selectedBots.length){
             setTimeout(function(){ document.querySelector(".user-guess input[type='text']").select(); }, botDelay);
         }
     }
