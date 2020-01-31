@@ -165,6 +165,11 @@ window.addEventListener('load', function () {
             }
         }
     });
+
+    state.gameplayState.guessInput.addEventListener('click', () => {
+        state.gameplayState.guessInput.value = "";
+        })
+
     // add event listeners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
         console.log(state.settingsState.buttons)

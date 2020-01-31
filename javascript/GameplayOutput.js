@@ -12,8 +12,8 @@ function printGameplay(minNumber, maxNumber) {
  */
 function updateNumberRange(minNumber, maxNumber) {
     state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
-    let settings = JSON.parse(localStorage.getItem("settings"));
-    if (!settings.settingShowGuessesOn){       
+    if ("settings" in localStorage) {
+        let settings = JSON.parse(localStorage.getItem("settings"));
         settingMaxNumber = parseInt(settings.settingMaxNumber);
         state.gameplayState.numberRange.innerHTML = "1 - " + settingMaxNumber;
     } else {
@@ -228,8 +228,6 @@ function printSelectBotsCon() {
     botInfoToggle.addEventListener('click', toggleBotSelection);
 
     state.newGameState.selectBotsForm.appendChild(botInfoDiv);
-
-
 
 }
 

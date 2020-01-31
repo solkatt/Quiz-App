@@ -2,6 +2,8 @@ document.querySelector("#rangeButton").addEventListener("click", selectRangeText
 
 document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
 
+
+
 function checkUserSettings() {
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let showOpponentsButton = document.getElementById("showOpponentsButton");
