@@ -154,7 +154,6 @@ window.addEventListener('load', function () {
         })
     // add event listeners to buttons in settingsState
     for (const key in state.settingsState.buttons) {
-        console.log(state.settingsState.buttons)
         if (state.settingsState.buttons.hasOwnProperty(key)) {
             const button = state.settingsState.buttons[key];
             button.addEventListener('click', () => {

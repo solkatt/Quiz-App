@@ -4,7 +4,6 @@
 function printGameplay(minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
     printSelectedBots();
-    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber);
 }
 /**
  * Completes the number range by printing the 'secret number' in the guess number field.

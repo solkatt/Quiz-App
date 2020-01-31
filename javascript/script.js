@@ -345,7 +345,6 @@ function displayOutput(player, guess, result, timer){
                 scoreList[i] += 100 * timer;
                 scoreList[i] = Math.round(scoreList[i]/numberOfGuesses[i]);
             }
-            console.log(scoreList)
             playerScore = scoreList[0];
             addHighScoreToLocalStorage(gatherUsername(), playerScore);
             state.gameoverState.scoreList = scoreList;
@@ -355,8 +354,6 @@ function displayOutput(player, guess, result, timer){
             let winnerName = state.newGameState.selectedBots[winnerIndex]
             printBotGuess(player, guess, result);
             clearOnWin(winnerName, winnerIndex, winnerScore);
-            console.log(playerScore + " playerScore")
-            console.log(scoreList + " scoreList")
             break;
         case "lower":
             maxNumber = guess;
