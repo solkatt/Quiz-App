@@ -153,8 +153,8 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         }
 
         else if ("You" === winner) {
-            "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score."
-            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + gatherUsername() + " got the highest score.";
+            "The secret number was " + state.gameplayState.secretNumber + " BUT " + winner + " got the highest score!"
+            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + " BUT " + gatherUsername() + " got the highest score.";
             // img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
@@ -164,7 +164,7 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         }
 
         else if (bot === winner) {
-            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + ". " + winner + " got the highest score.";
+            state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + " BUT " + winner + " got the highest score.";
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = bot;
             score.innerText = winnerScore;
