@@ -84,7 +84,7 @@ function printBotGuessDelay(player, guess, result) {
  * @param {string} winner The winner name as string.
  * @param {number} winnerScore The winner's score.
  */
-function clearOnWin(winner, winnerScore) {
+function clearOnWin(winner, winnerIndex, winnerScore) {
     if ("settings" in localStorage) {
         let settings = JSON.parse(localStorage.getItem("settings"));
         maxNumber = parseInt(settings.settingMaxNumber);
@@ -158,7 +158,6 @@ function clearOnWin(winner, winnerScore) {
         else if ("You" === winner) {
             "The secret number was " + state.gameplayState.secretNumber + " BUT " + winner + " got the highest score!"
             state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + " BUT " + gatherUsername() + " got the highest score.";
-            // img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
             score.innerText = winnerScore;
