@@ -60,13 +60,13 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
+        secretNumber = getRandom(minNumber, maxNumber);
         if ("settings" in localStorage) {
             let settings = JSON.parse(localStorage.getItem("settings"));
             maxNumber = parseInt(settings.settingMaxNumber);
             state.gameplayState.maxNumber = maxNumber;
             state.gameplayState.minNumber = minNumber;
         }
-        secretNumber = getRandom(minNumber, maxNumber);
         state.gameplayState.secretNumber = secretNumber;
         state.gameoverState.winnerDiv.innerHTML = "";
         printGameplay(minNumber, maxNumber);
