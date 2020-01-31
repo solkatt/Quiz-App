@@ -8,7 +8,6 @@ const submitUsername = document.querySelector('#submitUsername');
  */
 submitUsername.addEventListener('click', gatherUsername);
 
-
 /**
  *  * Handels the gathering of username and saving the userScore-object in local storage 
  */
@@ -47,6 +46,10 @@ function showHighScore(placeForHighscore, userScore){
     }
 }
 
+/**
+ * removes li elements from ol.
+ * @param {element} olClassName - classname on targeted ol 
+ */
 function removeOldHighScore(olClassName){
     let ol = document.querySelector(olClassName);
     while( ol.firstChild ){
@@ -54,7 +57,6 @@ function removeOldHighScore(olClassName){
     } 
 }
  
-
 /**
  * Creates List elements to display Highscore in.
  * @param {Object} userScore - conains username and score

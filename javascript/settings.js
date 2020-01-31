@@ -1,9 +1,16 @@
+/**
+ * gets rangebutton
+ */
 document.querySelector("#rangeButton").addEventListener("click", selectRangeText);
 
+/**
+ * gets check user settings
+ */
 document.querySelector(".set-user-settings").addEventListener("click", checkUserSettings);
 
-
-
+/**
+ * checks user setting, and if there is any user settings in local storage
+ */
 function checkUserSettings() {
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let showOpponentsButton = document.getElementById("showOpponentsButton");
@@ -34,11 +41,16 @@ function checkUserSettings() {
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
+/**
+ * selects range text
+ */
 function selectRangeText() {
     document.querySelector(".set-user-maxNumber").select();
 }
 
-//change text in settings
+/**
+ * changes text in settings
+ */
 function setSettingValues() {
     let settingMaxNumberBox = document.querySelector(".set-user-maxNumber");
     let settings = JSON.parse(localStorage.getItem("settings"));
@@ -52,5 +64,4 @@ function setSettingValues() {
     } else {
         settingMaxNumberBox.placeholder = "20";
     }
-
 }

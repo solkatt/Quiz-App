@@ -13,9 +13,8 @@
     <title>Numbers</title>
     <script defer src="./javascript/gamestates.js" type="text/javascript"></script>
     <script defer src="./javascript/script.js" type="text/javascript"></script>
-    <script defer src="./javascript//BotSelection.js" type="text/javascript"></script>
-    <script defer src="./javascript/localStorage.js" type="text/javascript"></script>
-    <script defer src="./javascript/Scoreboard.js" type="text/javascript"></script>
+    <script defer src="./javascript/BotSelection.js" type="text/javascript"></script>
+    <script defer src="./javascript/highScore.js" type="text/javascript"></script>
     <script defer src="./timerAnimation/timerAnimation.js"></script>
     <script defer src="./javascript/settings.js" type="text/javascript"></script>
     <script defer src="./javascript/GameplayOutput.js" type="text/javascript"></script>
@@ -23,7 +22,6 @@
     <script src="https://use.fontawesome.com/519e29e5cf.js"></script>
 
 </head>
-
 <body>
     <div class="boxContainer">
         <!-- MENU -->
@@ -57,21 +55,20 @@
                 <button class="backToMenuButton" type="button" value="index">Back to menu</button>
             </div>
 
-
             <!-- GAME -->
             <div class="gameCon container hide">
                 <div class="yellowContainer">
                     <div class="display-bots">
                         <!-- Code inserted from JS -->
                     </div>
-                    <!-- <div id="guessingList"></div> ONLY USED FOR TESTING! -->
                     <h1 id="display-text">Guess between <span></span></h1>
-                    <div class="user-guess-div"></div>
+                    <div class="user-guess-div">
+                        <!-- User guess isnerted frpm JS-->
+                    </div>
                     <form class="user-guess" action="javascript:void(0);">
                         <input class="yourGuessInput" type="text" placeholder="Enter your guess">
                         <input class="yourGuessSubmit checkUserGuess" type="button" value="Guess!">
                     </form>
-                    <!-- <button class="backToMenuButton" type="button" value="index">Back to menu</button> -->
                 </div>
             </div>
 
@@ -81,8 +78,9 @@
                     <div class="gameover-display-bots">
                         <!--Code inserted from JS-->
                     </div>
-                    <h2 class="winnerH2"><span class="gameoverWinner"></span>'s guess was correct!<br>The secret
-                        number was<span class="secretNumberText"></span></h2>
+                    <h2 class="winnerH2">
+                        <span class="gameoverWinner"></span>'s guess was correct!<br>The secret number was<span class="secretNumberText"></span>
+                    </h2>
                     <div class="winner">
                         <!--Code inserted from JS-->
                     </div>
@@ -119,13 +117,13 @@
                     <p class="rulesText">
                         Welcome to Numbers, a version of the popular game Higher or Lower.<br>The aim of
                         the game is to guess the randomly selected number between two given numbers.
-                        You do this by entering an number and the computer answers with “higher” if the
-                        number you entered is higher than the randomized number or “lower” if the given
-                        number is lower than the randomized number. <br>
-                        When you start the game, you get a choice of how many and which bots you want to
-                        battle against. As well as a short description about how each of the bots work.<br>
-                        In 'Settings' you also have the option to make the game more difficult by not updating the number range. Good luck!
-                    
+                        You do this by entering a number and the computer answers with “higher” if the
+                        number you entered is lower than the randomized number or “lower” if the given
+                        number is higher than the randomized number, but beware, if you answer too slowly you loose points.
+                        <br><br>
+                        When you start the game, you get a choice of how many and which bots you want to battle against, they all have own personalities!
+                        <br>
+
                     </p>
                 </div>
                 <button class="backToMenuButton" type="button" value="index">Back to menu</button>
@@ -138,18 +136,14 @@
                     <form class="settings-input" action="javascript:void(0);">
                         <button id="showOpponentsButton" type="button" value="Show opponents:">Update number range: <span>on</span></button>
                         <div class="settingRangeContainer">
-                            <button id="rangeButton" type="button" value="Level">Highest
-                                nr:</button>
+                            <button id="rangeButton" type="button" value="Level">Highest nr:</button>
                             <input type="text" placeholder="Max Range: 20" maxlength="3"
                                 onClick="this.setSelectionRange(0, this.value.length)" class="set-user-maxNumber">
                         </div>
-                        <!--maxlength is for string length, onclick selects everything in the field, action resets Enter clicks -->
                         <input type="button" value="Save settings" class="set-user-settings">
                     </form>
-
                 </div>
-                <button class="backToMenuButton" type="button" value="index">Back to
-                    menu</button>
+                <button class="backToMenuButton" type="button" value="index">Back to menu</button>
             </div>
         </div>
 
@@ -159,7 +153,6 @@
                 <svg class="ellipse">
                     <ellipse id="ellipse" />
                 </svg>
-
                 <div id="visual-timer">
                     <div id="timer-wrapper"><span id="time">3</span></div>
                 </div>
@@ -168,5 +161,4 @@
         </div>
     </div>
 </body>
-
 </html>

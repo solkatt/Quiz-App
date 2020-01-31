@@ -4,9 +4,7 @@
 function printGameplay(minNumber, maxNumber) {
     updateNumberRange(minNumber, maxNumber);
     printSelectedBots();
-    console.log('printgameplay', state.gameplayState.secretNumber, maxNumber);
 }
-
 /**
  * Completes the number range by printing the 'secret number' in the guess number field.
  */
@@ -23,6 +21,7 @@ function updateNumberRange(minNumber, maxNumber) {
         state.gameplayState.numberRange.innerHTML = minNumber + " - " + maxNumber;
     }
 }
+
 /**
  * Prints user selected bots by creating DOM-elements.
  */
@@ -42,12 +41,11 @@ function printSelectedBots() {
         let botResult = document.createElement('p');
         botResult.classList.add('botResult');
 
-            let botText = document.createElement('p');
-            botText.classList.add('botText');
-            botText.innerText = bot;
-            botDiv.append(img, botText, botGuess, botResult);
-        
-
+        let botText = document.createElement('p');
+        botText.classList.add('botText');
+        botText.innerText = bot;
+        botDiv.append(img, botText, botGuess, botResult);
+    
         state.gameplayState.botContainer.append(botDiv);
     })
 }
@@ -59,11 +57,16 @@ function printSelectedBots() {
  * @param {string} result - the result from the player's guess.
  */
 function printBotGuess(player, guess, result, minNumber, maxNumber) {
-    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); updateNumberRange(minNumber, maxNumber); }, botDelay);
-    
+    setTimeout(function () { printBotGuessDelay(player, guess, result, minNumber, maxNumber); updateNumberRange(minNumber, maxNumber); }, botDelay);  
 }
 
-function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
+/**
+ * Handles displaying of bot answers
+ * @param {string} player - the player that guessed.
+ * @param {number} guess - the player's guess as a number.
+ * @param {string} result - the result from the player's guess.
+ */
+function printBotGuessDelay(player, guess, result) {
     if (player != "You") {
         let botGuessElement = document.querySelector('.' + player + ' .botGuess');
         let botResultElement = document.querySelector('.' + player + ' .botResult');
@@ -76,10 +79,9 @@ function printBotGuessDelay(player, guess, result, minNumber, maxNumber) {
 }
 
 /**
- * 
+ * Handles everything when game is over
  * @param {string} winner The winner name as string.
  * @param {number} winnerScore The winner's score.
- * @param {Array<number>} scoreList List of all player's scores.
  */
 function clearOnWin(winner, winnerIndex, winnerScore) {
     if ("settings" in localStorage) {
@@ -155,7 +157,6 @@ function clearOnWin(winner, winnerIndex, winnerScore) {
         else if ("You" === winner) {
             "The secret number was " + state.gameplayState.secretNumber + " BUT " + winner + " got the highest score!"
             state.gameoverState.winnerHeading.innerHTML = "The secret number was " + state.gameplayState.secretNumber + " BUT " + gatherUsername() + " got the highest score.";
-            // img.src = state.gameoverState.userAvatar;
             playerText.classList.replace('botText', 'winnerName');
             playerText.innerText = state.gameoverState.userName;
             score.innerText = winnerScore;
@@ -208,17 +209,10 @@ function printSelectBotsCon() {
         playerText.classList.add('botText');
         playerText.innerText = bot;
 
-        // let botDescriptionText = document.createElement('p');
-        // botDescriptionText.classList.add('botDescriptionText');
-        // botDescriptionText.innerText = blablabla;
-
         botDiv.append(label, input, playerText);
         botDiv.append(label, input);
         state.newGameState.selectBotsForm.append(botDiv);
     })
-
-
-
 
     let botInfoDiv = document.createElement('div');
     botInfoDiv.setAttribute('id', 'botInfoDiv');
@@ -226,15 +220,12 @@ function printSelectBotsCon() {
     botInfoToggle.setAttribute('id', 'botInfoToggle');
     botInfoToggle.innerText = 'Read about the bots..';
     botInfoDiv.appendChild(botInfoToggle);
-
-
     botInfoToggle.addEventListener('click', toggleBotSelection);
-
     state.newGameState.selectBotsForm.appendChild(botInfoDiv);
-
 }
 
 /**
+ * returns random avatar image
  * @return {string} Returns string with random avatar for the user.
  */
 function getUserAvatar() {
@@ -242,6 +233,7 @@ function getUserAvatar() {
 }
 
 /**
+ * return random number for returning random avatar
  * @return {number} Returns random number between 1-6.
  */
 function randomAvatarNum() {
