@@ -109,6 +109,7 @@ h3 {
 }
 
 button, a, .set-user-settings {
+  font-family: 'Josefin Sans Bold', sans-serif;
   color: #5F193D;
 }
 
@@ -519,7 +520,7 @@ input[type='checkbox']:checked, input[type='checkbox'] {
 }
 
 .rulesText {
-  line-height: 17px;
+  line-height: 15px;
 }
 
 /* MEDIA QUERIES */
@@ -557,29 +558,41 @@ input[type='checkbox']:checked, input[type='checkbox'] {
   h2 {
     margin-top: 8vh;
   }
+
+  .rulesText {
+    line-height: 17px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
 }
 
 @media only screen and (min-height: 600px) and (min-width:500px) {
   .boxContainer {
-        width: 80%;
+    width: 80%;
   }
-
+  
   .container {
-        width: 100%;
+    width: 100%;
   }
-
+  
   .whiteContainer {
-        width: 100%;
+    width: 100%;
   }
-
+  
   .title {
-        width: 80%;
-        padding-top: 20px;
-        padding-bottom: 10px;
-        max-width: 500px;
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    max-width: 500px;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
   }
 
-  h2 {
-        font-size: 2.5rem;
+  .rulesText {
+    line-height: 22px;
+    font-size: 120%;
   }
 }

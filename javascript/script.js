@@ -69,7 +69,6 @@ state.newGameState.startPlayingButton.addEventListener('click', () => {
         turn = 0;
         minNumber = 1;
         state.gameoverState.botContainer.innerHTML = "";
-        secretNumber = getRandom(minNumber, maxNumber);
         if ("settings" in localStorage) {
             let settings = JSON.parse(localStorage.getItem("settings"));
             maxNumber = parseInt(settings.settingMaxNumber);
@@ -311,10 +310,18 @@ function botGuesses(player) {
 
 function checkResult(player, guess) {
     if (guess > secretNumber && guess > maxNumber) {
+        //keeps deliberatly wrong guesses from confusing the bots
+        if(player = "You") {
+            numberOfGuesses[0]++;
+        }
         displayOutput(player, guess, "too high", timer);
     } else if(guess > secretNumber){
         displayOutput(player, guess, "lower", timer);
     } else if(guess < secretNumber && guess < minNumber && guess < maxNumber){ 
+        //keeps deliberatly wrong guesses from confusing the bots
+        if(player = "You") {
+            numberOfGuesses[0]++;
+        }
         displayOutput(player, guess, "too low", timer);
     } else if(guess < secretNumber) {
         displayOutput(player, guess, "higher", timer);

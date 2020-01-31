@@ -125,6 +125,8 @@ window.addEventListener('load', function () {
     // adds event listeners to all back-to-menu-buttons
     for (const button of state.backToMenuButton) {
         button.addEventListener('click', () => {
+            init();
+            timer = 5;
         clearBackToMenu();
 
             state.gameplayState.yellowContainer.querySelectorAll('div').forEach(div => {
@@ -164,11 +166,15 @@ window.addEventListener('load', function () {
     // add event listener to restart-button in gameoverState
     state.gameoverState.restartButton.addEventListener('click', () => {
         state.newGameState.selectedBots.splice(0, 1);
+        init();
+        timer = 5;
         clearOnRestart();
         toggleClass(state.newGameState, 'hide');
     })
     // add event listener to quit-button in gameoverState
     state.gameoverState.quitButton.addEventListener('click', () => {
+        init();
+        timer = 5;
         clearOnQuit();
         toggleClass(state.menuState, 'hide');
     })
